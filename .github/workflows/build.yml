@@ -16,6 +16,11 @@ jobs:
         echo "The contents of the current directory are:"
         ls -l
         ls -a
+    - name : Entramos en el directorio del proyecto
+      run : |
+        cd foodtrackv4
+        ls -a
+    
 
     
 
