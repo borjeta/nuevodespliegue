@@ -33,53 +33,62 @@ jobs:
           docker-compose --version
           docker --version
 
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, gd, pdo_mysql, zip, dom, curl, xml, json, bcmath, exif, fileinfo, iconv, mysqli, pcntl, pdo, pdo_sqlite, phar, posix, readline, sqlite3, tokenizer, xmlreader, xmlwriter, xsl, zip, opcache, imagick, gmp, ldap, redis, memcached, xdebug, soap, sockets, calendar, ctype, ftp, gettext, iconv, imap, mbstring, mysqli, pcntl, pdo, pdo_mysql, pdo_sqlite, phar, posix, readline, shmop, simplexml, soap, sockets, sysvmsg, sysvsem, sysvshm, tokenizer, wddx, xml, xmlreader, xmlwriter, xsl, zip, zlib, bcmath, bz2, calendar, exif, fileinfo, ftp, gettext, gmp, iconv, imap, intl, json, ldap, mbstring, mysqli, opcache, pcntl, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, readline, shmop, simplexml, soap, sockets, sysvmsg, sysvsem, sysvshm, tokenizer, wddx, xml, xmlreader, xmlwriter, xsl, zip, zlib, xdebug, redis, memcached, imagick, gmagick, igbinary, msgpack, mongodb, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick, msgpack, mongodb, pthreads, raphf, redis, swoole, yaml, xdebug, sodium, libsodium, sodium_compat, ldap, memcached, mongodb, redis, xdebug, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick, msgpack, mongodb, pthreads, raphf, redis, swoole, yaml, xdebug, sodium, libsodium, sodium_compat, ldap, memcached, mongodb, redis, xdebug, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick
+      #instalamos node
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      #Descargamos e instalamos composer
+      - name: Install Composer
+        run: |
+          curl -sS https://getcomposer.org/installer -o composer-setup.php
+          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+          composer --version
+      #hacemos el composer install dentro del directorio api
+      - name: Install Composer
+        run: |
+          cd foodtrackv4
+          ls -a
+          cd api 
+          ls -a
+          composer install
+          php artisan serve
+      #instalamos npm
+      - name: Install NPM
+        run: |
+          cd foodtrackv4/material-kit-react-main
+          npm install
+          npm start
+      - name: Entramos en el directorio del proyecto
+        run: |
+          cd foodtrackv4
+          ls -a
+          cd api 
+          ls -a
           
+#Importamos la base de datos a mysql
+      - name: Import database
+        uses:
+          docker://mysql:latest
+        with:
+          args: mysql -h localhost -u root -p -e "CREATE DATABASE foodtrackv4"
+      - name: Import database
+        uses:
+          docker://mysql:latest
+        with:
+          args: mysql -h localhost -u root -p foodtrackv4 < foodtrackv4.sql
 
-#       - name: Install PHP
-#         uses: shivammathur/setup-php@v2
-#         with:
-#           php-version: '8.1'
-#           extensions: mbstring, intl, gd, pdo_mysql, zip, dom, curl, xml, json, bcmath, exif, fileinfo, iconv, mysqli, pcntl, pdo, pdo_sqlite, phar, posix, readline, sqlite3, tokenizer, xmlreader, xmlwriter, xsl, zip, opcache, imagick, gmp, ldap, redis, memcached, xdebug, soap, sockets, calendar, ctype, ftp, gettext, iconv, imap, mbstring, mysqli, pcntl, pdo, pdo_mysql, pdo_sqlite, phar, posix, readline, shmop, simplexml, soap, sockets, sysvmsg, sysvsem, sysvshm, tokenizer, wddx, xml, xmlreader, xmlwriter, xsl, zip, zlib, bcmath, bz2, calendar, exif, fileinfo, ftp, gettext, gmp, iconv, imap, intl, json, ldap, mbstring, mysqli, opcache, pcntl, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, readline, shmop, simplexml, soap, sockets, sysvmsg, sysvsem, sysvshm, tokenizer, wddx, xml, xmlreader, xmlwriter, xsl, zip, zlib, xdebug, redis, memcached, imagick, gmagick, igbinary, msgpack, mongodb, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick, msgpack, mongodb, pthreads, raphf, redis, swoole, yaml, xdebug, sodium, libsodium, sodium_compat, ldap, memcached, mongodb, redis, xdebug, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick, msgpack, mongodb, pthreads, raphf, redis, swoole, yaml, xdebug, sodium, libsodium, sodium_compat, ldap, memcached, mongodb, redis, xdebug, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick
-#       #instalamos node
-#       - name: Install Node
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: "14"
-#       #Descargamos e instalamos composer
-#       - name: Install Composer
-#         run: |
-#           curl -sS https://getcomposer.org/installer -o composer-setup.php
-#           php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-#           composer --version
-#       #hacemos el composer install dentro del directorio api
-#       - name: Install Composer
-#         run: |
-#           cd foodtrackv4
-#           ls -a
-#           cd api 
-#           ls -a
-#           composer install
-#       #instalamos npm
-#       - name: Install NPM
-#         run: |
-#           cd foodtrackv4/material-kit-react-main
-#           npm install
-#           npm start
-#       - name: Entramos en el directorio del proyecto
-#         run: |
-#           cd foodtrackv4
-#           ls -a
-#           cd api 
-#           ls -a
+
+      - name: levantamos el servicio mysql
+        run: |
+          docker-compose up -d
+          docker-compose ps
+          docker-compose logs -f
+          docker-compose exec mysql bash
+          docker-compose exec mysql mysql -u root -p foodtrackv4 < foodtrackv4.sql
           
-# #Importamos la base de datos a mysql
-#       - name: Import database
-#         uses:
-#           docker://mysql:latest
-#         with:
-#           args: mysql -h localhost -u root -p -e "CREATE DATABASE foodtrackv4"
-#       - name: Import database
-#         uses:
-#           docker://mysql:latest
-#         with:
-#           args: mysql -h localhost -u root -p foodtrackv4 < foodtrackv4.sql
