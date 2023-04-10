@@ -54,6 +54,7 @@ jobs:
           ls -a
           cd api 
           ls -a
+          composer update
           composer install
 
     # #instalamos composer
