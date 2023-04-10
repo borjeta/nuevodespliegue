@@ -19,7 +19,9 @@ jobs:
 
       - name: instalamos docker
         run: |
-          sudo apt-get update
+          sudo apt-get update -y
+          sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release -y
+          sudo apt-get upgrade -y
           sudo apt-get install docker.io
           
 
