@@ -15,6 +15,7 @@ jobs:
         echo "The current directory is $(pwd)."
         echo "The contents of the current directory are:"
         ls -l
+        ls -a
 
     
 
