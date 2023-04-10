@@ -1,0 +1,40 @@
+#prueba del build en github actions para desplegar el proyecto en laravel , react y msql
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+   
+   #comprobamos que se ha descargado el proyecto
+    - name: Check out code
+      run: |
+        echo "The current directory is $(pwd)."
+        echo "The contents of the current directory are:"
+        ls -l
+
+    
+
+    # #instalamos composer
+    # - name: Install Composer
+    #   run: |
+    #     composer install
+    # #instalamos npm
+    # - name: Install NPM
+    #   run: |
+    #     npm install
+    # #ejecutamos las migraciones
+    # - name: Run Migrations
+    #   run: |
+    #     php artisan migrate
+    # #ejecutamos las pruebas
+    # - name: Run Tests
+    #   run: |
+    #     php artisan test
+    # #ejecutamos el proyecto
+    # - name: Run Project
+    #   run: |
+    #     php artisan serve

@@ -1,0 +1,108 @@
+#Docker compose para levantar 3 contenedores en en el mismo volumen y la misma red en una imagen de ubuntu 16.04
+version: '3'
+
+services:
+
+  #Contenedor de base de datos que importa el archivo sql
+
+  mysql:
+    image: mysql:5.7
+    container_name: foodtrackv4_mysql
+    ports:
+      - "3306:3306"
+    volumes:
+        - ./mysql:/var/lib/mysql
+    environment:
+        MYSQL_DATABASE: foodtrackv4
+        MYSQL_USER: root
+        MYSQL_PASSWORD:
+
+    networks:
+        - foodtrackv4
+
+
+
+
+
+
+  #Contenedor de la aplicación
+
+  app:
+
+    build: app
+
+    volumes:
+
+      - app_data:/var/www/html
+
+    ports:
+
+      - "8080:80"
+
+    depends_on:
+
+      - db
+
+    networks:
+
+      - backend
+
+    # descargamos el archivo de composer para instalar las dependencias
+
+    command: bash -c "curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
+
+    # entramos en la carpeta foodtrackv4 y api y ejecutamos el comando para instalar las dependencias
+
+    command: bash -c "cd foodtrackv4 && cd api && composer install"
+
+
+    command: bash -c "cd foodtrackv4 && cd api && php artisan serve"
+
+    #ejecuta los comandos para importar el archivo llamado foodtrackv4.sql
+
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-file=/docker-entrypoint-initdb.d/foodtrackv4.sql
+
+
+    #configura el archivo sql para que se importe al iniciar el contenedor
+
+    volumes:
+
+      - ./foodtrackv4.sql:/docker-entrypoint-initdb.d/foodtrackv4.sql
+
+
+
+  #Contenedor de phpmyadmin
+
+  phpmyadmin:
+
+    image: phpmyadmin/phpmyadmin
+
+    environment:
+
+      PMA_HOST: db
+
+      MYSQL_ROOT_PASSWORD: root
+
+    ports:
+
+      - "8081:80"
+
+    depends_on:
+
+      - db
+
+    networks:
+
+      - backend
+
+volumes:
+  
+    db_data:
+  
+    app_data:
+
+networks:
+  
+    backend:
+
+

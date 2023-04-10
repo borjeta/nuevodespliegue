@@ -1,0 +1,20 @@
+#Docker compose para deplegar el cliente en React en el puerto 3000 
+
+version: '3'
+
+services:
+  client:
+    build: ./material-kit-react-main
+    container_name: foodtrackv4_client
+    ports:
+      - "3000:3000"
+    volumes:
+        - ./material-kit-react-main:/var/www/html
+    networks:
+        - foodtrackv4
+    depends_on:
+        - api
+    command: npm start
+
+    networks:
+        foodtrackv4:
