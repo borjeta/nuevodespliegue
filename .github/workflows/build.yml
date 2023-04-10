@@ -16,10 +16,36 @@ jobs:
         echo "The contents of the current directory are:"
         ls -l
         ls -a
+
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: mbstring, intl, gd, xml, zip, dom, curl, json, fileinfo, ctype, iconv, pdo, pdo_mysql, bcmath, tokenizer, xmlwriter, xmlreader, simplexml, soap, exif, pcntl, opcache, imagick, redis, memcached, xdebug
+        coverage: none # disable xdebug, pcov
+        tools: composer:v2
+    #instalamos node
+    - name: Install Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14'
+    #instalamos composer
+    - name: Install Composer
+      run: |
+        composer install
+    #instalamos npm
+    - name: Install NPM
+      run: |
+        npm install
     - name : Entramos en el directorio del proyecto
       run : |
         cd foodtrackv4
         ls -a
+        cd api 
+        ls -a
+        composer install
+        php artisan serve
+
     
 
     
