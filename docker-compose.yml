@@ -1,0 +1,51 @@
+version: "3"
+services:
+  web:
+    image: node:latest
+    container_name: foodtrackv4
+    ports:
+      - "3000:3000"
+    volumes:
+      - volumendespliegue:/var/www/html/storage
+    networks:
+      - mynet
+    depends_on:
+      - db
+      #instalamos node 19 , npm 9.6 y update y upgrade
+    command: /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install npm -y && npm install -g npm  &&  apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a && cd foodtrackv4 && cd material-kit-react-main && npm install && npm start"
+  db:
+    image: mysql:5.7
+    container_name: foodtrackv4db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: foodtrackv4
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+    volumes:
+      - volumendespliegue:/var/lib/mysql
+    networks:
+      - mynet
+  api:
+    image: ubuntu:latest
+    container_name: foodtrackv4api
+    ports:
+      - "8000:80"
+    volumes:
+      - volumendespliegue:/var/www/html/storage
+    networks:
+      - mynet
+    depends_on:
+      - db
+    command: /bin/bash -c "service apache2 start && tail -f /dev/null"
+networks:
+  mynet:
+    driver: bridge
+volumes:
+  volumendespliegue:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/foodtrackv4
+      o: bind

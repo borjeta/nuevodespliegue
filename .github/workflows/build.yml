@@ -49,46 +49,8 @@ jobs:
           curl -sS https://getcomposer.org/installer -o composer-setup.php
           php composer-setup.php --install-dir=/usr/local/bin --filename=composer
           composer --version
-      #hacemos el composer install dentro del directorio api
-      - name: Install Composer
-        run: |
-          cd foodtrackv4
-          ls -a
-          cd api 
-          ls -a
-          composer install
-          php artisan serve
-      #instalamos npm
-      - name: Install NPM
-        run: |
-          cd foodtrackv4/material-kit-react-main
-          npm install
-          npm start
-      - name: Entramos en el directorio del proyecto
-        run: |
-          cd foodtrackv4
-          ls -a
-          cd api 
-          ls -a
-          
-#Importamos la base de datos a mysql
-      - name: Import database
-        uses:
-          docker://mysql:latest
-        with:
-          args: mysql -h localhost -u root -p -e "CREATE DATABASE foodtrackv4"
-      - name: Import database
-        uses:
-          docker://mysql:latest
-        with:
-          args: mysql -h localhost -u root -p foodtrackv4 < foodtrackv4.sql
 
+      #ejecutamos los dos docker-compose.yml
+      
 
-      - name: levantamos el servicio mysql
-        run: |
-          docker-compose up -d
-          docker-compose ps
-          docker-compose logs -f
-          docker-compose exec mysql bash
-          docker-compose exec mysql mysql -u root -p foodtrackv4 < foodtrackv4.sql
-          
+  
