@@ -17,6 +17,12 @@ jobs:
           ls -l
           ls -a
 
+      - name: instalamos docker
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-ce docker-ce-cli containerd.io
+          
+
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -46,32 +52,22 @@ jobs:
         run: |
           cd foodtrackv4/material-kit-react-main
           npm install
+          npm start
       - name: Entramos en el directorio del proyecto
         run: |
           cd foodtrackv4
           ls -a
           cd api 
           ls -a
-          composer update
-          composer install
-
-    # #instalamos composer
-    # - name: Install Composer
-    #   run: |
-    #     composer install
-    # #instalamos npm
-    # - name: Install NPM
-    #   run: |
-    #     npm install
-    # #ejecutamos las migraciones
-    # - name: Run Migrations
-    #   run: |
-    #     php artisan migrate
-    # #ejecutamos las pruebas
-    # - name: Run Tests
-    #   run: |
-    #     php artisan test
-    # #ejecutamos el proyecto
-    # - name: Run Project
-    #   run: |
-    #     php artisan serve
+          
+#Importamos la base de datos a mysql
+      - name: Import database
+        uses:
+          docker://mysql:latest
+        with:
+          args: mysql -h localhost -u root -p -e "CREATE DATABASE foodtrackv4"
+      - name: Import database
+        uses:
+          docker://mysql:latest
+        with:
+          args: mysql -h localhost -u root -p foodtrackv4 < foodtrackv4.sql
