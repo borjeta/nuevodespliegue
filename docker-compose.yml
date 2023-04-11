@@ -11,7 +11,7 @@ services:
       - mynet
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD:
       MYSQL_DATABASE: foodtrackv4
   web:
     image: node:latest
@@ -26,7 +26,7 @@ services:
       - db
     command: /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install npm -y && npm install -g npm -y &&  apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a && cd foodtrackv4 && cd material-kit-react-main && npm install && npm start"
   api:
-    image: php:8.1
+    image: php:latest
     container_name: foodtrackv4api
     ports:
       - "8000:8000"
@@ -36,7 +36,7 @@ services:
       - mynet
     depends_on:
       - db
-    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && curl -sS https://getcomposer.org/installer -o composer-setup.php&& apt-get install npm -y && npm install -g npm -y &&  apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a && cd foodtrackv4 && cd api && mysql -u root -p foodtrackv4 < foodtrackv4.sql && composer install && php artisan serve"
+    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && curl -sS https://getcomposer.org/installer -o composer-setup.php&& apt-get install npm -y && npm install -g npm -y &&  apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a  && ls -a && cd foodtrackv4 && cd api && composer install && php artisan serve"
 networks:
   mynet:
     driver: bridge
