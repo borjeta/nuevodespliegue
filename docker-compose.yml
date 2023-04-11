@@ -1,3 +1,5 @@
+#te faltará cammbiar la ruta del volumen de mysql , crear los usuarios de mysql y importar correctamente
+#el fichero sql 
 version: "3"
 services:
   db:
