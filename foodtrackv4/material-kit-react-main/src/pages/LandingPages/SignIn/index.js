@@ -157,7 +157,7 @@ function SignInBasic() {
                 textAlign="center"
               >
                 <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Login
+                  Login ya!
                 </MKTypography>
 
               </MKBox>
