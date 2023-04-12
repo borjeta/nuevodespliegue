@@ -38,7 +38,7 @@ services:
       - mynet
     depends_on:
       - db
-    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && curl -sS https://getcomposer.org/installer -o composer-setup.php&& apt-get install npm -y && npm install -g npm -y &&  apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a  && ls -a && cd foodtrackv4 && cd api && composer install && php artisan serve"
+    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php &&  apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a  && cd foodtrackv4 && cd api && ls -a && cd .. && cd mysql-dump && mysql -u root -p foodtrackv4 < foodtrackv4.sql && cd .. && ls -a && composer install && php artisan serve"
 networks:
   mynet:
     driver: bridge
