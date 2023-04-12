@@ -62,7 +62,7 @@ function SignInBasic() {
       password: password,
     };
     axios
-      .post("http://localhost:8000/api/usuarios/login", data,
+      .post("http://api:8000/api/usuarios/login", data,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",

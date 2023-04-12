@@ -8,7 +8,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - volumendespliegue:/var/www/html/storage
+      - ./mysql-dump:/docker-entrypoint-initdb.d/
     networks:
       - mynet
     environment:
@@ -21,7 +21,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - volumendespliegue:/var/www/html/storage
+      - volumendespliegues:/var/www/html/storage
     networks:
       - mynet
     depends_on:
@@ -33,17 +33,18 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - volumendespliegue:/var/www/html/storage
+      - volumendespliegues:/var/www/html/storage
     networks:
       - mynet
     depends_on:
       - db
-    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php &&  apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a  && cd foodtrackv4 && cd api && ls -a && cd .. && cd mysql-dump && mysql -u root -p foodtrackv4 < foodtrackv4.sql && cd .. && ls -a && composer install && php artisan serve"
+    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a  && cd foodtrackv4 && cd api && ls -a && curl -sS https://getcomposer.org/installer -o composer-setup.php &&
+     php composer-setup.php && php composer.phar install && php artisan serve"
 networks:
   mynet:
     driver: bridge
 volumes:
-  volumendespliegue:
+  volumendespliegues:
     driver: local
     driver_opts:
       type: none
