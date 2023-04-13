@@ -73,6 +73,7 @@ function SignInBasic() {
         document.cookie = `api_token=${res.data.token}`;
         document.cookie = `user_id=${res.data.user_id}`;
         document.cookie = `role=${res.data.role}`;
+        alert("axios 1 con exito")
 
         if (res.data.role == "admin") {
           window.location.href = "http://localhost:3000/homeadmin";
@@ -91,10 +92,48 @@ function SignInBasic() {
       .catch((err) => {
         console.log(err);
         alert("Usuario o contraseña incorrectos" + err);
+
       }
       );
 
     /*Colocamos la imagen de fondo en el body*/
+    axios
+      .post('http://0.0.0.0:8000/api/usuarios/login', data,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+
+        }
+        //172.21.0.3:8000 API LOCAL
+        //172.21.0.4:3000 material-kit-react
+      )
+      .then((res) => {
+        setData(res.data.api_token);
+        document.cookie = `api_token=${res.data.token}`;
+        document.cookie = `user_id=${res.data.user_id}`;
+        document.cookie = `role=${res.data.role}`;
+
+        if (res.data.role == "admin") {
+          window.location.href = "http://localhost:3000/homeadmin";
+          //alert("Usuario logueado como admin");
+        } else if (res.data.role == "user") {
+          window.location.href = "http://localhost:3000/homeusuario";
+          //alert("Usuario logueado como usuario");
+        } else if (res.data.role == "propietario") {
+          window.location.href = "http://localhost:3000/homepropietario";
+          //alert("Usuario logueado como propietario");
+        } else {
+          alert("No se ha podido loguear correctamente");
+        }
+        alert("axios 2 con exito")
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Usuario o contraseña incorrectos" + err);
+      }
+      );
 
 
 
