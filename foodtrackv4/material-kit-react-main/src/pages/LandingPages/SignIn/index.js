@@ -57,7 +57,7 @@ function SignInBasic() {
       password: password,
     };
     axios
-      .post('http://172.20.0.4:8000/api/usuarios/login', data,
+      .post('http://172.21.0.3:8000/api/usuarios/login', data,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -65,6 +65,8 @@ function SignInBasic() {
           },
 
         }
+        //172.21.0.3:8000 API LOCAL
+        //172.21.0.4:3000 material-kit-react
       )
       .then((res) => {
         setData(res.data.api_token);
