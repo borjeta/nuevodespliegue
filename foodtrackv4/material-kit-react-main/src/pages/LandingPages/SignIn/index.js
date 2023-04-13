@@ -57,7 +57,7 @@ function SignInBasic() {
       password: password,
     };
     axios
-      .post('http://172.21.0.3:8000/api/usuarios/login', data,
+      .post('http://172.16.238.10:8000/api/usuarios/login', data,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -65,8 +65,9 @@ function SignInBasic() {
           },
 
         }
-        //172.21.0.3:8000 API LOCAL
-        //172.21.0.4:3000 material-kit-react
+        //172.16.238.10 API LOCAL
+        //172.16.238.20 material-kit-react
+        //172.16.238.30 mysql-db
       )
       .then((res) => {
         setData(res.data.api_token);
@@ -85,13 +86,13 @@ function SignInBasic() {
           window.location.href = "http://localhost:3000/homepropietario";
           //alert("Usuario logueado como propietario");
         } else {
-          alert("No se ha podido loguear correctamente");
+          alert("No se ha podido loguear correctamente ");
         }
 
       })
       .catch((err) => {
         console.log(err);
-        alert("Usuario o contraseña incorrectos" + err);
+        alert("Usuario o contraseña incorrectos axios 1 error " + err);
 
       }
       );
@@ -131,7 +132,7 @@ function SignInBasic() {
       })
       .catch((err) => {
         console.log(err);
-        alert("Usuario o contraseña incorrectos" + err);
+        alert("Usuario o contraseña incorrectos axios 2" + err);
       }
       );
 

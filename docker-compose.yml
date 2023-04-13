@@ -8,7 +8,8 @@ services:
     volumes:
       - ./mysql-dump:/docker-entrypoint-initdb.d/
     networks:
-      - mynet
+      my_network:
+        ipv4_address: 172.16.238.30
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_PASSWORD:
@@ -21,10 +22,12 @@ services:
     volumes:
       - volumendespliegues:/var/www/html/storage
     networks:
-      - mynet
+      my_network:
+        ipv4_address: 172.16.238.20
     depends_on:
       - db
-    command: /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install npm -y && npm install -g npm -y &&
+    command:
+      /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install npm -y && npm install -g npm -y &&
       apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue &&
       ls -a && cd foodtrackv4 && cd material-kit-react-main &&
       npm install && npm run build && npm start"
@@ -36,15 +39,19 @@ services:
     volumes:
       - volumendespliegues:/var/www/html/storage
     networks:
-      - mynet
+      my_network:
+        ipv4_address: 172.16.238.10
     depends_on:
       - db
-    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a &&
-     cd nuevodespliegue && ls -a  && cd foodtrackv4 && cd api && ls -a && curl -sS https://getcomposer.org/installer -o composer-setup.php &&
-     php composer-setup.php && php composer.phar install && php artisan serve"
+    command:
+      /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a &&
+      cd nuevodespliegue && ls -a  && cd foodtrackv4 && cd api && ls -a && curl -sS https://getcomposer.org/installer -o composer-setup.php &&
+      php composer-setup.php && php composer.phar install && php artisan serve"
 networks:
-  mynet:
-    driver: bridge
+  my_network:
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
 volumes:
   volumendespliegues:
     driver: local
