@@ -1,5 +1,3 @@
-#te faltará cammbiar la ruta del volumen de mysql , crear los usuarios de mysql y importar correctamente
-#el fichero sql 
 version: "3"
 services:
   db:
@@ -26,7 +24,10 @@ services:
       - mynet
     depends_on:
       - db
-    command: /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install npm -y && npm install -g npm -y &&  apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a && cd foodtrackv4 && cd material-kit-react-main && npm install && npm start"
+    command: /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install npm -y && npm install -g npm -y &&
+      apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue &&
+      ls -a && cd foodtrackv4 && cd material-kit-react-main &&
+      npm install && npm run build && npm start"
   api:
     image: php:latest
     container_name: foodtrackv4api
@@ -38,7 +39,8 @@ services:
       - mynet
     depends_on:
       - db
-    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue && ls -a  && cd foodtrackv4 && cd api && ls -a && curl -sS https://getcomposer.org/installer -o composer-setup.php &&
+    command: /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a &&
+     cd nuevodespliegue && ls -a  && cd foodtrackv4 && cd api && ls -a && curl -sS https://getcomposer.org/installer -o composer-setup.php &&
      php composer-setup.php && php composer.phar install && php artisan serve"
 networks:
   mynet:

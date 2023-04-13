@@ -25,11 +25,6 @@ import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 import MuiLink from "@mui/material/Link";
 
-// @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
-
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
@@ -62,7 +57,7 @@ function SignInBasic() {
       password: password,
     };
     axios
-      .post("http://api:8000/api/usuarios/login", data,
+      .post("http://127.0.0.1:8000/api/usuarios/login", data,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
