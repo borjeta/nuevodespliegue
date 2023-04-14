@@ -99,7 +99,7 @@ function SignInBasic() {
 
     /*Colocamos la imagen de fondo en el body*/
     axios
-      .post('http://0.0.0.0:8000/api/usuarios/login', data,
+      .post('http://api:8000/api/usuarios/login', data,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
