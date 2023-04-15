@@ -15,7 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD:
       MYSQL_DATABASE: foodtrackv4
   web:
-    image: node:latest
+    image: benylightflows/node-php8.1
     container_name: foodtrackv4
     ports:
       - "3000:3000"
@@ -26,13 +26,15 @@ services:
         ipv4_address: 172.16.238.20
     depends_on:
       - db
-    command:
-      /bin/bash -c "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install npm -y && npm install -g npm -y &&
-      apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a && cd nuevodespliegue &&
+    command: /bin/bash -c "apt-get update && apt-get upgrade -y &&
+      apt-get install apt-utils &&
+      apt-get install git -y &&
+      git clone https://github.com/borjeta/nuevodespliegue.git &&
+      ls -a && cd nuevodespliegue &&
       ls -a && cd foodtrackv4 && cd material-kit-react-main &&
       npm install && npm run build && npm start"
   api:
-    image: php:latest
+    image: 0175648424/laravel9php8:v1.0
     container_name: foodtrackv4api
     ports:
       - "8000:8000"
@@ -44,8 +46,11 @@ services:
     depends_on:
       - db
     command:
-      /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  && apt-get install git -y && git clone https://github.com/borjeta/nuevodespliegue.git && ls -a &&
-      cd nuevodespliegue && ls -a  && cd foodtrackv4 && cd api && ls -a && curl -sS https://getcomposer.org/installer -o composer-setup.php &&
+      /bin/bash -c  "apt-get update && apt-get upgrade -y && apt-get install curl -y  &&
+      apt-get install git -y &&
+      git clone https://github.com/borjeta/nuevodespliegue.git && ls -a &&
+      mv nuevodespliegue/foodtrackv4/api /var/www/html/ && ls -a &&
+      cd /var/www/html/api && ls -a  && ls -a && curl -sS https://getcomposer.org/installer -o composer-setup.php &&
       php composer-setup.php && php composer.phar install && php artisan serve"
 networks:
   my_network:
