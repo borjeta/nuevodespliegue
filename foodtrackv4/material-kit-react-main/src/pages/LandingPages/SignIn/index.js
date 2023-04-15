@@ -92,7 +92,7 @@ function SignInBasic() {
       })
       .catch((err) => {
         console.log(err);
-        alert("Usuario o contraseña incorrectos axios 1 error \n " + res + "\n " + err);
+        alert("Usuario o contraseña incorrectos axios 1 error \n " + err);
 
       }
       );
@@ -134,7 +134,7 @@ function SignInBasic() {
       })
       .catch((err) => {
         console.log(err);
-        alert("Usuario o contraseña incorrectos axios 2 \n " + res + "\n " + err);
+        alert("Usuario o contraseña incorrectos axios 2 \n " + err);
       }
       );
 
