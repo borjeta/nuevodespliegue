@@ -35,7 +35,7 @@ function ListaUsuariosAdmin() {
     const classes = useStyles();
     const [data, setData] = useState([]);
     const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const [foodtrucks, setFoodtrucks] = useState([]);
+    const [usuarios, setUsuarios] = useState([]);
     const [foodtruck, setFoodtruck] = useState([]);
 
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -43,6 +43,7 @@ function ListaUsuariosAdmin() {
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
     const StyledTableCell = styled(TableCell)`
+    border: 1px solid black;
     background-color: #f5f5f5;
     color: #000000;
     font-weight: bold;
@@ -85,7 +86,7 @@ function ListaUsuariosAdmin() {
 
             })
             .then((res) => {
-                setFoodtrucks(res.data);
+                setUsuarios(res.data);
                 console.log(res.data);
 
             })
@@ -104,41 +105,71 @@ function ListaUsuariosAdmin() {
                 <TableContainer component={Paper}>
                     <Table className="table" aria-label="customized table">
 
-                        <TableHead>
+                        <TableHead
+                            style={{
+                                backgroundColor: "#f5f5f5",
+                                color: "#000000",
+                                fontWeight: "bold",
+                                align: "center",
+                                justify: "center",
+
+
+                            }}
+
+                        >
                             <TableRow>
-                                <MKTypography variant="h2" justify="center" align="center" color="textprimary" gutterBottom >
+                                <MKTypography variant="h2"
+                                    justify="center"
+                                    align="center"
+                                    color="textprimary"
+                                    gutterBottom
+
+                                >
                                     Lista de usuarios
                                 </MKTypography>
                             </TableRow>
 
                             <TableRow>
-                                <StyledTableCell>Nombre</StyledTableCell>
-                                <StyledTableCell align="right">Email</StyledTableCell>
-                                <StyledTableCell align="right">Rol</StyledTableCell>
-                                <StyledTableCell align="right">Acciones</StyledTableCell>
+                                <StyledTableCell>
+                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                        Nombre
+                                    </MKTypography>
+
+                                </StyledTableCell>
+                                <StyledTableCell align="right">
+                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                        Email
+                                    </MKTypography>
+                                </StyledTableCell>
+
+                                <StyledTableCell align="right">
+                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                        Rol</MKTypography></StyledTableCell>
+                                <StyledTableCell align="right">                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                    Acciones</MKTypography></StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {foodtrucks.map((foodtruck) => (
-                                <StyledTableRow key={foodtruck.id}>
+                            {usuarios.map((usuario) => (
+                                <StyledTableRow key={usuario.id}>
                                     <StyledTableCell component="th" scope="row">
-                                        {foodtruck.name}
+                                        {usuario.name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="right">{foodtruck.email}</StyledTableCell>
-                                    <StyledTableCell align="right">{foodtruck.role}</StyledTableCell>
+                                    <StyledTableCell align="right">{usuario.email}</StyledTableCell>
+                                    <StyledTableCell align="right">{usuario.role}</StyledTableCell>
                                     <StyledTableCell align="right">
                                         <StyledButton>
-                                            <Link to={`/admin/usuarios/${foodtruck.id}/info`} className='btn btn-primary btn-sm'>
+                                            <Link to={`/admin/usuarios/${usuario.id}/info`} className='btn btn-primary btn-sm'>
                                                 <StyledIcon icon={showIcon} />
                                             </Link>
                                         </StyledButton>
                                         <StyledButton>
-                                            <Link to={`/admin/usuarios/${foodtruck.id}/editar`} className='btn btn-primary btn-sm'>
+                                            <Link to={`/admin/usuarios/${usuario.id}/editar`} className='btn btn-primary btn-sm'>
                                                 <StyledIcon icon={editIcon} />
                                             </Link>
                                         </StyledButton>
                                         <StyledButton>
-                                            <Link to={`/admin/usuarios/${foodtruck.id}/eliminar`} className='btn btn-primary btn-sm'>
+                                            <Link to={`/admin/usuarios/${usuario.id}/eliminar`} className='btn btn-primary btn-sm'>
                                                 <StyledIcon icon={deleteIcon} />
                                             </Link>
                                         </StyledButton>

@@ -21,8 +21,8 @@ Route::post('/usuarios/{id}/buscaportoken', 'App\Http\Controllers\Api\UsuarioCon
 Route::post('/usuarios/registro/newuser', 'App\Http\Controllers\Api\UsuarioController@store');
 Route::put('/usuarios/editar/usuario', 'App\Http\Controllers\Api\UsuarioController@update');
 Route::delete('/usuarios/{usuario}', 'App\Http\Controllers\Api\UsuarioController@destroy');
-Route::post('/usuarios/login', 'App\Http\Controllers\Api\UsuarioController@login')->middleware('canAccess');
-Route::get('/usuarios/logout', 'App\Http\Controllers\Api\UsuarioController@logout')->middleware('canAccess');
+Route::post('/usuarios/login', 'App\Http\Controllers\Api\UsuarioController@login');
+Route::get('/usuarios/logout', 'App\Http\Controllers\Api\UsuarioController@logout');
 Route::post('/usuarios/{id}/buscausuario', 'App\Http\Controllers\Api\UsuarioController@buscausuario');
 Route::post('/usuarios/{id}/editarusuarioadmin', 'App\Http\Controllers\Api\UsuarioController@editarusuarioadmin');
 

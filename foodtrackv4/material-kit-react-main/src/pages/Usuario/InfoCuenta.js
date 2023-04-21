@@ -154,14 +154,7 @@ function SimpleModal() {
 
     }
     function redirect() {
-        if (user.role == "propietario")
-            window.location.href = `/homepropietario`;
-        else if (user.role == "user")
-            window.location.href = `/homeusuario`;
-        else if (user.role == "admin")
-            window.location.href = `/homeadmin`;
-        else
-            window.location.href = `/login`;
+        window.history.back();
     }
 
 

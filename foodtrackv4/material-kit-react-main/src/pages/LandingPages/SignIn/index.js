@@ -57,10 +57,9 @@ function SignInBasic() {
       password: password,
     };
     axios
-      .post('http://172.16.238.10:8000/api/usuarios/login', data,
+      .post('http://localhost:8000/api/usuarios/login', data,
         {
           headers: {
-            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
           },
 
@@ -97,49 +96,6 @@ function SignInBasic() {
       }
       );
 
-    /*Colocamos la imagen de fondo en el body*/
-    axios
-      .post('http://api:8000/api/usuarios/login', data,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-
-          },
-
-        }
-        //172.16.238.10 API LOCAL
-        //172.16.238.20 material-kit-react
-        //172.16.238.30 mysql-db
-      )
-      .then((res) => {
-        setData(res.data.api_token);
-        document.cookie = `api_token=${res.data.token}`;
-        document.cookie = `user_id=${res.data.user_id}`;
-        document.cookie = `role=${res.data.role}`;
-
-        if (res.data.role == "admin") {
-          window.location.href = "http://localhost:3000/homeadmin";
-          //alert("Usuario logueado como admin");
-        } else if (res.data.role == "user") {
-          window.location.href = "http://localhost:3000/homeusuario";
-          //alert("Usuario logueado como usuario");
-        } else if (res.data.role == "propietario") {
-          window.location.href = "http://localhost:3000/homepropietario";
-          //alert("Usuario logueado como propietario");
-        } else {
-          alert("No se ha podido loguear correctamente");
-        }
-        alert("axios 2 con exito")
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Usuario o contraseña incorrectos axios 2 \n " + err);
-      }
-      );
-
-
-
 
 
   };
@@ -156,12 +112,6 @@ function SignInBasic() {
 
   return (
     <>
-      <DefaultNavbar
-        routes={rutas}
-
-        transparent
-        light
-      />
       <MKBox
         position="absolute"
         top={0}
@@ -196,7 +146,7 @@ function SignInBasic() {
                 textAlign="center"
               >
                 <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Login ya!
+                  Login
                 </MKTypography>
 
               </MKBox>
@@ -222,7 +172,7 @@ function SignInBasic() {
                   </MKBox>
                   <MKBox mt={4} mb={1}>
                     <MKButton onClick={handleSubmit} variant="gradient" color="info" fullWidth>
-                      Iniciar SEsion
+                      Iniciar Sesión
                     </MKButton>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">
@@ -230,7 +180,7 @@ function SignInBasic() {
                       Don&apos;t have an account?{" "}
                       <MKTypography
                         component={Link}
-                        to="/authentication/sign-up/cover"
+                        to="/registro"
                         variant="button"
                         color="info"
                         fontWeight="medium"

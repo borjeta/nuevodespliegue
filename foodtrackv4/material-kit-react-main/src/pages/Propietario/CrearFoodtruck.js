@@ -26,7 +26,7 @@ import MKAlert from "components/MKAlert";
 import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
 
 
-function EditarFoodtruck() {
+function CrearFoodtruck() {
     const [data, setData] = useState([]);
     const [foodtruck, setfoodtruck] = useState([]);
     const [user, setUser] = useState([]);
@@ -45,20 +45,17 @@ function EditarFoodtruck() {
     const handleSubmit = () => {
 
 
-        axios.put(`http://localhost:8000/api/foodtrucks/${foodtruck.id}/editar`, {
-            "id": foodtruck.id,
+        axios.post(`http://localhost:8000/api/foodtrucks`, {
             "nombre": document.getElementById("nombre").value,
             "descripcion": document.getElementById("descripcion").value,
             "ubicacion": document.getElementById("ubicacion").value,
             "telefono": document.getElementById("telefono").value,
-            "avatar": document.getElementById("avatar").value,
-            "horario": document.getElementById("horario").value,
+            "avatar": document.getElementById("imagen").value,
             "tipocomida": document.getElementById("categoria").value,
-            "status": foodtruck.status,
 
         }, {
             headers: {
-                "Access-Control-Allow-Origin": "localhost:3000/*/*/*",
+                "Access-Control-Allow-Origin": "*",
                 'Accept': 'application/json',
                 "Content-Type": "application/json",
                 "user_id": `${user_id}`,
@@ -122,7 +119,7 @@ function EditarFoodtruck() {
                                         color="primary"
                                         size="large"
                                         onClick={() => {
-                                            window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
+                                            window.history.back();
                                         }
                                         }
                                         sx={{
@@ -139,7 +136,14 @@ function EditarFoodtruck() {
                                     </MKButton>
                                 </MKBox>
                                 <MKAlert severity="info"
-                                     sx={{ width: "70%"  }}>
+                                    sx={{
+                                        width: "70%",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        margin: "auto",
+                                        marginTop: "10px",
+
+                                    }}>
                                     Estos datos serán visibles para los clientes y los podrás modificar en cualquier momento.
                                 </MKAlert>
                                 <MKBox p={4}>
@@ -190,14 +194,7 @@ function EditarFoodtruck() {
                                                     size="small"
 
                                                 />
-                                                <MKTypography variant="h6" >
-                                                    Horario
-                                                </MKTypography>
-                                                <MKInput
-                                                    id="horario"
-                                                    size="large"
-                                                    type="time"
-                                                />
+
 
                                             </div>
 
@@ -242,6 +239,20 @@ function EditarFoodtruck() {
                                             <option value="Comida Argentina">Comida Argentina</option>
 
                                         </select>
+                                        <MKTypography
+                                            variant="outlined"
+                                            size="small"
+                                        >
+                                            URL de la imagen
+                                        </MKTypography>
+                                        <MKInput
+                                            id="imagen"
+                                            variant="outlined"
+                                            size="small"
+                                            fullWidth
+                                        />
+
+
 
                                         <MKTypography variant="h6" >
                                             Previsualización
@@ -285,6 +296,6 @@ function EditarFoodtruck() {
     );
 }
 
-export default EditarFoodtruck;
+export default CrearFoodtruck;
 
 

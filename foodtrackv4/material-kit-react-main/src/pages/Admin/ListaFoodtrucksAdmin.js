@@ -97,7 +97,7 @@ function HomeAdmin() {
                             <MKBox display="flex" justifyContent="flex-end" p={2}>
 
                                 <MKButton
-                                    href="/foodtrucks/propietario/listafoodtrucks/crear"
+                                    href="/foodtrucks/admin/crear"
                                     variant="gradient"
                                     color="warning"
                                     size="large"

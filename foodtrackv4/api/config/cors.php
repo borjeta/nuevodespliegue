@@ -15,6 +15,7 @@ return [
     |
     */
 
+    'paths' => ['*'],
 
     'access_control_allow_origin' => ['*'],
 

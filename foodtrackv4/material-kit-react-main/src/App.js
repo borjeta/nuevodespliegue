@@ -109,6 +109,7 @@ export default function App() {
             <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
             <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
             <Route path="/foodtrucks/propietario/nuevafoodtruck" element={<CrearFoodtruck />} />
+            <Route path="/foodtrucks/admin/crear" element={<EditarFoodtruck />} />
           </Routes>
         </MKBox>
       </ThemeProvider>

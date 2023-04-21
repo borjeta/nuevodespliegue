@@ -27,18 +27,19 @@ import MenuItem from "@mui/material/MenuItem";
 function EditarFoodtruck() {
     const [data, setData] = useState([]);
     const [foodtruck, setfoodtruck] = useState([]);
-    const [user, setUser] = useState([]);
     const [show, setShow] = useState(true);
-    const [imagen, setImagen] = useState([]);
-    const id = useParams();
-    const [categorias, setCategorias] = useState([]);
-
-
-    const [open, setOpen] = useState(false);
-
+    const URL = window.history.state;
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    const id = useParams();
+
+    //Cogemos de la url el id de la foodtruck
+
+
+
+
+
 
     const handleSubmit = () => {
 
@@ -120,16 +121,28 @@ function EditarFoodtruck() {
                 }
             })
             .then((res) => {
-                setfoodtruck(res.data);
-                document.getElementById("nombre").value = res.data.nombre;
-                document.getElementById("descripcion").value = res.data.descripcion;
-                document.getElementById("ubicacion").value = res.data.ubicacion;
-                document.getElementById("horario").value = res.data.horario;
-                document.getElementById("telefono").value = res.data.telefono;
-                document.getElementById("avatar").value = res.data.avatar;
+                setfoodtruck(res.data[0]);
+                /*Seteamos el nombre del foodtruck*/
+                alert(foodtruck.id);
+
+                document.getElementById("nombre").value = res.data[0].nombre;
+                /*Seteamos la descripcion del foodtruck*/
+                document.getElementById("descripcion").value = res.data[0].descripcion;
+                /*Seteamos la ubicacion del foodtruck*/
+                document.getElementById("ubicacion").value = res.data[0].ubicacion;
+                /*Seteamos el telefono del foodtruck*/
+                document.getElementById("telefono").value = res.data[0].telefono;
+                /*Seteamos el avatar del foodtruck*/
+                document.getElementById("avatar").value = res.data[0].avatar;
+                /*Seteamos el horario del foodtruck*/
+                if (res.data[0].horario == null) {
+                    document.getElementById("horario").value = "00:00";
+                } else {
+                    document.getElementById("horario").value = res.data[0].horario;
+                }
                 /*Seteamos el tipo de comida del foodtruck*/
-                document.getElementById("categoria").value = res.data.TipoComida;
-                console.log(res.data);
+                document.getElementById("categoria").value = res.data[0].TipoComida;
+
             })
             .catch((err) => {
                 console.log(err);
@@ -140,6 +153,7 @@ function EditarFoodtruck() {
     /*ACtivar y desactivar foodtruck*/
 
     const handleOpen = () => {
+
         axios
             .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/abrirfoodtruck`, {
                 headers: {
@@ -176,8 +190,6 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 console.log(res.data);
-
-
                 window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
 
             })
@@ -185,28 +197,6 @@ function EditarFoodtruck() {
                 console.log(err);
             });
     }
-
-
-
-    const dondeestaras = () => {
-        axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/dondeestaras`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-            })
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
-
 
 
     /*Editar foodtruck*/
@@ -280,7 +270,10 @@ function EditarFoodtruck() {
                                                     required
                                                     fullWidth
 
+
                                                 />
+
+
                                             </div>
 
                                             {/* <!--Columna 2--> */}
@@ -292,6 +285,8 @@ function EditarFoodtruck() {
                                                     id="descripcion"
                                                     variant="outlined"
                                                     size="small"
+                                                    required
+                                                    fullWidth
                                                 />
                                             </div>
                                         </div>
@@ -312,7 +307,7 @@ function EditarFoodtruck() {
 
                                                 />
                                                 <MKTypography variant="h6" >
-                                                    Horario
+                                                    Hora de cierre del foodtruck
                                                 </MKTypography>
                                                 <MKInput
                                                     id="horario"
@@ -362,7 +357,8 @@ function EditarFoodtruck() {
                                         <MKTypography variant="h6" >
                                             Categoria
                                         </MKTypography>
-                                        <select className="form-select" aria-label="Default select example" id="categoria">
+                                        <select className="form-select" aria-label="Default select example" defaultValue={foodtruck.TipoComida} id="categoria">
+
                                             <option value="Comida Japonesa">Comida Japonesa</option>
                                             <option value="Comida Mexicana">Comida Mexicana</option>
                                             <option value="Comida Italiana">Comida Italiana</option>
