@@ -98,6 +98,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 -- --------------------------------------------------------
 
+CREATE USER 'borja'@'172.16.238.30' IDENTIFIED BY 'contraseña';
+GRANT ALL PRIVILEGES ON *.* TO 'borja'@'172.16.238.30';
+FLUSH PRIVILEGES;
+
+-- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `password_reset_tokens`
 --
