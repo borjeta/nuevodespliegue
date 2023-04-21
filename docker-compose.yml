@@ -49,7 +49,10 @@ services:
       mv nuevodespliegue/foodtrackv4/api /var/www/html/ && ls -a &&
       cd /var/www/html/api && ls -a  && ls -a &&
       curl -sS https://getcomposer.org/installer -o composer-setup.php &&
-      php composer-setup.php && php composer.phar install && php artisan serve --host=172.16.238.10 --port=8000"
+      php composer-setup.php  &&
+      php composer.phar validate &&
+      php composer.phar install &&
+      php artisan serve --host=172.16.238.10 --port=8000"
 networks:
   my_network:
     driver: bridge
@@ -65,3 +68,4 @@ volumes:
       type: none
       device: /home/foodtrackv4
       o: bind
+

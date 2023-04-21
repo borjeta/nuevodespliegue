@@ -73,7 +73,7 @@ function HomeAdmin() {
                             <MKButton
                                 color="primary"
                                 size="large"
-                                href="/admin/roles"
+                                href="/admin/opcionesglobales"
                                 className="btn"
                             >
                                 Opciones globales

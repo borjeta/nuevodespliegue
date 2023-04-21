@@ -42,6 +42,7 @@ import ListaUsuariosAdmin from "pages/Admin/ListaUsuariosAdmin";
 import EditarUsuarioAdmin from "pages/Admin/EditarUsuarioAdmin";
 import DatosCompletosUsuario from "pages/Admin/DatosCompletosUsuario";
 import CrearFoodtruck from "pages/Propietario/CrearFoodtruck";
+import OpcionesGlobales from "pages/Admin/OpcionesGlobales";
 import bgImage from "assets/images/img1.jpeg";
 import MKBox from "components/MKBox";
 
@@ -77,7 +78,7 @@ export default function App() {
           : theme
       }>
         <CssBaseline />
-        <MKBox  sx={{
+        <MKBox sx={{
           backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             `${linearGradient(
               rgba(gradients.dark.main, 0.6),
@@ -110,6 +111,7 @@ export default function App() {
             <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
             <Route path="/foodtrucks/propietario/nuevafoodtruck" element={<CrearFoodtruck />} />
             <Route path="/foodtrucks/admin/crear" element={<EditarFoodtruck />} />
+            <Route path="/admin/opcionesglobales" element={<OpcionesGlobales />} />
           </Routes>
         </MKBox>
       </ThemeProvider>
