@@ -32,7 +32,7 @@ function HomeUsuario() {
     useEffect(() => {
 
         axios
-            .get(`http://localhost:8000/api/foodtrucks/`, {
+            .post(`http://localhost:8000/api/foodtrucks/user/foodtrucks/open`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

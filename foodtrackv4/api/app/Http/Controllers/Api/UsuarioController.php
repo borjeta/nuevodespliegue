@@ -14,10 +14,22 @@ class UsuarioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return usuario::all();
+
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $body['headers']['api_token'];
+        $user_id = $body['headers']['user_id'];
+        $role = $body['headers']['role'];
+        $user = usuario::where('id', $user_id)->first();
+        if ($user->role == 'admin' && $user->api_token == $api_token && $user->id == $user_id) {
+            $users = usuario::all();
+            return response()->json($users, 200);
+        }
+        return response()->json(['error' => 'No tienes permisos para acceder a este recurso'], 401);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -49,10 +61,10 @@ class UsuarioController extends Controller
     {
         $body = $request->all();
         /* Buscamos el usuario por el nombre */
-        $api_token = $body['headers']['api_token'];
-        $user_id = $body['headers']['user_id'];
-        $role = $body['headers']['role'];
-        $user = usuario::where('id', $user_id)->first();
+        $api_token = $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
+        $user = usuario::where('api_token', $api_token)->first();
         /*desencriptamos la constraseña para mostrarla en texto plano */
         return response()->json($user, 200);
     }
@@ -98,19 +110,21 @@ class UsuarioController extends Controller
 
         $usuario = usuario::where('email', $request->email)->first();
         if ($usuario) {
-            //if (password_verify($request->password, $usuario->password)) {
-            /* Si el usuario existe y la contraseña es correcta , generamos el token con 60 caracteres aleatorios */
-            $token = Str::class::random(60);
-            $role = $usuario->role;
-            $user_id = $usuario->id;
-            $usuario->api_token = $token;
-            $usuario->date_createtoken = now();
-            $usuario->expires_at = now()->addDays(1);
-            $usuario->save();
-        }
+            if (password_verify($request->password, $usuario->password)) {
+                /* Si el usuario existe y la contraseña es correcta , generamos el token con 60 caracteres aleatorios */
+                $token = Str::class::random(60);
+                $role = $usuario->role;
+                $user_id = $usuario->id;
+                $usuario->api_token = $token;
+                $usuario->date_createtoken = now();
+                $usuario->expires_at = now()->addDays(1);
+                $usuario->save();
+            }
 
-        return response()->json(['token' => $token, 'user_id' => $user_id, 'role' => $role], 200);
+            return response()->json(['token' => $token, 'user_id' => $user_id, 'role' => $role], 200);
+        }
     }
+
 
     public function logout(Request $request)
     {
@@ -134,6 +148,8 @@ class UsuarioController extends Controller
         $user_id = $body['headers']['user_id'];
         $role = $body['headers']['role'];
         $user = usuario::where('id', $user_id)->first();
+
+
 
         $id = $request->id;
         $usuario = usuario::where('id', $id)->first();
@@ -181,7 +197,6 @@ class UsuarioController extends Controller
             $usuario->save();
             return Response($usuario, 200);
         } else {
-            /*generamos una cabecera con el access Control Allow Origin para que el front pueda acceder a la respuesta */
             return response('No tienes permisos para acceder a este recurso', 401);
         }
 

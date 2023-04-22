@@ -133,4 +133,30 @@ class FoodtruckController extends Controller
         $foodtruck->save();
         return $foodtruck;
     }
+
+    public function getFoodtrucksSoloActivas(Request $request)
+    {
+        $api_token = $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
+
+        $comprobacion = usuario::where
+        (
+            [
+                ['id', '=', $user_id],
+                ['api_token', '=', $api_token],
+                ['role', '=', $role]
+            ]
+        )->first();
+
+        if ($comprobacion == null) {
+            return Response()->json(['message' => 'No tienes permisos para ver los foodtrucks'], 401);
+        }
+
+        else {
+            $foodtrucks = foodtruck::where('status', 'Activo')->get();
+            return $foodtrucks;
+        }
+    }
+  
 }

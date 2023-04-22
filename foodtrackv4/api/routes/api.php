@@ -36,3 +36,4 @@ Route::post('/foodtrucks/buscador/foodtruck', 'App\Http\Controllers\Api\Foodtruc
 Route::get('/foodtrucks/listaporpropietario/{id}', 'App\Http\Controllers\Api\FoodtruckController@getFoodtrucksByUser');
 Route::get('/foodtrucks/listaporpropietario/{id}/abrirfoodtruck', 'App\Http\Controllers\Api\FoodtruckController@abrirfoodtruck');
 Route::get('/foodtrucks/listaporpropietario/{id}/cerrarfoodtruck', 'App\Http\Controllers\Api\FoodtruckController@cerrarfoodtruck');
+Route::post('/foodtrucks/user/foodtrucks/Open', 'App\Http\Controllers\Api\FoodtruckController@getFoodtrucksSoloActivas');
