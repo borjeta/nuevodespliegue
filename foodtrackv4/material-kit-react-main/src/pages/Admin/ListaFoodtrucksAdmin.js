@@ -44,14 +44,7 @@ function HomeAdmin() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-    const tabla = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #000;
-    border-radius: 5px;
-    padding: 10px;
-    `;
+
 
     useEffect(() => {
 
@@ -91,7 +84,7 @@ function HomeAdmin() {
                     <div className="col-md-12">
                         <div className="card">
                             <div className="card-header card-header-primary">
-                                <h4 className="card-title ">Foodtrucks</h4>
+                                <h1 className="card-title ">Foodtrucks</h1>
                                 <p className="card-category"> Listado de foodtrucks</p>
                             </div>
                             <MKBox display="flex" justifyContent="flex-end" p={2}>

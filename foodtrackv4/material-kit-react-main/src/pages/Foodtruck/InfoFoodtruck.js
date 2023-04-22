@@ -14,6 +14,8 @@ import MKAvatar from "components/MKAvatar";
 import Stack from "@mui/material/Stack";
 import { borders } from '@material-ui/system';
 import Box from '@mui/material/Box';
+import { Link, animateScroll as scroll } from "react-scroll";
+
 
 
 const defaultProps = {
@@ -72,7 +74,7 @@ function InfoFoodtruck() {
                 <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
 
                 </Grid>
-                <Modal open={show} sx={{ display: "grid", placeItems: "center" }} >
+                <Modal open={show} style={{ overflow: "scroll" }} sx={{ display: "grid", placeItems: "center" }} >
                     <Slide direction="down" in={show} timeout={500}>
                         <MKBox
                             position="relative"
@@ -128,7 +130,7 @@ function InfoFoodtruck() {
                                                     <MKTypography variant="h4" >
                                                         {foodtruck.nombre}
                                                     </MKTypography>
-<hr></hr>
+                                                    <hr></hr>
                                                     <MKTypography
                                                         variant="h6"
                                                         color="primary"
@@ -156,7 +158,15 @@ function InfoFoodtruck() {
                                                         fontWeight="400"
                                                         mb={2}
                                                     >
-                                                        {foodtruck.telefono}
+                                                        Telf:{foodtruck.telefono}
+                                                    </MKTypography>
+                                                    <MKTypography
+                                                        variant="h6"
+                                                        color="textSecondary"
+                                                        fontWeight="400"
+                                                        mb={2}
+                                                    >
+                                                        Categoría : {foodtruck.TipoComida}
                                                     </MKTypography>
                                                     <MKTypography
                                                         variant="h6"

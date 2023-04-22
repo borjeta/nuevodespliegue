@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\foodtruck;
 use App\Models\usuario;
-use Dotenv\Repository\RepositoryInterface;
 use Illuminate\Http\Request;
 
 class FoodtruckController extends Controller
@@ -134,29 +133,11 @@ class FoodtruckController extends Controller
         return $foodtruck;
     }
 
-    public function getFoodtrucksSoloActivas(Request $request)
+    public function foodtrucksSoloActivas()
     {
-        $api_token = $request->header('api_token');
-        $user_id = $request->header('user_id');
-        $role = $request->header('role');
 
-        $comprobacion = usuario::where
-        (
-            [
-                ['id', '=', $user_id],
-                ['api_token', '=', $api_token],
-                ['role', '=', $role]
-            ]
-        )->first();
-
-        if ($comprobacion == null) {
-            return Response()->json(['message' => 'No tienes permisos para ver los foodtrucks'], 401);
-        }
-
-        else {
-            $foodtrucks = foodtruck::where('status', 'Activo')->get();
-            return $foodtrucks;
-        }
+        $foodtrucks = foodtruck::where('status', 'Activo')->get();
+        return $foodtrucks;
     }
-  
+
 }

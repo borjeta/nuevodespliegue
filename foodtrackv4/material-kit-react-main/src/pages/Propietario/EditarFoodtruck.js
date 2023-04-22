@@ -232,13 +232,17 @@ function EditarFoodtruck() {
 
                             >
                                 <MKBox display="flex" alignItems="center" p={2}>
+                                    <br />
+                                    <br />
+                                    <br />
                                     <MKTypography variant="h5" alignItems="center">Ventana de edición de foodtruck</MKTypography>
+                                    <br />
                                     <MKButton
                                         variant="text"
                                         color="primary"
                                         size="large"
                                         onClick={() => {
-                                            window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
+                                            window.history.back();
                                         }
                                         }
                                         sx={{

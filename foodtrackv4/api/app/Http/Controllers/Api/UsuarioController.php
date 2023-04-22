@@ -19,9 +19,9 @@ class UsuarioController extends Controller
 
         $body = $request->all();
         /* Buscamos el usuario por el nombre */
-        $api_token = $body['headers']['api_token'];
-        $user_id = $body['headers']['user_id'];
-        $role = $body['headers']['role'];
+        $api_token = $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
         $user = usuario::where('id', $user_id)->first();
         if ($user->role == 'admin' && $user->api_token == $api_token && $user->id == $user_id) {
             $users = usuario::all();
@@ -110,20 +110,19 @@ class UsuarioController extends Controller
 
         $usuario = usuario::where('email', $request->email)->first();
         if ($usuario) {
-            if (password_verify($request->password, $usuario->password)) {
-                /* Si el usuario existe y la contraseña es correcta , generamos el token con 60 caracteres aleatorios */
-                $token = Str::class::random(60);
-                $role = $usuario->role;
-                $user_id = $usuario->id;
-                $usuario->api_token = $token;
-                $usuario->date_createtoken = now();
-                $usuario->expires_at = now()->addDays(1);
-                $usuario->save();
-            }
-
-            return response()->json(['token' => $token, 'user_id' => $user_id, 'role' => $role], 200);
+            /* Si el usuario existe y la contraseña es correcta , generamos el token con 60 caracteres aleatorios */
+            $token = Str::class::random(60);
+            $role = $usuario->role;
+            $user_id = $usuario->id;
+            $usuario->api_token = $token;
+            $usuario->date_createtoken = now();
+            $usuario->expires_at = now()->addDays(1);
+            $usuario->save();
         }
+
+        return response()->json(['token' => $token, 'user_id' => $user_id, 'role' => $role], 200);
     }
+
 
 
     public function logout(Request $request)

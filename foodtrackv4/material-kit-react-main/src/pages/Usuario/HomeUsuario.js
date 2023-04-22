@@ -10,6 +10,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import MKAlert from "components/MKAlert";
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
@@ -32,7 +33,7 @@ function HomeUsuario() {
     useEffect(() => {
 
         axios
-            .post(`http://localhost:8000/api/foodtrucks/user/foodtrucks/open`, {
+            .post(`http://localhost:8000/api/foodtrucks/estado/foodtrucksabiertas`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -66,19 +67,25 @@ function HomeUsuario() {
             <br />
             <br />
             <br />
-            
+            <MKAlert severity="info"
+                sx={{
+                    width: "70%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "auto",
+                    marginTop: "10px",
+
+                }}>
+                        Encuentra los mejores foodtrucks cerca de ti
+            </MKAlert>
 
 
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
 
-                    <Typography variant="h4" component="h1" gutterBottom align="center">
-                        Foodtrucks
-                    </Typography>
-                    <Typography variant="h5" component="h2" gutterBottom align="center">
-                        Encuentra los mejores foodtrucks cerca de ti
-                    </Typography>
+
+                   
                     <Box sx={{ my: 4 }}>
 
 

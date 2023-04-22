@@ -49,37 +49,44 @@ function HomeAdmin() {
                     <div class="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
 
                         <MKBox align="center" justify-content="center">
-                            <MKButton
-                                color="primary"
-                                size="large"
-                                href="/admin/foodtrucks"
-                                className="btn"
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <br />
 
-                            >
-                                Foodtrucks
-                            </MKButton>
-                            &nbsp;
-                            &nbsp;
-                            <MKButton
-                                color="primary"
-                                size="large"
-                                href="/admin/usuarios"
-                                className="btn"
-                            >
-                                Usuarios
-                            </MKButton>
-                            &nbsp;
-                            &nbsp;
-                            <MKButton
-                                color="primary"
-                                size="large"
-                                href="/admin/opcionesglobales"
-                                className="btn"
-                            >
-                                Opciones globales
-                            </MKButton>
-                            &nbsp;
-                            &nbsp;
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        href="/admin/foodtrucks"
+                                        className="btn"
+
+                                    >
+                                        Foodtrucks
+                                    </MKButton>
+                                </div>
+                                <div className="col-md-4">
+                                    <br />
+
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        href="/admin/usuarios"
+                                        className="btn"
+                                    >
+                                        Usuarios
+                                    </MKButton>
+                                </div>
+                                <div className="col-md-4">
+                                    <br />
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        href="/admin/opcionesglobales"
+                                        className="btn"
+                                    >
+                                        Opciones globales
+                                    </MKButton>
+                                </div>
+                            </div>
 
                         </MKBox>
                     </div>

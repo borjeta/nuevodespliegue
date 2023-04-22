@@ -1,19 +1,4 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.0.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
@@ -48,53 +33,40 @@ function Footer() {
               mb={3}
               sx={{ listStyle: "none" }}
             >
-              <MKBox component="li">
+              <MKBox >
                 <MKTypography
                   variant="button"
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
                   href="http://localhost:3000/homeusuario"
-                  target="_blank"
                   rel="noreferrer"
                 >
                   Home
                 </MKTypography>
               </MKBox>
 
-              <MKBox component="li">
+              <MKBox >
                 <MKTypography
                   variant="button"
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
                   href="http://localhost:3000/micuenta"
-                  target="_blank"
                   rel="noreferrer"
                 >
-                  Mi cuenta 
-                                  </MKTypography>
-              </MKBox>
-
-
-
-              <MKBox component="li">
-                <MKTypography
-                  variant="button"
-                  fontWeight="regular"
-                  opacity={0.8}
-                  component={Link}
-                  href="https://www.creative-tim.com/blog"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  
+                  Mi cuenta
                 </MKTypography>
               </MKBox>
-
-
             </Stack>
-            <MKTypography variant="button" opacity={0.8}>
+            <MKTypography
+              variant="gradient"
+              fontWeight="regular"
+              opacity={0.8}
+              textAlign={{ xs: "center", lg: "left" }}
+              color = "white"
+            >
+
               Copyright ©  2023 Creado por Borja Alventosa
             </MKTypography>
           </Grid>

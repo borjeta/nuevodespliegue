@@ -10,7 +10,8 @@ import editIcon from '@iconify/icons-mdi/edit';
 
 import MKButton from 'components/MKButton';
 import Container from '@mui/material/Container';
-
+import MKTypography from 'components/MKTypography';
+import Footer from 'pages/LandingPages/Author/sections/Footer';
 
 const HomePropietario = () => {
 
@@ -55,70 +56,88 @@ const HomePropietario = () => {
                 <NavbarPropietario />
                 <br />
                 <br />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="card">
+                                <div className="card-header card-header-primary">
+                                    <h4 className="card-title ">Foodtrucks</h4>
+                                    <p className="card-category"> Listado de foodtrucks</p>
+                                </div>
+                                <div className="card-body">
+                                    <div className="table-responsive">
+                                        {/*align-center justify-content-center*/}
+                                        <Container maxWidth="lg" align="center">
+                                            <Box sx={{ width: '100%' }}>
+                                                <Table id="tablafoodtrucks">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Nombre</th>
+                                                            <th scope="col">Estado</th>
+                                                            <th scope="col"><div className="d-flex justify-content-center align-text-center ">Acciones</div></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {foodtrucks.map((foodtruck) => (
+                                                            <tr key={foodtruck.id}>
+                                                                <td>{foodtruck.nombre}</td>
+                                                                <td>{foodtruck.status}</td>
+                                                                <td>
+                                                                    <div className="d-flex justify-content-center">
 
-                {/*align-center justify-content-center*/}
-                <Container maxWidth="lg" align="center">
-                    <Box sx={{ width: '100%' }}>
-                        <Table id="tablafoodtrucks">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col"><div className="d-flex justify-content-center align-text-center ">Acciones</div></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {foodtrucks.map((foodtruck) => (
-                                    <tr key={foodtruck.id}>
-                                        <td>{foodtruck.nombre}</td>
-                                        <td>{foodtruck.status}</td>
-                                        <td>
-                                            <div className="d-flex justify-content-center">
 
+                                                                        &nbsp;
+                                                                        <MKButton
+                                                                            href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
+                                                                            variant="gradient"
+                                                                            color="info"
+                                                                            size="large"
+                                                                            startIcon={<Icon icon={editIcon} />}
+                                                                        >
+                                                                            Editar
+                                                                        </MKButton>
+                                                                        &nbsp;
+                                                                        <MKButton variant="gradient" color="info" size="large" onClick={() => {
+                                                                            axios
+                                                                                .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
+                                                                                    headers: {
+                                                                                        "Access-Control-Allow-Origin": "*",
+                                                                                        "Content-Type": "application/json",
+                                                                                        "user_id": `${user_id}`,
+                                                                                        "api_token": `${api_token}`,
+                                                                                        "role": `${role}`
+                                                                                    }
 
-                                                &nbsp;
-                                                <MKButton
-                                                    href={`/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`}
-                                                    variant="gradient"
-                                                    color="info"
-                                                    size="large"
-                                                    startIcon={<Icon icon={editIcon} />}
-                                                >
-                                                    Editar
-                                                </MKButton>
-                                                &nbsp;
-                                                <MKButton variant="gradient" color="info" size="large" onClick={() => {
-                                                    axios
-                                                        .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
-                                                            headers: {
-                                                                "Access-Control-Allow-Origin": "*",
-                                                                "Content-Type": "application/json",
-                                                                "user_id": `${user_id}`,
-                                                                "api_token": `${api_token}`,
-                                                                "role": `${role}`
-                                                            }
+                                                                                })
+                                                                                .then((res) => {
+                                                                                    console.log(res.data);
+                                                                                    window.location.reload();
+                                                                                }
+                                                                                )
+                                                                                .catch((err) => {
+                                                                                    console.log(err);
+                                                                                }
+                                                                                );
+                                                                        }}>Eliminar</MKButton>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </Table>
+                                            </Box>
+                                        </Container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div >
+                    </div >
+                </div >
+            </div >
+            <Footer />
 
-                                                        })
-                                                        .then((res) => {
-                                                            console.log(res.data);
-                                                            window.location.reload();
-                                                        }
-                                                        )
-                                                        .catch((err) => {
-                                                            console.log(err);
-                                                        }
-                                                        );
-                                                }}>Eliminar</MKButton>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    </Box>
-                </Container>
-            </div>
-        </div>
+        </div >
+
     )
 }
 

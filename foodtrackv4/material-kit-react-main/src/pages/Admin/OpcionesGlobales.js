@@ -27,6 +27,13 @@ function HomeAdmin() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
+    const deleteCookie = (name) => {
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+    deleteCookie("api_token");
+    deleteCookie("user_id");
+    deleteCookie("role");
+
 
 
     return (
@@ -49,36 +56,43 @@ function HomeAdmin() {
                     <div class="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
 
                         <MKBox align="center" justify-content="center">
-                            <MKButton
-                                color="primary"
-                                size="large"
-                                href="/admin/foodtrucks"
-                                className="btn"
-                            >
-                            Crear Administrador 
-                            </MKButton>
-                            &nbsp;
-                            &nbsp;
-                            <MKButton
-                                color="primary"
-                                size="large"
-                                href="/admin/usuarios"
-                                className="btn"
-                            >
-                            Cerrar todas las foodtrucks
-                            </MKButton>
-                            &nbsp;
-                            &nbsp;
-                            <MKButton
-                                color="primary"
-                                size="large"
-                                href=""
-                                className="btn"
-                            > Volver                            
-                            </MKButton>
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        href="/admin/foodtrucks"
+                                        className="btn"
+                                    >
+                                        Crear Administrador
+                                    </MKButton>
+                                </div>
+                                <br />
 
-                            &nbsp;
-                            &nbsp;
+                                <div className="col-md-4">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        href="/admin/usuarios"
+                                        className="btn"
+                                    >
+                                        Cerrar foodtrucks
+                                    </MKButton>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        onClick={() => {
+                                            window.history.back();
+                                        }}
+                                        className="btn"
+                                    > Volver
+                                    </MKButton>
+                                </div>
+                            </div>
+
 
                         </MKBox>
                     </div>

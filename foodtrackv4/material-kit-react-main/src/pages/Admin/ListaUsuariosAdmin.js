@@ -25,7 +25,7 @@ import NavbarAdmin from "pages/Admin/NavbarAdmin";
 
 const useStyles = makeStyles({
     table: {
-        minWidth: 650,
+
     },
 });
 
@@ -41,6 +41,7 @@ function ListaUsuariosAdmin() {
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
 
     const StyledTableCell = styled(TableCell)`
     border: 1px solid black;
@@ -61,13 +62,6 @@ function ListaUsuariosAdmin() {
     const StyledIcon = styled(Icon)`
     color: #000000;
     font-weight: bold;
-    `;
-
-    const TableContainer = styled(Paper)`
-    background-color: #f5f5f5;
-    color: #000000;
-    font-weight: bold;
-    margin: 10%;
     `;
 
 
@@ -100,86 +94,88 @@ function ListaUsuariosAdmin() {
     return (
         <div>
             <NavbarAdmin />
-            &nbsp;
-            <MKBox>
-                <TableContainer component={Paper}>
-                    <Table className="table" aria-label="customized table">
 
-                        <TableHead
-                            style={{
-                                backgroundColor: "#f5f5f5",
-                                color: "#000000",
-                                fontWeight: "bold",
-                                align: "center",
-                                justify: "center",
+            <br />
+            <br />
+            <br />
+            <MKBox sx={{
 
 
-                            }}
 
-                        >
-                            <TableRow>
-                                <MKTypography variant="h2"
-                                    justify="center"
-                                    align="center"
-                                    color="textprimary"
-                                    gutterBottom
+            }}><div className="card-body">
+                    <div className="table-responsive">
+                        <TableContainer component={Paper}>
 
-                                >
-                                    Lista de usuarios
-                                </MKTypography>
-                            </TableRow>
+                            <Table className={classes.table} aria-label="simple table">
 
-                            <TableRow>
-                                <StyledTableCell>
-                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
-                                        Nombre
-                                    </MKTypography>
+                                <TableHead >
+                                    <br />
+                                    <TableRow>
+                                        <MKTypography variant="h2"
+                                            justify="center"
+                                            align="center"
+                                            color="textprimary"
+                                            gutterBottom
 
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
-                                        Email
-                                    </MKTypography>
-                                </StyledTableCell>
+                                        >
+                                            Usuarios
+                                        </MKTypography>
+                                    </TableRow>
 
-                                <StyledTableCell align="right">
-                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
-                                        Rol</MKTypography></StyledTableCell>
-                                <StyledTableCell align="right">                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
-                                    Acciones</MKTypography></StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {usuarios.map((usuario) => (
-                                <StyledTableRow key={usuario.id}>
-                                    <StyledTableCell component="th" scope="row">
-                                        {usuario.name}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">{usuario.email}</StyledTableCell>
-                                    <StyledTableCell align="right">{usuario.role}</StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        <StyledButton>
-                                            <Link to={`/admin/usuarios/${usuario.id}/info`} className='btn btn-primary btn-sm'>
-                                                <StyledIcon icon={showIcon} />
-                                            </Link>
-                                        </StyledButton>
-                                        <StyledButton>
-                                            <Link to={`/admin/usuarios/${usuario.id}/editar`} className='btn btn-primary btn-sm'>
-                                                <StyledIcon icon={editIcon} />
-                                            </Link>
-                                        </StyledButton>
-                                        <StyledButton>
-                                            <Link to={`/admin/usuarios/${usuario.id}/eliminar`} className='btn btn-primary btn-sm'>
-                                                <StyledIcon icon={deleteIcon} />
-                                            </Link>
-                                        </StyledButton>
-                                    </StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                                    <TableRow>
+                                        <TableCell>
+                                            <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                                Nombre
+                                            </MKTypography>
+
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                                Email
+                                            </MKTypography>
+                                        </TableCell>
+
+                                        <TableCell align="right">
+                                            <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                                Rol</MKTypography></TableCell>
+                                        <TableCell align="right">                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                            Acciones</MKTypography></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {usuarios.map((usuario) => (
+                                        <TableRow key={usuario.id}>
+                                            <TableCell component="th" scope="row">
+                                                {usuario.name}
+                                            </TableCell>
+                                            <TableCell align="right">{usuario.email}</TableCell>
+                                            <TableCell align="right">{usuario.role}</TableCell>
+                                            <TableCell align="right">
+                                                <StyledButton>
+                                                    <Link to={`/admin/usuarios/${usuario.id}/info`} className='btn btn-primary btn-sm'>
+                                                        <StyledIcon icon={showIcon} />
+                                                    </Link>
+                                                </StyledButton>
+                                                <StyledButton>
+                                                    <Link to={`/admin/usuarios/${usuario.id}/editar`} className='btn btn-primary btn-sm'>
+                                                        <StyledIcon icon={editIcon} />
+                                                    </Link>
+                                                </StyledButton>
+                                                <StyledButton>
+                                                    <Link to={`/admin/usuarios/${usuario.id}/eliminar`} className='btn btn-primary btn-sm'>
+                                                        <StyledIcon icon={deleteIcon} />
+                                                    </Link>
+                                                </StyledButton>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </div>
+                </div>
             </MKBox>
+
         </div >
     );
 }

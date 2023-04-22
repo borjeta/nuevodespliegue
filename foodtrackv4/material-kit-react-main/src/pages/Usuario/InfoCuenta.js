@@ -115,7 +115,7 @@ function SimpleModal() {
                 document.getElementById("email").value = res.data.email;
                 document.getElementById("phone").value = res.data.telefono;
                 document.getElementById("ubicacion").value = res.data.ubicacion;
-                
+
 
 
             })
@@ -320,13 +320,20 @@ function SimpleModal() {
                                                 </Grid>
                                             </Grid>
                                             <Grid container item justifyContent="center" xs={12} my={1}>
-                                                <MKButton onClick={handleSubmit} size="large" variant="gradient" color="warning" >
-                                                    Guardar cambios
-                                                </MKButton>
-                                                &nbsp;
-                                                <MKButton onClick={handleConfirmDelete} size="large" variant="gradient" color="error" >
-                                                    borrar cuenta
-                                                </MKButton>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <MKButton onClick={handleSubmit} size="large" variant="gradient" color="warning" >
+                                                            Guardar cambios
+                                                        </MKButton>
+                                                    </div>
+                                                    <div className="col-6">
+
+
+                                                        <MKButton onClick={handleConfirmDelete} size="large" variant="gradient" color="error" >
+                                                            borrar cuenta
+                                                        </MKButton>
+                                                    </div>
+                                                </div>
 
                                             </Grid>
 
