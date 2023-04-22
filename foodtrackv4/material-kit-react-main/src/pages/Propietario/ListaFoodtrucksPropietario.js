@@ -58,28 +58,30 @@ function ListaFoodtrucksPropietario() {
             <br />
             <br />
             <br />
-            <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute  text-white">
-                <div className="container-fluid">
+            <div className="row">
+                <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute  text-white">
+                    <div className="container-fluid">
 
-                    <div className="collapse navbar-collapse justify-content-end">
-                        <MKButton href="/foodtrucks/propietario/nuevafoodtruck" variant="gradient" color="info" size="large" startIcon={<Icon icon={editIcon} />}>
-                            Crear Foodtruck
-                        </MKButton>
-                        &nbsp;
+                        <div className="collapse navbar-collapse justify-content-end">
+                            <MKButton href="/foodtrucks/propietario/nuevafoodtruck" variant="gradient" color="info" size="large" startIcon={<Icon icon={editIcon} />}>
+                                Crear Foodtruck
+                            </MKButton>
+                            &nbsp;
 
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <a className="nav-link" href="#pablo">
-                                    <i className="material-icons">settings</i>
+                            <ul className="navbar-nav">
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/foodtrucks/propietario/ajustes">
+                                        <i className="material-icons">settings</i>
 
-                                </a>
-                            </li>
-                            <li className="nav-item dropdown">
-                            </li>
-                        </ul>
+                                    </a>
+                                </li>
+                                <li className="nav-item dropdown">
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
             <br />
 
 

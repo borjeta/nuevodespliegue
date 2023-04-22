@@ -54,9 +54,7 @@ function InfoFoodtruck() {
 
             })
             .then((res) => {
-                setFoodtruck(res.data);
-                console.log(res.data);
-
+                setFoodtruck(res.data[0]);
             })
             .catch((err) => {
                 console.log(err);
@@ -130,10 +128,10 @@ function InfoFoodtruck() {
                                                     <MKTypography variant="h4" >
                                                         {foodtruck.nombre}
                                                     </MKTypography>
-
+<hr></hr>
                                                     <MKTypography
                                                         variant="h6"
-                                                        color="textSecondary"
+                                                        color="primary"
                                                         fontWeight="400"
                                                         mb={2}
                                                     >
@@ -170,7 +168,7 @@ function InfoFoodtruck() {
                                                     </MKTypography>
                                                     <MKTypography
                                                         variant="h3"
-                                                        color="textPrimary"
+                                                        color="primary"
                                                         fontWeight="600"
                                                         mb={2}
                                                     >
@@ -181,7 +179,7 @@ function InfoFoodtruck() {
                                                         fontWeight="400"
                                                         mb={2}
                                                     >
-                                                        Estamos abiertos hasta &nbsp;{foodtruck.horario}
+                                                        Abiertos hasta &nbsp;{foodtruck.horario}
                                                     </MKTypography>
 
                                                     <MKButton variant="gradient" color="info" size="large" onClick={() => {
