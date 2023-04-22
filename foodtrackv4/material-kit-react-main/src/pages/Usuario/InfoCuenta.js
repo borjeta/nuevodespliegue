@@ -115,6 +115,8 @@ function SimpleModal() {
                 document.getElementById("email").value = res.data.email;
                 document.getElementById("phone").value = res.data.telefono;
                 document.getElementById("ubicacion").value = res.data.ubicacion;
+                
+
 
             })
 

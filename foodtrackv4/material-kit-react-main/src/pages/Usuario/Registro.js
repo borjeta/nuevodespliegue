@@ -92,7 +92,8 @@ function SimpleModal() {
                 <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
 
                 </Grid>
-                <Modal open={show} sx={{ display: "grid", placeItems: "center" }}>
+                <Modal open={show} style={{ overflow: "scroll" }}
+                    sx={{ display: "grid", placeItems: "center" }}>
                     <Slide direction="down" in={show} timeout={500}>
                         <MKBox
                             position="relative"
