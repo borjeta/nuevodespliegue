@@ -74,7 +74,7 @@ function HomeAdmin() {
                                 size="large"
                                 href=""
                                 className="btn"
-                            >                               
+                            > Volver                            
                             </MKButton>
 
                             &nbsp;
