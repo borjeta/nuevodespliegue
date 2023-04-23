@@ -43,28 +43,6 @@ function ListaUsuariosAdmin() {
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
 
-    const StyledTableCell = styled(TableCell)`
-    border: 1px solid black;
-    background-color: #f5f5f5;
-    color: #000000;
-    font-weight: bold;
-    `;
-    const StyledTableRow = styled(TableRow)`
-    background-color: #f5f5f5;
-    color: #000000;
-    font-weight: bold;
-    `;
-    const StyledButton = styled(MKButton)`
-    background-color: #f5f5f5;
-    color: #000000;
-    font-weight: bold;
-    `;
-    const StyledIcon = styled(Icon)`
-    color: #000000;
-    font-weight: bold;
-    `;
-
-
 
     useEffect(() => {
 
@@ -109,37 +87,28 @@ function ListaUsuariosAdmin() {
                             <Table className={classes.table} aria-label="simple table">
 
                                 <TableHead >
-                                    <br />
-                                    <TableRow>
-                                        <MKTypography variant="h2"
-                                            justify="center"
-                                            align="center"
-                                            color="textprimary"
-                                            gutterBottom
-
-                                        >
-                                            Usuarios
-                                        </MKTypography>
-                                    </TableRow>
+                                    
 
                                     <TableRow>
                                         <TableCell>
-                                            <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                            <MKTypography  justify="center" align="center" variant="h5" >
                                                 Nombre
                                             </MKTypography>
 
                                         </TableCell>
                                         <TableCell align="right">
-                                            <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                            <MKTypography  justify="center" align="center" variant="h5"  >
                                                 Email
                                             </MKTypography>
                                         </TableCell>
-
                                         <TableCell align="right">
-                                            <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
+                                            <MKTypography  justify="center" align="center" variant="h5"  >
                                                 Rol</MKTypography></TableCell>
-                                        <TableCell align="right">                                    <MKTypography variant="h4" justify="center" align="center" color="textprimary" gutterBottom >
-                                            Acciones</MKTypography></TableCell>
+                                        <TableCell align="right">
+                                            <MKTypography  justify="center" align="center" variant="h5" >
+                                                Acciones
+                                            </MKTypography>
+                                        </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -151,21 +120,21 @@ function ListaUsuariosAdmin() {
                                             <TableCell align="right">{usuario.email}</TableCell>
                                             <TableCell align="right">{usuario.role}</TableCell>
                                             <TableCell align="right">
-                                                <StyledButton>
+                                                <MKButton>
                                                     <Link to={`/admin/usuarios/${usuario.id}/info`} className='btn btn-primary btn-sm'>
-                                                        <StyledIcon icon={showIcon} />
+                                                        <Icon icon={showIcon} />
                                                     </Link>
-                                                </StyledButton>
-                                                <StyledButton>
+                                                </MKButton>
+                                                <MKButton>
                                                     <Link to={`/admin/usuarios/${usuario.id}/editar`} className='btn btn-primary btn-sm'>
-                                                        <StyledIcon icon={editIcon} />
+                                                        <Icon icon={editIcon} />
                                                     </Link>
-                                                </StyledButton>
-                                                <StyledButton>
+                                                </MKButton>
+                                                <MKButton>
                                                     <Link to={`/admin/usuarios/${usuario.id}/eliminar`} className='btn btn-primary btn-sm'>
-                                                        <StyledIcon icon={deleteIcon} />
+                                                        <Icon icon={deleteIcon} />
                                                     </Link>
-                                                </StyledButton>
+                                                </MKButton>
                                             </TableCell>
                                         </TableRow>
                                     ))}

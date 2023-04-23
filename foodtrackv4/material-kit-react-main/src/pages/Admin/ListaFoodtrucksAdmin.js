@@ -62,6 +62,7 @@ function HomeAdmin() {
             .then((res) => {
                 setFoodtrucks(res.data);
                 console.log(res.data);
+                
 
             })
             .catch((err) => {

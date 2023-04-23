@@ -65,8 +65,13 @@ class UsuarioController extends Controller
         $user_id = $request->header('user_id');
         $role = $request->header('role');
         $user = usuario::where('api_token', $api_token)->first();
-        /*desencriptamos la constraseña para mostrarla en texto plano */
-        return response()->json($user, 200);
+        if ($user) {
+            return response()->json($user, 200);
+        }
+        else{
+            return response()->json(['error' => 'No tienes permisos para acceder a este recurso \n 
+            o no se ha encontrado el usuario'], 401);
+        }
     }
 
     /**
@@ -81,7 +86,8 @@ class UsuarioController extends Controller
         $user_id = $body['headers']['user_id'];
         $role = $body['headers']['role'];
         $user = usuario::where('id', $user_id)->first();
-        if ($user) {
+
+        if ($user->id == $user_id && $user->api_token == $api_token && $user->role == $role) {
             $user->name = $request->name;
             $user->email = $request->email;
             $user->telefono = $request->telefono;

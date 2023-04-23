@@ -14,7 +14,30 @@ class FoodtruckController extends Controller
      */
     public function index()
     {
-        return foodtruck::all();
+        $api_token = request()->header('api_token');
+        $user_id = request()->header('user_id');
+        $role = request()->header('role');
+
+        $comprobacion = usuario::where
+        (
+            [
+                ['id', '=', $user_id],
+                ['api_token', '=', $api_token],
+                ['role', '=', $role]
+            ]
+        )->first();
+
+        if($comprobacion->role == 'admin' && $comprobacion->api_token == $api_token && $comprobacion->id == $user_id){
+            $foodtrucks = foodtruck::all();
+            return response()->json($foodtrucks, 200);
+        }
+        
+        if ($comprobacion == null ) {
+            return Response()->json(['message' => 'No tienes permisos para ver los foodtrucks'], 401);
+        } else {
+            $foodtrucks = foodtruck::all();
+            return response()->json($foodtrucks, 200);
+        }
     }
 
     /**
@@ -48,7 +71,7 @@ class FoodtruckController extends Controller
             $foodtruck->telefono = $request->telefono;
             $foodtruck->avatar = $request->avatar;
             $foodtruck->tipocomida = $request->tipocomida;
-            $foodtruck->horario = now();
+            $foodtruck->horario = "00:00";
             $foodtruck->save();
             return Response()->json(['message' => 'Foodtruck creado correctamente'], 200);
         }

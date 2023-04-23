@@ -122,9 +122,8 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 setfoodtruck(res.data[0]);
-                /*Seteamos el nombre del foodtruck*/
-                alert(foodtruck.id);
 
+                /*Seteamos el nombre del foodtruck*/
                 document.getElementById("nombre").value = res.data[0].nombre;
                 /*Seteamos la descripcion del foodtruck*/
                 document.getElementById("descripcion").value = res.data[0].descripcion;
@@ -135,11 +134,7 @@ function EditarFoodtruck() {
                 /*Seteamos el avatar del foodtruck*/
                 document.getElementById("avatar").value = res.data[0].avatar;
                 /*Seteamos el horario del foodtruck*/
-                if (res.data[0].horario == null) {
-                    document.getElementById("horario").value = "00:00";
-                } else {
-                    document.getElementById("horario").value = res.data[0].horario;
-                }
+                document.getElementById("horario").value = res.data[0].horario;
                 /*Seteamos el tipo de comida del foodtruck*/
                 document.getElementById("categoria").value = res.data[0].TipoComida;
 
