@@ -206,4 +206,38 @@ class UsuarioController extends Controller
         }
 
     }
+
+    /*Funcion para crear un admin desde el panel de administrador */
+
+    public function crearAdmin(Request $request): Response
+    {
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $body['headers']['api_token'];
+        $user_id = $body['headers']['user_id'];
+        $role = $body['headers']['role'];
+        $user = usuario::where('id', $user_id)->first();
+        if ($user->api_token == $api_token && $user->id == $user_id && $user->role == $role) {
+            $usuario = new usuario();
+            $usuario->name = $body['data']['name'];
+            $usuario->email = $body['data']['email'];
+            $usuario->telefono = $body['data']['telefono'];
+            $usuario->role = $body['data']['role'];
+            $usuario->password = password_hash($body['data']['password'], PASSWORD_DEFAULT);
+            $usuario->save();
+            return Response($usuario, 200);
+        } else {
+            return response('No tienes permisos para acceder a este recurso', 401);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 }

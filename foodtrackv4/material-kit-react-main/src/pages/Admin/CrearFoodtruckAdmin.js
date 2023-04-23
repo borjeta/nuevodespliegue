@@ -26,6 +26,7 @@ import MKAlert from "components/MKAlert";
 import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
 
 
+
 function CrearFoodtruckAdmin() {
     const [data, setData] = useState([]);
     const [foodtruck, setfoodtruck] = useState([]);
@@ -34,7 +35,7 @@ function CrearFoodtruckAdmin() {
     const [imagen, setImagen] = useState([]);
     const id = useParams();
     const [categorias, setCategorias] = useState([]);
-
+    const [usuarios, setUsuarios] = useState([]);
 
     const [open, setOpen] = useState(false);
 
@@ -80,6 +81,25 @@ function CrearFoodtruckAdmin() {
     const toggleModal = () => {
         handleSubmit();
     };
+
+    axios
+        .get(`http://localhost:8000/api/usuarios`, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                "user_id": `${user_id}`,
+                "api_token": `${api_token}`,
+                "role": `${role}`
+            }
+
+        })
+        .then((res) => {
+            setUsuarios(res.data);
+            console.log(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
 
     return (
@@ -152,7 +172,7 @@ function CrearFoodtruckAdmin() {
                                         <div className="row">
 
                                             {/* <!--Columna 1--> */}
-                                            <div className="col">
+                                            <div className="col-md-3">
                                                 <MKTypography variant="h6" >
                                                     Nombre
                                                 </MKTypography>
@@ -167,7 +187,7 @@ function CrearFoodtruckAdmin() {
                                             </div>
 
                                             {/* <!--Columna 2--> */}
-                                            <div className="col">
+                                            <div className="col-md-3">
                                                 <MKTypography variant="h6" >
                                                     Descripción
                                                 </MKTypography>
@@ -175,6 +195,7 @@ function CrearFoodtruckAdmin() {
                                                     id="descripcion"
                                                     variant="outlined"
                                                     size="small"
+                                                    fullWidth
                                                 />
                                             </div>
                                         </div>
@@ -184,7 +205,7 @@ function CrearFoodtruckAdmin() {
 
 
                                             {/* <!--Columna 1--> */}
-                                            <div className="col">
+                                            <div className="col-md-3">
                                                 <MKTypography variant="h6" >
                                                     Ubicacion
                                                 </MKTypography>
@@ -192,6 +213,7 @@ function CrearFoodtruckAdmin() {
                                                     id="ubicacion"
                                                     variant="outlined"
                                                     size="small"
+                                                    fullWidth
 
                                                 />
 
@@ -201,7 +223,7 @@ function CrearFoodtruckAdmin() {
 
 
                                             {/* <!--Columna 3--> */}
-                                            <div className="col">
+                                            <div className="col-md-3">
 
                                                 <MKTypography variant="h6" >
                                                     Teléfono
@@ -210,35 +232,61 @@ function CrearFoodtruckAdmin() {
                                                     id="telefono"
                                                     variant="outlined"
                                                     size="small"
+                                                    fullWidth
                                                 />
 
 
                                             </div>
+
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-3">
+
+                                                <MKTypography variant="h6" >
+                                                    Propietario:
+                                                    <select className="form-select" aria-label="Default select example" id="usuario">
+                                                        {usuarios.map((usuario) => (
+                                                            <option value={usuario.id}>{usuario.name}</option>
+                                                        ))}
+                                                    </select>
+                                                </MKTypography>
+                                                <MKTypography variant="h6" >
+                                                    Categoria
+                                                </MKTypography>
+                                                <select className="form-select" aria-label="Default select example" id="categoria">
+                                                    <option value="Comida Japonesa">Comida Japonesa</option>
+                                                    <option value="Comida Mexicana">Comida Mexicana</option>
+                                                    <option value="Comida Italiana">Comida Italiana</option>
+                                                    <option value="Comida China">Comida China</option>
+                                                    <option value="Comida Española">Comida Española</option>
+                                                    <option value="Comida Americana">Comida Americana</option>
+                                                    <option value="Comida Peruana">Comida Peruana</option>
+                                                    <option value="Comida Colombiana">Comida Colombiana</option>
+                                                    <option value="Comida Argentina">Comida Argentina</option>
+                                                    <option value="Hamburguesas y Hot Dogs">Hamburguesas y Hot Dogs</option>
+                                                    <option value="Helados">Helados</option>
+                                                    <option value="Churrerias">Churrerias</option>
+                                                    <option value="Golosinas">Golosinas</option>
+
+
+                                                </select>
+
+
+                                            </div>
+                                            <div className="col-md-3">
+                                                            
+
+
+                                            </div>
+
 
 
                                         </div>
                                         <div className="row">
 
                                             {/* <!--Columna 2--> */}
-
-
                                         </div>
-                                        <MKTypography variant="h6" >
-                                            Categoria
-                                        </MKTypography>
-                                        <select className="form-select" aria-label="Default select example" id="categoria">
-                                            <option value="Comida Japonesa">Comida Japonesa</option>
-                                            <option value="Comida Mexicana">Comida Mexicana</option>
-                                            <option value="Comida Italiana">Comida Italiana</option>
-                                            <option value="Comida China">Comida China</option>
-                                            <option value="Comida Francesa">Comida Francesa</option>
-                                            <option value="Comida Española">Comida Española</option>
-                                            <option value="Comida Americana">Comida Americana</option>
-                                            <option value="Comida Peruana">Comida Peruana</option>
-                                            <option value="Comida Colombiana">Comida Colombiana</option>
-                                            <option value="Comida Argentina">Comida Argentina</option>
 
-                                        </select>
                                         <MKTypography
                                             variant="outlined"
                                             size="small"

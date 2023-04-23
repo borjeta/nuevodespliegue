@@ -27,12 +27,12 @@ class FoodtruckController extends Controller
             ]
         )->first();
 
-        if($comprobacion->role == 'admin' && $comprobacion->api_token == $api_token && $comprobacion->id == $user_id){
+        if ($comprobacion->role == 'admin' && $comprobacion->api_token == $api_token && $comprobacion->id == $user_id) {
             $foodtrucks = foodtruck::all();
             return response()->json($foodtrucks, 200);
         }
-        
-        if ($comprobacion == null ) {
+
+        if ($comprobacion == null) {
             return Response()->json(['message' => 'No tienes permisos para ver los foodtrucks'], 401);
         } else {
             $foodtrucks = foodtruck::all();
@@ -161,6 +161,35 @@ class FoodtruckController extends Controller
 
         $foodtrucks = foodtruck::where('status', 'Activo')->get();
         return $foodtrucks;
+    }
+
+
+    /*OpcionGlobal solo para admin para cerrar todas las foodtrucks*/
+    public function cerrarfoodtrucks(Request $request)
+    {
+        $api_token = $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
+
+        $comprobacion = usuario::where
+        (
+            [
+                ['id', '=', $user_id],
+                ['api_token', '=', $api_token],
+                ['role', '=', $role]
+            ]
+        )->first();
+
+        if ($comprobacion == null || $comprobacion->role != 'admin' || $comprobacion->id != $user_id || $comprobacion->api_token != $api_token) {
+            return Response()->json(['message' => 'No tienes permisos para cerrar todas las foodtrucks'], 401);
+        } else {
+            $foodtrucks = foodtruck::all();
+            foreach ($foodtrucks as $foodtruck) {
+                $foodtruck->status = 'Inactivo';
+                $foodtruck->save();
+            }
+            return Response()->json(['message' => 'Todas las foodtrucks han sido cerradas'], 200);
+        }
     }
 
 }

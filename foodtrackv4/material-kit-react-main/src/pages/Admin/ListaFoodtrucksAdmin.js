@@ -9,13 +9,12 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Icon } from "@iconify/react";
 import editIcon from "@iconify/icons-mdi/edit";
-import closeIcon from "@iconify/icons-mdi/close";
-import styled from "styled-components";
-import eyeIcon from "@iconify/icons-mdi/eye";
+import MKTypography from "components/MKTypography";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import deleteIcon from "@iconify/icons-mdi/delete";
 import Modal from "@material-ui/core/Modal";
+import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -39,6 +38,7 @@ function HomeAdmin() {
     const [foodtrucks, setFoodtrucks] = useState([]);
     const [foodtruck, setFoodtruck] = useState([]);
     const [show, setShow] = useState(false);
+    const [totalfoodtrucks, setTotalfoodtrucks] = useState(0);
 
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -62,7 +62,7 @@ function HomeAdmin() {
             .then((res) => {
                 setFoodtrucks(res.data);
                 console.log(res.data);
-                
+
 
             })
             .catch((err) => {
@@ -88,29 +88,30 @@ function HomeAdmin() {
                                 <h1 className="card-title ">Foodtrucks</h1>
                                 <p className="card-category"> Listado de foodtrucks</p>
                             </div>
-                            <MKBox display="flex" justifyContent="flex-end" p={2}>
+                            <MKBox sx={{
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                p: 1,
+                                bgcolor: 'background.paper',
+                            }}>
+                                <MKTypography justify="left" align="left" variant="h5" >
+                                    Total de usuarios: {totalfoodtrucks}
+                                </MKTypography>
 
-                                <MKButton
-                                    href="/foodtrucks/admin/crear"
-                                    variant="gradient"
-                                    color="warning"
-                                    size="large"
-                                    startIcon={<Icon icon={editIcon} />}
-                                >
-                                    Crear
+                                <MKButton>
+                                    <Link to={`/foodtrucks/admin/crear`} className='btn btn-primary btn-md'>
+                                        Crear foodtruck
+                                    </Link>
                                 </MKButton>
-                                &nbsp;
-                                &nbsp;
-                                <MKButton
-                                    href="/homeadmin"
-                                    variant="gradient"
-                                    color="warning"
-                                    size="large"
-                                    startIcon={<Icon icon={closeIcon} />}
-                                >
-                                    Volver
+                                <MKButton>
+                                    <Link to={`/homeadmin`} className='btn btn-primary btn-md'>
+                                        Volver al inicio
+                                    </Link>
                                 </MKButton>
+
                             </MKBox>
+
+
 
                             <div className="card-body">
                                 <div className="table-responsive">

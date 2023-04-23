@@ -37,6 +37,8 @@ function ListaUsuariosAdmin() {
     const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const [usuarios, setUsuarios] = useState([]);
     const [foodtruck, setFoodtruck] = useState([]);
+    const [totalUsuarios, setTotalUsuarios] = useState(0);
+
 
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -61,6 +63,20 @@ function ListaUsuariosAdmin() {
                 setUsuarios(res.data);
                 console.log(res.data);
 
+                /*Función para contar el número de usuarios*/
+                function countUsers() {
+                    let count = 0;
+                    for (let i = 0; i < res.data.length; i++) {
+                        count++;
+                    }
+                    return count;
+                }
+                setTotalUsuarios(countUsers());
+
+
+
+
+
             })
             .catch((err) => {
                 console.log(err);
@@ -83,29 +99,55 @@ function ListaUsuariosAdmin() {
             }}><div className="card-body">
                     <div className="table-responsive">
                         <TableContainer component={Paper}>
+                            <div className="card-header card-header-primary">
+                                <h4 className="card-title ">Usuarios</h4>
+                                <p className="card-category"> Aquí puedes ver todos los usuarios registrados en FoodTrack</p>
+                            </div>
+                            <MKBox sx={{
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                p: 1,
+                                bgcolor: 'background.paper',
+                            }}>
+                                <MKTypography justify="left" align="left" variant="h5" >
+                                    Total de usuarios: {totalUsuarios}
+                                </MKTypography>
+
+                                <MKButton>
+                                    <Link to={`/admin/usuarios/crear`} className='btn btn-primary btn-md'>
+                                        Crear usuario
+                                    </Link>
+                                </MKButton>
+                                <MKButton>
+                                    <Link to={`/homeadmin`} className='btn btn-primary btn-md'>
+                                        Volver al inicio
+                                    </Link>
+                                </MKButton>
+
+                            </MKBox>
+
+
 
                             <Table className={classes.table} aria-label="simple table">
 
                                 <TableHead >
-                                    
-
                                     <TableRow>
                                         <TableCell>
-                                            <MKTypography  justify="center" align="center" variant="h5" >
+                                            <MKTypography justify="center" align="center" variant="h5" >
                                                 Nombre
                                             </MKTypography>
 
                                         </TableCell>
                                         <TableCell align="right">
-                                            <MKTypography  justify="center" align="center" variant="h5"  >
+                                            <MKTypography justify="center" align="center" variant="h5"  >
                                                 Email
                                             </MKTypography>
                                         </TableCell>
                                         <TableCell align="right">
-                                            <MKTypography  justify="center" align="center" variant="h5"  >
+                                            <MKTypography justify="center" align="center" variant="h5"  >
                                                 Rol</MKTypography></TableCell>
                                         <TableCell align="right">
-                                            <MKTypography  justify="center" align="center" variant="h5" >
+                                            <MKTypography justify="center" align="center" variant="h5" >
                                                 Acciones
                                             </MKTypography>
                                         </TableCell>

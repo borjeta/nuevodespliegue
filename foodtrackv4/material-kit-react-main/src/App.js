@@ -46,6 +46,7 @@ import OpcionesGlobales from "pages/Admin/OpcionesGlobales";
 import bgImage from "assets/images/img1.jpeg";
 import MKBox from "components/MKBox";
 import AjustesPropietario from "pages/Propietario/AjustesPropietario";
+import CrearFoodtruckAdmin from "pages/Admin/CrearFoodtruckAdmin";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -111,7 +112,7 @@ export default function App() {
             <Route path="/admin/usuarios/:id/editar" element={<EditarUsuarioAdmin />} />
             <Route path="/admin/usuarios/:id/info" element={<DatosCompletosUsuario />} />
             <Route path="/foodtrucks/propietario/nuevafoodtruck" element={<CrearFoodtruck />} />
-            <Route path="/foodtrucks/admin/crear" element={<EditarFoodtruck />} />
+            <Route path="/foodtrucks/admin/crear" element={<CrearFoodtruckAdmin />} />
             <Route path="/admin/opcionesglobales" element={<OpcionesGlobales />} />
             <Route path="/foodtrucks/propietario/ajustes" element={<AjustesPropietario />} />
           </Routes>
