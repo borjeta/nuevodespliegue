@@ -67,10 +67,11 @@ class UsuarioController extends Controller
         $user = usuario::where('api_token', $api_token)->first();
         if ($user) {
             return response()->json($user, 200);
-        }
-        else{
-            return response()->json(['error' => 'No tienes permisos para acceder a este recurso \n 
-            o no se ha encontrado el usuario'], 401);
+        } else {
+            return response()->json([
+                'error' => 'No tienes permisos para acceder a este recurso \n 
+            o no se ha encontrado el usuario'
+            ], 401);
         }
     }
 
@@ -213,17 +214,18 @@ class UsuarioController extends Controller
     {
         $body = $request->all();
         /* Buscamos el usuario por el nombre */
-        $api_token = $body['headers']['api_token'];
-        $user_id = $body['headers']['user_id'];
-        $role = $body['headers']['role'];
+        $api_token = $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
+
+
         $user = usuario::where('id', $user_id)->first();
         if ($user->api_token == $api_token && $user->id == $user_id && $user->role == $role) {
             $usuario = new usuario();
-            $usuario->name = $body['data']['name'];
-            $usuario->email = $body['data']['email'];
-            $usuario->telefono = $body['data']['telefono'];
-            $usuario->role = $body['data']['role'];
-            $usuario->password = password_hash($body['data']['password'], PASSWORD_DEFAULT);
+            $usuario->name = $body['name'];
+            $usuario->email = $body['email'];
+            $usuario->role = 'admin';
+            $usuario->password = password_hash($body['password'], PASSWORD_DEFAULT);
             $usuario->save();
             return Response($usuario, 200);
         } else {

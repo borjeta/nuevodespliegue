@@ -9,6 +9,10 @@ import MKTypography from "components/MKTypography";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Modal from "@mui/material/Modal";
+import MKAlert from "components/MKAlert";
+import MKInput from "components/MKInput";
+import Footer from "pages/LandingPages/Author/sections/Footer";
+
 
 
 const useStyles = makeStyles({
@@ -26,6 +30,14 @@ function HomeAdmin() {
     const [foodtrucks, setFoodtrucks] = useState([]);
     const [foodtruck, setFoodtruck] = useState([]);
     const [showmodalexito, setShowModalExito] = useState(false);
+    const [showmodalerror, setShowModalError] = useState(false);
+    const [showmodal, setShowModal] = useState(false);
+    const [nombre, setNombre] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [password_confirmation, setPasswordConfirmation] = useState("");
+
+
 
 
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -41,6 +53,9 @@ function HomeAdmin() {
 
 
 
+
+
+
     return (
         <div>
             <NavbarAdmin />
@@ -52,15 +67,16 @@ function HomeAdmin() {
                 <MKTypography variant="h4" component="h2" gutterBottom>
                     Bienvenido al panel de administración del servicio
                 </MKTypography>
-                <Modal show={showmodalexito}
-                    open={showmodalexito}
-                    onHide={() => setShowModalExito(false)}
-                >
+                <br />
+                <MKAlert severity="success"
+                    style={{ display: showmodalexito ? "block" : "none" }}
 
-                    <Button variant="secondary" onClick={() => setShowModalExito(false)}>
-                        Cerrar
-                    </Button>
-                </Modal>
+
+                >
+                    Se cerraron todas las foodtrucks
+                </MKAlert>
+                <br />
+
 
 
                 <MKBox className="container"
@@ -76,7 +92,10 @@ function HomeAdmin() {
                                     <MKButton
                                         color="primary"
                                         size="large"
-                                        href="/admin/foodtrucks"
+                                        onClick={() => {
+                                            setShowModal(true);
+                                        }}
+
                                         className="btn"
                                     >
                                         Crear Administrador
@@ -102,11 +121,21 @@ function HomeAdmin() {
                                                 .then((res) => {
                                                     console.log(res.data);
                                                     setShowModalExito(true);
-
-
+                                                    /*cierra el modal a los 3 segundos*/
+                                                    setTimeout(() => {
+                                                        setShowModalExito(false);
+                                                    }
+                                                        , 3000);
                                                 })
                                                 .catch((err) => {
                                                     console.log(err);
+                                                    setShowModalError(true);
+                                                    /*cierra el modal a los 3 segundos*/
+                                                    setTimeout(() => {
+                                                        setShowModalError(false);
+                                                    }
+                                                        , 3000);
+
                                                 });
                                         }}
 
@@ -134,7 +163,164 @@ function HomeAdmin() {
 
                 </MKBox>
             </Container>
-        </div>
+            <Modal open={showmodalexito} onClose={() => setShowModalExito(false)}>
+                <MKAlert severity="success">
+                    <MKTypography variant="h6" component="h2" gutterBottom sx={
+                        { color: "green" }
+                    }>
+                        ¡El administrador se ha creado con éxito!
+                    </MKTypography>
+                </MKAlert>
+            </Modal>
+            <Modal open={showmodalerror} onClose={() => setShowModalError(false)}
+                sx={{
+                    display: "grid",
+                    placeItems: "center",
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+
+                }}
+
+            >
+                <MKAlert severity="error" >
+                    <MKTypography variant="h6" component="h2" gutterBottom >
+                        ¡El administrador no se ha creado!
+                    </MKTypography>
+                </MKAlert>
+            </Modal>
+            <Modal open={showmodal} onClose={() => setShowModal(false)} sx={{ display: "grid", placeItems: "center" }}>
+                <div className="container" align="center" justify-content="center" py={10}>
+                    <MKBox sx={{
+                        width: 400,
+                        height: 400,
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24, p: 4,
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+
+
+                    }}>
+                        <MKButton
+                            color="primary"
+                            size="large"
+                            onClick={() => {
+                                setShowModal(false);
+                            }}
+                            className="btn"
+                            sx={
+                                {
+                                    position: 'absolute',
+                                    top: '10%',
+                                    right: '0%',
+                                    transform: 'translate(-50%, -50%)',
+
+                                }
+                            }
+                        > X
+                        </MKButton>
+
+
+
+                        <MKTypography variant="h6" component="h2" gutterBottom>
+                            Crear administrador
+                        </MKTypography>
+                        <div className="form-group">
+
+                            <MKInput
+                                id="outlined-basic"
+                                label="Nombre"
+                                variant="outlined"
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
+                            />
+                            <br />
+                            <br />
+                            <MKInput
+                                id="outlined-basic"
+                                label="Email"
+                                variant="outlined"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <br />
+                            <br />
+                            <MKInput
+
+                                id="outlined-basic"
+                                label="Contraseña"
+                                variant="outlined"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <br />
+                            <br />
+                            <MKInput
+                                id="outlined-basic"
+                                label="Confirmar contraseña"
+                                variant="outlined"
+                                value={password_confirmation}
+                                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                            />
+                            <br />
+                            <br />
+                            <MKButton
+                                variant="contained"
+                                color="primary"
+                                sx={{
+                                    position: 'absolute',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+
+
+                                }}
+                                onClick={() => {
+                                    if (nombre === "" || email === "" || password === "" || password_confirmation === "") {
+                                        alert("Rellena todos los campos");
+                                        return;
+                                    } else if (password !== password_confirmation) {
+                                        alert("Las contraseñas no coinciden");
+                                        return;
+                                    } else {
+
+                                        axios.post("http://localhost:8000/api/usuarios/admin/crearadmin", {
+                                            name: nombre,
+                                            email: email,
+                                            password: password,
+                                            password_confirmation: password_confirmation
+                                        }, {
+                                            headers: {
+                                                "Access-Control-Allow-Origin": "*",
+                                                "Content-Type": "application/json",
+                                                "user_id": `${user_id}`,
+                                                "api_token": `${api_token}`,
+                                                "role": `${role}`
+                                            }
+                                        }
+                                        ).then((response) => {
+                                            console.log(response);
+                                            setShowModalExito(true);
+                                            setShowModal(false);
+                                        }).catch((error) => {
+                                            console.log(error);
+                                            setShowModalError(true);
+                                            setShowModal(false);
+                                        })
+                                    }
+                                }
+                                }
+                            >
+                                Crear
+                            </MKButton>
+                        </div>
+                    </MKBox>
+                </div>
+            </Modal>
+            <Footer />
+        </div >
     );
 }
 

@@ -25,6 +25,10 @@ Route::post('/usuarios/login', 'App\Http\Controllers\Api\UsuarioController@login
 Route::get('/usuarios/logout', 'App\Http\Controllers\Api\UsuarioController@logout');
 Route::post('/usuarios/{id}/buscausuario', 'App\Http\Controllers\Api\UsuarioController@buscausuario');
 Route::post('/usuarios/{id}/editarusuarioadmin', 'App\Http\Controllers\Api\UsuarioController@editarusuarioadmin');
+Route::post('/usuarios/admin/crearadmin', 'App\Http\Controllers\Api\UsuarioController@crearadmin');
+
+
+
 
 /*Rutas API Foodtrucks*/
 Route::get('/foodtrucks', 'App\Http\Controllers\Api\FoodtruckController@index');
