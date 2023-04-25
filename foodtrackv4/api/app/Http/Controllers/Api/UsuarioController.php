@@ -17,7 +17,6 @@ class UsuarioController extends Controller
     public function index(Request $request)
     {
 
-        $body = $request->all();
         /* Buscamos el usuario por el nombre */
         $api_token = $request->header('api_token');
         $user_id = $request->header('user_id');
@@ -36,7 +35,6 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //guarda un usuario en bd   
         $usuario = new usuario();
         $usuario->name = $request->name;
         $usuario->email = $request->email;

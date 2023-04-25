@@ -6,6 +6,7 @@ import { Container } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import NavbarAdmin from "pages/Admin/NavbarAdmin";
 import MKTypography from "components/MKTypography";
+import Footer from "pages/LandingPages/Author/sections/Footer";
 
 
 const useStyles = makeStyles({
@@ -37,8 +38,23 @@ function HomeAdmin() {
             <br />
 
             <Container className="container" align="center" justify-content="center" py={10}>
-                <MKTypography variant="h4" component="h2" gutterBottom>
-                    Bienvenido al panel de administración del servicio
+                <MKTypography 
+                variant="h3"
+
+
+                sx={
+                    {
+                        
+                        textAlign: "center",
+                        fontFamily: "Roboto",
+                        marginBottom: 10,
+                        color: "#000000",
+                        fontWeight: "bold",
+                        
+
+                    }
+
+                }> Panel de administración
                 </MKTypography>
 
                 <MKBox className="container"
@@ -93,7 +109,9 @@ function HomeAdmin() {
 
                 </MKBox>
             </Container>
+            <Footer />
         </div>
+
     );
 }
 

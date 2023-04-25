@@ -185,7 +185,7 @@ function EditarFoodtruck() {
             })
             .then((res) => {
                 console.log(res.data);
-                window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
+                window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
 
             })
             .catch((err) => {

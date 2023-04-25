@@ -135,17 +135,38 @@ class FoodtruckController extends Controller
         return Response()->json(['message' => 'Foodtruck eliminado correctamente'], 200);
     }
 
-    public function getFoodtrucksByUser($id)
+    public function getFoodtrucksByUser(Request $request, $id)
     {
+        $api_token = $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
         $foodtrucks = foodtruck::where('user_id', $id)->get();
         return $foodtrucks;
     }
-    public function abrirfoodtruck($id)
+    public function abrirfoodtruck(Request $request, $id)
     {
-        $foodtruck = foodtruck::find($id);
-        $foodtruck->status = 'Activo';
-        $foodtruck->save();
-        return $foodtruck;
+        $api_token = $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
+
+
+        $comprobacion = usuario::where
+        (
+            [
+                ['id', '=', $user_id],
+                ['api_token', '=', $api_token],
+                ['role', '=', $role]
+            ]
+        )->first();
+
+        if ($comprobacion == null) {
+            return Response()->json(['message' => 'No tienes permisos para abrir este foodtruck'], 401);
+        } else {
+            $foodtruck = foodtruck::where('id', $id)->where('user_id', $user_id)->first();
+            $foodtruck->status = 'Activo';
+            $foodtruck->save();
+            return $foodtruck;
+        }
     }
 
     public function cerrarfoodtruck($id)
@@ -158,7 +179,6 @@ class FoodtruckController extends Controller
 
     public function foodtrucksSoloActivas()
     {
-
         $foodtrucks = foodtruck::where('status', 'Activo')->get();
         return $foodtrucks;
     }

@@ -122,22 +122,25 @@ function ListaFoodtrucksPropietario() {
             <br />
             <br />
             <MKBox >
-                <div className="row">
-                    <div className="col-md-2">
+                <div className="container">
+
+                    <div className="row">
 
                         <MKButton href="/foodtrucks/propietario/nuevafoodtruck" variant="gradient" color="info" size="large" startIcon={<Icon icon={editIcon} />}>
-                            Crear Foodtruck
+                            Crear nueva
                         </MKButton>
-                        <br />
+                        &nbsp;
+                        &nbsp;
+                        <div className="col-md-1.5 alig-rigth">
+                            <MKButton href="/foodtrucks/propietario/ajustes" variant="gradient" color="warning" size="large" startIcon={<Icon icon={settingsIcon} />}>
+                                Ajustes
+                            </MKButton>
 
 
+
+                        </div>
                     </div>
-                    <div className="col-md-1.5 alig-rigth">
-                        <MKButton href="/foodtrucks/propietario/ajustes" variant="gradient" color="warning" size="large" startIcon={<Icon icon={settingsIcon} />}>
-                            Ajustes
-                        </MKButton>
 
-                    </div>
 
                 </div>
                 <br />
