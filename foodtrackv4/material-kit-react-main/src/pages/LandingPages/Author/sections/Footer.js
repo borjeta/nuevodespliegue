@@ -39,7 +39,9 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  href="http://localhost:3000/homeusuario"
+                  onClick={() => {
+                    window.history.back();
+                  }}
                   rel="noreferrer"
                 >
                   Home
@@ -64,7 +66,7 @@ function Footer() {
               fontWeight="regular"
               opacity={0.8}
               textAlign={{ xs: "center", lg: "left" }}
-              color = "white"
+              color="white"
             >
 
               Copyright ©  2023 Creado por Borja Alventosa

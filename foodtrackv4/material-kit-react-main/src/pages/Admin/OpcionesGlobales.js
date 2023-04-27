@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import NavbarAdmin from "pages/Admin/NavbarAdmin";
 import MKTypography from "components/MKTypography";
 import axios from "axios";
-import Button from "@material-ui/core/Button";
 import Modal from "@mui/material/Modal";
 import MKAlert from "components/MKAlert";
 import MKInput from "components/MKInput";
@@ -64,9 +63,12 @@ function HomeAdmin() {
             <br />
 
             <Container className="container" align="center" justify-content="center" py={10}>
+
                 <MKTypography variant="h4" component="h2" gutterBottom>
                     Bienvenido al panel de administración del servicio
+                    <br />
                 </MKTypography>
+
                 <br />
                 <MKAlert severity="success"
                     style={{ display: showmodalexito ? "block" : "none" }}
@@ -92,6 +94,10 @@ function HomeAdmin() {
                                     <MKButton
                                         color="primary"
                                         size="large"
+                                        style={{
+                                            display: role == "admin" ? "block" : "none"
+                                        }}
+
                                         onClick={() => {
                                             setShowModal(true);
                                         }}
@@ -102,6 +108,8 @@ function HomeAdmin() {
                                     </MKButton>
                                 </div>
                                 <br />
+                                <div className="col-md-4">
+                                </div>
 
                                 <div className="col-md-4">
                                     <MKButton
@@ -144,20 +152,9 @@ function HomeAdmin() {
                                     </MKButton>
                                 </div>
 
-                                <div className="col-md-4">
-                                    <MKButton
-                                        color="primary"
-                                        size="large"
-                                        onClick={() => {
-                                            window.history.back();
-                                        }}
-                                        className="btn"
-                                    > Volver
-                                    </MKButton>
-                                </div>
+
+
                             </div>
-
-
                         </MKBox>
                     </div>
 
