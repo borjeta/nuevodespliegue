@@ -26,8 +26,6 @@ function HomeAdmin() {
     const classes = useStyles();
     const [data, setData] = useState([]);
     const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const [foodtrucks, setFoodtrucks] = useState([]);
-    const [foodtruck, setFoodtruck] = useState([]);
     const [showmodalexito, setShowModalExito] = useState(false);
     const [showmodalerror, setShowModalError] = useState(false);
     const [showmodal, setShowModal] = useState(false);
@@ -59,17 +57,25 @@ function HomeAdmin() {
         <div>
             <NavbarAdmin />
             <br />
-            <br />
-            <br />
 
             <Container className="container" align="center" justify-content="center" py={10}>
+                <br />
+                <br />
 
-                <MKTypography variant="h4" component="h2" gutterBottom>
-                    Bienvenido al panel de administración del servicio
+                <MKTypography variant="h2" component="h2" sx={
+                    {
+                        textAlign: "center",
+                        fontFamily: "Roboto",
+                        marginBottom: 10,
+                        color: "#FFFFFF",
+                        fontWeight: "bold"
+                    }
+                }>
+                    Bienvenido al panel de administración de la plataforma Foodtrack
                     <br />
                 </MKTypography>
-
                 <br />
+
                 <MKAlert severity="success"
                     style={{ display: showmodalexito ? "block" : "none" }}
 
@@ -77,7 +83,6 @@ function HomeAdmin() {
                 >
                     Se cerraron todas las foodtrucks
                 </MKAlert>
-                <br />
 
 
 
@@ -90,7 +95,7 @@ function HomeAdmin() {
 
                         <MKBox align="center" justify-content="center">
                             <div className="row">
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <MKButton
                                         color="primary"
                                         size="large"
@@ -107,11 +112,8 @@ function HomeAdmin() {
                                         Crear Administrador
                                     </MKButton>
                                 </div>
-                                <br />
-                                <div className="col-md-4">
-                                </div>
 
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <MKButton
                                         color="primary"
                                         size="large"
@@ -150,9 +152,64 @@ function HomeAdmin() {
                                     >
                                         Cerrar foodtrucks
                                     </MKButton>
+
                                 </div>
 
+                                <div className="col-md-3">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        className="btn"
+                                        onClick={() => {
+                                            axios.get(`http://localhost:8000/api/foodtrucks/admin/abretodas`, {
+                                                headers: {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json",
+                                                    "user_id": `${user_id}`,
+                                                    "api_token": `${api_token}`,
+                                                    "role": `${role}`
+                                                }
+                                            })
+                                                .then((res) => {
+                                                    console.log(res.data);
+                                                    setShowModalExito(true);
+                                                    /*cierra el modal a los 3 segundos*/
+                                                    setTimeout(() => {
+                                                        setShowModalExito(false);
+                                                    }
+                                                        , 3000);
+                                                })
+                                                .catch((err) => {
+                                                    console.log(err);
+                                                    setShowModalError(true);
+                                                    /*cierra el modal a los 3 segundos*/
+                                                    setTimeout(() => {
+                                                        setShowModalError(false);
+                                                    }
+                                                        , 3000);
 
+                                                });
+                                        }}
+
+                                    >
+                                        Abrir foodtrucks
+                                    </MKButton>
+
+                                </div>
+
+                                <div className="col-md-3">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        className="btn"
+                                        onClick={() => {
+                                            window.location.href = "/admin";
+                                        }}
+
+                                    >
+                                        Volver al panel
+                                    </MKButton>
+                                </div>
 
                             </div>
                         </MKBox>
@@ -160,6 +217,7 @@ function HomeAdmin() {
 
                 </MKBox>
             </Container>
+
             <Modal open={showmodalexito} onClose={() => setShowModalExito(false)}>
                 <MKAlert severity="success">
                     <MKTypography variant="h6" component="h2" gutterBottom sx={

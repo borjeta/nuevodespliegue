@@ -45,9 +45,9 @@ function AjustesPropietario() {
                         justify-content="center"
                         py={10}
                     >
-                        <div class="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
-                            <div class="row">
-                                <div class="col-md-3">
+                        <div  class="btn-group btn-group-justified " id="btnsGlobales" role="group" aria-label="Basic example" >
+                            <div class="row ajustes ">
+                                {/* <div class="col-md-3">
                                     <MKButton
                                         color="primary"
                                         size="large"
@@ -59,7 +59,7 @@ function AjustesPropietario() {
                                         Contactar con soporte
                                     </MKButton>
 
-                                </div>
+                                </div> */}
                                 <div class="col-md-3">
                                     <MKButton
                                         color="primary"
@@ -71,7 +71,9 @@ function AjustesPropietario() {
                                         Cerrar todas las foodtrucks
                                     </MKButton>
                                 </div>
-
+                                &nbsp;
+                                &nbsp;
+                                
                                 <div class="col-md-3">
                                     <MKButton
                                         color="primary"

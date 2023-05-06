@@ -76,14 +76,6 @@ function EditarFoodtruck() {
                 console.log(err);
             }
             );
-
-
-
-
-
-
-
-
     };
 
 
@@ -137,7 +129,6 @@ function EditarFoodtruck() {
                 document.getElementById("horario").value = res.data[0].horario;
                 /*Seteamos el tipo de comida del foodtruck*/
                 document.getElementById("categoria").value = res.data[0].TipoComida;
-
             })
             .catch((err) => {
                 console.log(err);

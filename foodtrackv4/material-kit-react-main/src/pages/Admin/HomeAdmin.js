@@ -38,23 +38,23 @@ function HomeAdmin() {
             <br />
 
             <Container className="container" align="center" justify-content="center" py={10}>
-                <MKTypography 
-                variant="h3"
+                <MKTypography
+                    variant="h3"
 
 
-                sx={
-                    {
-                        
-                        textAlign: "center",
-                        fontFamily: "Roboto",
-                        marginBottom: 10,
-                        color: "#000000",
-                        fontWeight: "bold",
-                        
+                    sx={
+                        {
 
-                    }
+                            textAlign: "center",
+                            fontFamily: "Roboto",
+                            marginBottom: 10,
+                            color: "#FFFFFF",                           
+                            fontWeight: "bold",
 
-                }> Panel de administración
+
+                        }
+
+                    }> Panel de administración
                 </MKTypography>
 
                 <MKBox className="container"
@@ -63,7 +63,6 @@ function HomeAdmin() {
                     py={10}
                 >
                     <div class="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
-
                         <MKBox align="center" justify-content="center">
                             <div className="row">
                                 <div className="col-md-4">
@@ -74,7 +73,6 @@ function HomeAdmin() {
                                         size="large"
                                         href="/admin/foodtrucks"
                                         className="btn"
-
                                     >
                                         Foodtrucks
                                     </MKButton>
