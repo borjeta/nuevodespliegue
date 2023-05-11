@@ -270,7 +270,7 @@ class FoodtruckController extends Controller {
 
     public function obtenFoodtrucksPorUbicacion(Request $request) {
         
-        $ubicacion = $request['headers']['zona'];
+        $ubicacion = $request->headers->ubicacion;
         $api_token = $request['headers']['api_token'];
         $user_id = $request['headers']['user_id'];
         $role = $request['headers']['role'];
