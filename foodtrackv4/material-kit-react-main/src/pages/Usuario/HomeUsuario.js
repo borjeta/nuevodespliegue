@@ -89,7 +89,9 @@ function HomeUsuario() {
 
     /*configuramos el addeventlistener onChange del buscador por zona*/
     const handleZona = () => {
-        setZona(document.getElementById("filterzona").value);
+        var zona1 = document.getElementById("filterzona").value;
+        alert(zona1);
+        
 
         axios
             .get(`http://localhost:8000/api/foodtrucks/zona/zona`, {
@@ -99,7 +101,7 @@ function HomeUsuario() {
                     "user_id": `${user_id}`,
                     "api_token": `${api_token}`,
                     "role": `${role}`,
-                    "zona": `${zona}`
+                    "zona": `${zona1}`
                 }
 
 
