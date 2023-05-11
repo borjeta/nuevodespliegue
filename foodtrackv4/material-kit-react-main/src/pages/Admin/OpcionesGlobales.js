@@ -71,7 +71,7 @@ function HomeAdmin() {
                         fontWeight: "bold"
                     }
                 }>
-                    Bienvenido al panel de administración de la plataforma Foodtrack
+                    Opciones Globales
                     <br />
                 </MKTypography>
                 <br />
@@ -203,7 +203,7 @@ function HomeAdmin() {
                                         size="large"
                                         className="btn"
                                         onClick={() => {
-                                            window.location.href = "/admin";
+                                            window.location.href = "/homeadmin";
                                         }}
 
                                     >

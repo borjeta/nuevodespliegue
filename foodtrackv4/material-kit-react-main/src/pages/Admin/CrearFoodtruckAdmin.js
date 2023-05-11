@@ -20,10 +20,8 @@ import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+
 import MKAlert from "components/MKAlert";
-import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
 
 
 
@@ -53,6 +51,7 @@ function CrearFoodtruckAdmin() {
             "telefono": document.getElementById("telefono").value,
             "avatar": document.getElementById("imagen").value,
             "tipocomida": document.getElementById("categoria").value,
+            "user_id": document.getElementById("usuario").value
 
         }, {
             headers: {
@@ -67,7 +66,7 @@ function CrearFoodtruckAdmin() {
 
             .then((res) => {
                 console.log(res.data);
-                window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
+                window.location.href = `/homeadmin`;
             }
             )
             .catch((err) => {
@@ -76,30 +75,33 @@ function CrearFoodtruckAdmin() {
             );
 
     };
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8000/api/usuarios`, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                    "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
+                    "role": `${role}`
+                }
+
+            })
+            .then((res) => {
+                setUsuarios(res.data);
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
 
 
     const toggleModal = () => {
         handleSubmit();
     };
 
-    axios
-        .get(`http://localhost:8000/api/usuarios`, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json",
-                "user_id": `${user_id}`,
-                "api_token": `${api_token}`,
-                "role": `${role}`
-            }
-
-        })
-        .then((res) => {
-            setUsuarios(res.data);
-            console.log(res.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
 
 
     return (
@@ -274,7 +276,7 @@ function CrearFoodtruckAdmin() {
 
                                             </div>
                                             <div className="col-md-3">
-                                                            
+
 
 
                                             </div>

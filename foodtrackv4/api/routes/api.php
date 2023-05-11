@@ -42,3 +42,6 @@ Route::get('/foodtrucks/listaporpropietario/{id}/abrirfoodtruck', 'App\Http\Cont
 Route::get('/foodtrucks/listaporpropietario/{id}/cerrarfoodtruck', 'App\Http\Controllers\Api\FoodtruckController@cerrarfoodtruck');
 Route::post('/foodtrucks/estado/foodtrucksabiertas', 'App\Http\Controllers\Api\FoodtruckController@foodtrucksSoloActivas');
 Route::get('/foodtrucks/admin/cierratodas', 'App\Http\Controllers\Api\FoodtruckController@cerrarfoodtrucks');
+Route::post('/foodtrucks/categoria/categoria', 'App\Http\Controllers\Api\FoodtruckController@obtenFoodtrucksPorCategoria');
+Route::get('/foodtrucks/zona/zona', 'App\Http\Controllers\Api\FoodtruckController@obtenFoodtrucksPorUbicacion');
+

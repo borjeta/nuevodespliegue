@@ -62,8 +62,7 @@ function HomeAdmin() {
             .then((res) => {
                 setFoodtrucks(res.data);
                 console.log(res.data);
-
-
+                setTotalfoodtrucks(res.data.length+1);
             })
             .catch((err) => {
                 console.log(err);
@@ -95,7 +94,7 @@ function HomeAdmin() {
                                 bgcolor: 'background.paper',
                             }}>
                                 <MKTypography justify="left" align="left" variant="h5" >
-                                    Total de usuarios: {totalfoodtrucks}
+                                    Total de foodtrucks: {totalfoodtrucks}
                                 </MKTypography>
 
                                 <MKButton>

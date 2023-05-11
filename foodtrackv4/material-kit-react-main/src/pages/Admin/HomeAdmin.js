@@ -48,13 +48,13 @@ function HomeAdmin() {
                             textAlign: "center",
                             fontFamily: "Roboto",
                             marginBottom: 10,
-                            color: "#FFFFFF",                           
+                            color: "#FFFFFF",
                             fontWeight: "bold",
 
-
+                           
                         }
 
-                    }> Panel de administración
+                    }> Panel de administración de la aplicación
                 </MKTypography>
 
                 <MKBox className="container"
@@ -86,7 +86,7 @@ function HomeAdmin() {
                                         href="/admin/usuarios"
                                         className="btn"
                                     >
-                                        Usuarios
+                                        usuarios
                                     </MKButton>
                                 </div>
                                 <div className="col-md-4">
@@ -97,7 +97,7 @@ function HomeAdmin() {
                                         href="/admin/opcionesglobales"
                                         className="btn"
                                     >
-                                        Opciones globales
+                                        Opciones
                                     </MKButton>
                                 </div>
                             </div>
