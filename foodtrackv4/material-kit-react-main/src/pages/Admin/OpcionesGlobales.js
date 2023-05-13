@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 
-function HomeAdmin() {
+function OpcionesGlobales() {
 
     const classes = useStyles();
     const [data, setData] = useState([]);
@@ -81,8 +81,6 @@ function HomeAdmin() {
 
                 <MKAlert severity="success"
                     style={{ display: showmodalexito ? "block" : "none" }}
-
-
                 >
                     Se cerraron todas las foodtrucks
                 </MKAlert>
@@ -385,4 +383,4 @@ function HomeAdmin() {
 }
 
 
-export default HomeAdmin;
+export default OpcionesGlobales;

@@ -231,6 +231,44 @@ class UsuarioController extends Controller
         }
     }
 
+    public function obtenUsuariosPorEmail(Request $request ){
+        $email = $request -> header('email');
+        $api_token = $request -> header('api_token');
+        $user_id = $request -> header('user_id');
+        $role = $request -> header('role');
+        $usuariosFiltrados = array();
+
+        $comprobacion = usuario:: where
+            (
+                [
+                    ['id', '=', $user_id],
+                    ['api_token', '=', $api_token],
+                    ['role', '=', $role]
+                ]
+            ) -> first();
+
+        if ($comprobacion == null || $comprobacion -> role != 'admin' || $comprobacion -> id != $user_id || $comprobacion -> api_token != $api_token) {
+            return Response() -> json(['message' => 'No tienes permisos para ver los usuarios'], 401);
+        } else {
+            /* recogemos todas las foodtrucks de bdd*/
+            $usuarios = usuario:: all();
+
+            foreach($usuarios as $usuario) {
+                /*recogemos la ubicacion de cada foodtruck*/
+                $emailUsuario = $usuario -> email;
+                /*comprobamos si la ubicacion contiene la ubicacion que nos pasan por parametro*/
+                if (strpos($emailUsuario, $email) !== false) {
+                    /*si la contiene la guardamos en un array*/
+                    $usuariosFiltrados[] = $usuario;
+                }
+            }
+            /*devolvemos el array con las foodtrucks filtradas*/
+            return $usuariosFiltrados;
+        }
+    }
+
+    
+
 
 
 

@@ -11,6 +11,7 @@ import { Icon } from "@iconify/react";
 import editIcon from "@iconify/icons-mdi/edit";
 import showIcon from "@iconify/icons-mdi/eye";
 import styled from "styled-components";
+import MKInput from "components/MKInput";
 
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
@@ -62,21 +63,9 @@ function ListaUsuariosAdmin() {
             .then((res) => {
                 setUsuarios(res.data);
                 console.log(res.data);
-
-                /*Función para contar el número de usuarios*/
-                function countUsers() {
-                    let count = 0;
-                    for (let i = 0; i < res.data.length; i++) {
-                        count++;
-                    }
-                    return count;
+                if (res.data != null) {
+                    setTotalUsuarios(res.data.length + 1);
                 }
-                setTotalUsuarios(countUsers());
-
-
-
-
-
             })
             .catch((err) => {
                 console.log(err);
@@ -123,6 +112,70 @@ function ListaUsuariosAdmin() {
                                         Volver al inicio
                                     </Link>
                                 </MKButton>
+                                <MKInput type="text" sx={
+                                    {
+                                        width: '100%',
+                                        maxWidth: 360,
+                                        bgcolor: 'background.paper',
+                                        marginTop: 1,
+                                        marginRight: 4
+                                    }
+
+                                } placeholder="Buscar usuarios por email"
+                                    onChange={() => {
+                                        var email = document.getElementById("email").value;
+                                        
+                                        if(email != "" && email != null && email != undefined){
+
+                                        axios
+                                            .get(`http://localhost:8000/api/usuarios/admin/buscar`, {
+                                                headers: {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json",
+                                                    "user_id": `${user_id}`,
+                                                    "api_token": `${api_token}`,
+                                                    "role": `${role}`,
+                                                    "email": `${email}`
+                                                }
+                                            })
+                                            .then((res) => {
+                                                setUsuarios(res.data);
+                                                setTotalUsuarios(res.data.length + 1);
+                                            })
+                                            .catch((err) => {
+                                                console.log(err);
+                                            });
+                                        }
+                                        else{
+                                            axios
+                                            .get(`http://localhost:8000/api/foodtrucks`, {
+                                                headers: {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json",
+                                                    "user_id": `${user_id}`,
+                                                    "api_token": `${api_token}`,
+                                                    "role": `${role}`
+                                                }
+
+                                            })
+                                            .then((res) => {
+                                                setFoodtrucks(res.data);
+                                                setTotalfoodtrucks(res.data.length + 1);
+                                            })
+                                            .catch((err) => {
+                                            });
+                                        }
+                                        
+                                    }}
+
+                                    id="email"
+                                    name="email"
+                                    label="Filtrar usuarios por email"
+                                    variant="outlined"
+                                    size="medium"
+                                />
+
+
 
                             </MKBox>
 

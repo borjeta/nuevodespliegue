@@ -26,6 +26,7 @@ Route::get('/usuarios/logout', 'App\Http\Controllers\Api\UsuarioController@logou
 Route::post('/usuarios/{id}/buscausuario', 'App\Http\Controllers\Api\UsuarioController@buscausuario');
 Route::post('/usuarios/{id}/editarusuarioadmin', 'App\Http\Controllers\Api\UsuarioController@editarusuarioadmin');
 Route::post('/usuarios/admin/crearadmin', 'App\Http\Controllers\Api\UsuarioController@crearadmin');
+Route::get('/usuarios/admin/buscar', 'App\Http\Controllers\Api\UsuarioController@obtenUsuariosPorEmail');
 
 
 
@@ -44,4 +45,4 @@ Route::post('/foodtrucks/estado/foodtrucksabiertas', 'App\Http\Controllers\Api\F
 Route::get('/foodtrucks/admin/cierratodas', 'App\Http\Controllers\Api\FoodtruckController@cerrarfoodtrucks');
 Route::post('/foodtrucks/categoria/categoria', 'App\Http\Controllers\Api\FoodtruckController@obtenFoodtrucksPorCategoria');
 Route::get('/foodtrucks/zonas/ciudades/zona', 'App\Http\Controllers\Api\FoodtruckController@obtenFoodtrucksPorUbicacion');
-
+Route::get('/foodtrucks/buscar/{nombre}', 'App\Http\Controllers\Api\FoodtruckController@buscaFoodtruckPorNombre');

@@ -352,6 +352,45 @@ class FoodtruckController extends Controller {
         }
     }
 
+    /*Obten foodtrucks coincidencias con el nombre, solo si tiene rol admin*/
+
+    public function buscaFoodtruckPorNombre(Request $request) {
+        $nombre = $request -> header('nombre');
+        $api_token = $request -> header('api_token');
+        $user_id = $request -> header('user_id');
+        $role = $request -> header('role');
+        $foodtrucksFiltradas = array();
+
+        $comprobacion = usuario:: where
+            (
+                [
+                    ['id', '=', $user_id],
+                    ['api_token', '=', $api_token],
+                    ['role', '=', $role]
+                ]
+            ) -> first();
+
+        if ($comprobacion == null || $comprobacion -> role != 'admin' || $comprobacion -> id != $user_id || $comprobacion -> api_token != $api_token) {
+            return Response() -> json(['message' => 'No tienes permisos para ver las foodtrucks'], 401);
+        } else {
+            /* recogemos todas las foodtrucks de bdd*/
+            $foodtrucks = foodtruck:: all();
+
+            foreach($foodtrucks as $foodtruck) {
+                /*recogemos la ubicacion de cada foodtruck*/
+                $nombreFoodtruck = $foodtruck -> nombre;
+                /*comprobamos si la ubicacion contiene la ubicacion que nos pasan por parametro*/
+                if (strpos($nombreFoodtruck, $nombre) !== false) {
+                    /*si la contiene la guardamos en un array*/
+                    $foodtrucksFiltradas[] = $foodtruck;
+                }
+            }
+            /*devolvemos el array con las foodtrucks filtradas*/
+            return $foodtrucksFiltradas;
+        }
+    }
+
+
 
 
 

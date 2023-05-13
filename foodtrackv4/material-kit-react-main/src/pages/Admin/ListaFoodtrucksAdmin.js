@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import NavbarAdmin from "pages/Admin/NavbarAdmin";
+import MKInput from "components/MKInput";
 
 
 const useStyles = makeStyles({
@@ -62,7 +63,9 @@ function HomeAdmin() {
             .then((res) => {
                 setFoodtrucks(res.data);
                 console.log(res.data);
-                setTotalfoodtrucks(res.data.length+1);
+                if (res.data.length > 0) {
+                    setTotalfoodtrucks(res.data.length + 1);
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -107,6 +110,76 @@ function HomeAdmin() {
                                         Volver al inicio
                                     </Link>
                                 </MKButton>
+                                <MKTypography variant="h6" sx={{
+                                    color: "#FFFFFF",
+                                }} >
+                                    Buscar foodtrucks
+                                </MKTypography>
+
+                                <MKInput type="text" sx={
+                                    {
+                                        width: '100%',
+                                        maxWidth: 360,
+                                        bgcolor: 'background.paper',
+                                        marginTop: 3.5,
+                                        marginRight: 4
+
+                                    }
+
+                                } placeholder="Buscar foodtrucks por nombre"
+                                    onChange={() => {
+                                        var nombre = document.getElementById("nombre").value;
+                                        if(nombre != ""){
+
+                                        axios
+                                            .get(`http://localhost:8000/api/foodtrucks/buscar/${nombre}`, {
+                                                headers: {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json",
+                                                    "user_id": `${user_id}`,
+                                                    "api_token": `${api_token}`,
+                                                    "role": `${role}`,
+                                                    "nombre": `${nombre}`
+                                                }
+                                            })
+                                            .then((res) => {
+                                                setFoodtrucks(res.data);
+                                                setTotalfoodtrucks(res.data.length+1);
+                                                console.log(res.data);
+                                            })
+                                            .catch((err) => {
+                                                console.log(err);
+                                            });
+                                        }
+                                        else{
+                                            axios
+                                            .get(`http://localhost:8000/api/foodtrucks`, {
+                                                headers: {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json",
+                                                    "user_id": `${user_id}`,
+                                                    "api_token": `${api_token}`,
+                                                    "role": `${role}`
+                                                }
+
+                                            })
+                                            .then((res) => {
+                                                setFoodtrucks(res.data);
+                                                setTotalfoodtrucks(res.data.length + 1);
+                                            })
+                                            .catch((err) => {
+                                            });
+                                        }
+                                        
+                                    }}
+
+                                    id="nombre"
+                                    name="nombre"
+                                    label="Nombre"
+                                    variant="outlined"
+                                    size="small"
+                                />
+
 
                             </MKBox>
 

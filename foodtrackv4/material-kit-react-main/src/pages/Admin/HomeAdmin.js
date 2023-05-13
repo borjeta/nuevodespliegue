@@ -62,7 +62,7 @@ function HomeAdmin() {
                     justify-content="center"
                     py={10}
                 >
-                    <div class="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
+                    <div className="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
                         <MKBox align="center" justify-content="center">
                             <div className="row">
                                 <div className="col-md-4">
