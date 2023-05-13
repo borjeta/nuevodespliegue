@@ -56,7 +56,6 @@ function foodtruckFilter({ selectedCategory, onCategoryChange }) {
                                     </Card>
                                 </Grid>
                             ))}
-
                         </Grid>
                     </Container>
                 </Box>

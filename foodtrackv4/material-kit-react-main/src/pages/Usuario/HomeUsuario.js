@@ -91,10 +91,10 @@ function HomeUsuario() {
     const handleZona = () => {
         var zona1 = document.getElementById("filterzona").value;
         alert(zona1);
-        
+
 
         axios
-            .get(`http://localhost:8000/api/foodtrucks/zona/zona`, {
+            .get(`http://localhost:8000/api/foodtrucks/zonas/ciudades/zona`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

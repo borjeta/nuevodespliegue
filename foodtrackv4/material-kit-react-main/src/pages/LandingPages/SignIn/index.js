@@ -81,7 +81,7 @@ function SignInBasic() {
           window.location.href = "http://localhost:3000/homeusuario";
           //alert("Usuario logueado como usuario");
         } else if (res.data.role == "propietario") {
-          window.location.href = "http://localhost:3000/homepropietario";
+          window.location.href = "http://localhost:3000/foodtrucks/propietario/listafoodtrucks";
           //alert("Usuario logueado como propietario");
         } else {
           alert("No se ha podido loguear correctamente ");

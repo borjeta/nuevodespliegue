@@ -348,17 +348,19 @@ function EditarFoodtruck() {
                                             Categoria
                                         </MKTypography>
                                         <select className="form-select" aria-label="Default select example" defaultValue={foodtruck.TipoComida} id="categoria">
-
-                                            <option value="Comida Japonesa">Comida Japonesa</option>
                                             <option value="Comida Mexicana">Comida Mexicana</option>
                                             <option value="Comida Italiana">Comida Italiana</option>
+                                            <option value="Comida Japonesa">Comida Japonesa</option>
                                             <option value="Comida China">Comida China</option>
-                                            <option value="Comida Francesa">Comida Francesa</option>
                                             <option value="Comida Española">Comida Española</option>
                                             <option value="Comida Americana">Comida Americana</option>
                                             <option value="Comida Peruana">Comida Peruana</option>
                                             <option value="Comida Colombiana">Comida Colombiana</option>
                                             <option value="Comida Argentina">Comida Argentina</option>
+                                            <option value="Hamburguesas y Hot Dogs">Hamburguesas y Hot Dogs</option>
+                                            <option value="Helados">Helados</option>
+                                            <option value="Churrerias">Churrerias</option>
+                                            <option value="Golosinas">Golosinas</option>
                                         </select>
 
 

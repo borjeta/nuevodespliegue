@@ -1,27 +1,64 @@
 import React from "react";
 import { useEffect } from "react";
-
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import MKTypography from "components/MKTypography";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import Container from "@mui/material/Container";
 import NavbarPropietario from "./NavbarPropietario";
 import Footer from "pages/LandingPages/Author/sections/Footer";
+import Modal from '@mui/material/Modal'
+import axios from "axios";
+import { Button } from "components/MKButton";
+
 
 
 
 
 function AjustesPropietario() {
 
+    const [show, setShow] = React.useState(false);
+    const [show2, setShow2] = React.useState(false);
+    const handleClose = () => setShow(false);
+    const handleClose2 = () => setShow2(false);
+    const handleShow = () => setShow(true);
+    const handleShow2 = () => setShow2(true);
+
+    const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+
+
 
 
 
     function handleCerrarFoodtrucks() {
-        alert("Cerrar todas las foodtrucks");
+
+        axios.post('http://localhost:8080/foodtruck/propietario/cerrartodas', {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                "user_id": `${user_id}`,
+                "api_token": `${api_token}`,
+                "role": `${role}`
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                alert("Se han cerrado todas las foodtrucks");
+            }
+            )
+            .catch(function (error) {
+                console.log(error);
+            }
+            );
+
     }
 
     function handleProgramarCierres() {
-        alert("Programar cierres de las Foodtrucks");
+
     }
 
     function handleContactarSoporte() {
@@ -33,82 +70,112 @@ function AjustesPropietario() {
     return (
         <div>
             <NavbarPropietario />
+            <br />
+            <br />
+            <br />
 
             <Container className="container" align="center" justify-content="center" py={10}>
-                <MKTypography variant="h4" component="h2" gutterBottom id="titulopaneladmin">
-                    Bienvenido al panel de administración del servicio
-                </MKTypography>
-                <div className="table-responsive">
+                <MKTypography
+                    variant="h3"
 
-                    <MKBox className="container"
-                        align="center"
-                        justify-content="center"
-                        py={10}
-                    >
-                        <div  class="btn-group btn-group-justified " id="btnsGlobales" role="group" aria-label="Basic example" >
-                            <div class="row ajustes ">
-                                {/* <div class="col-md-3">
+
+                    sx={
+                        {
+
+                            textAlign: "center",
+                            fontFamily: "Roboto",
+                            marginBottom: 10,
+                            color: "#FFFFFF",
+                            fontWeight: "bold",
+
+
+                        }
+
+                    }> Panel de administración de la aplicación
+                </MKTypography>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <MKTypography variant="h5" sx={{ textAlign: "center", fontFamily: "Roboto", marginBottom: 10, color: "#FFFFFF", fontWeight: "bold", }}>¿Estás seguro de que quieres cerrar todas las foodtrucks?</MKTypography>
+                    </Modal.Header>
+                    <Modal.Body>Una vez cerradas, los usuarios no podrán acceder a ellas.</Modal.Body>
+                    <Modal.Footer>
+                        <MKButton variant="secondary" onClick={handleClose}>
+                            Cancelar
+                        </MKButton>
+                        <MKButton variant="primary" onClick={handleCerrarFoodtrucks}>
+                            Cerrar todas las foodtrucks
+                        </MKButton>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={show2} onHide={handleClose2}>
+                    <Modal.Header closeButton>
+                        <MKTypography variant="h5" sx={{ textAlign: "center", fontFamily: "Roboto", marginBottom: 10, color: "#FFFFFF", fontWeight: "bold", }}>¿A qué hora quieres cerrar las foodtrucks?</MKTypography>
+                    </Modal.Header>
+                    <Modal.Body>La hora elegida se aplicará a todas tus foodtrucks .</Modal.Body>
+                    <Modal.Footer>
+                        <MKButton variant="secondary" onClick={handleClose2}>
+                            Cancelar
+                        </MKButton>
+                        <MKButton variant="primary" onClick={handleProgramarCierres}>
+                            Programar cierres
+                        </MKButton>
+                    </Modal.Footer>
+                </Modal>
+
+
+                <MKBox className="container"
+                    align="center"
+                    justify-content="center"
+                    py={10}
+                >
+                    <div class="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
+                        <MKBox align="center" justify-content="center">
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <br />
+
                                     <MKButton
                                         color="primary"
                                         size="large"
-                                        onClick={handleContactarSoporte}
-                                        className="btnOpcionesGlobales"
-                                        id="btnOpcionesGlobales"
+                                        href="/admin/foodtrucks"
+                                        className="btn"
+                                    >
+                                        Cerrar mis foodtrucks
+                                    </MKButton>
+                                </div>
+                                <div className="col-md-4">
+                                    <br />
 
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        href="/admin/usuarios"
+                                        className="btn"
+                                    >
+                                        Programar cierres de las Foodtrucks
+                                    </MKButton>
+                                </div>
+                                <div className="col-md-4">
+                                    <br />
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        href="/admin/opcionesglobales"
+                                        className="btn"
                                     >
                                         Contactar con soporte
                                     </MKButton>
-
-                                </div> */}
-                                <div class="col-md-3">
-                                    <MKButton
-                                        color="primary"
-                                        size="large"
-                                        onClick={handleCerrarFoodtrucks}
-                                        className="btnOpcionesGlobales"
-                                        id="btnOpcionesGlobales"
-                                    >
-                                        Cerrar todas las foodtrucks
-                                    </MKButton>
                                 </div>
-                                &nbsp;
-                                &nbsp;
-                                
-                                <div class="col-md-3">
-                                    <MKButton
-                                        color="primary"
-                                        size="large"
-                                        onClick={handleProgramarCierres}
-                                        className="btnOpcionesGlobales"
-                                        id="btnOpcionesGlobales"
-                                    >Programar cierres de las Foodtrucks
-                                    </MKButton>
-                                </div>
-
-                                <div class="col-md-3 ">
-                                    <MKButton
-                                        color="primary"
-                                        size="large"
-                                        onClick={() => {
-                                            window.history.back();
-                                        }}
-                                        id="btnOpcionesGlobales"
-                                        className="btnOpcionesGlobales"
-                                    >Volver
-                                    </MKButton>
-                                </div>
-
-
-
                             </div>
-                        </div>
-                    </MKBox >
-                </div >
 
-            </Container >
+                        </MKBox>
+                    </div>
+
+                </MKBox>
+            </Container>
             <Footer />
         </div>
-
 
     );
 }

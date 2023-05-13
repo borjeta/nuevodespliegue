@@ -83,7 +83,7 @@ function SimpleModal() {
             .then((res) => {
                 console.log(res.data);
                 if (res.data.role == "propietario")
-                    window.location.href = `/homepropietario`;
+                    window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
                 else if (res.data.role == "usuario")
                     window.location.href = `/homeusuario`;
                 else if (res.data.role == "admin")
@@ -163,7 +163,7 @@ function SimpleModal() {
     const toggleModal = () => {
         setShow(!show);
         if (user.role == "propietario")
-            window.location.href = `/homepropietario`;
+            window.location.href = `/foodtrucks/propietario/listafoodtrucks`;
         else if (user.role == "user")
             window.location.href = `/homeusuario`;
         else if (user.role == "admin")

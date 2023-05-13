@@ -142,8 +142,8 @@ class FoodtruckController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request ,foodtruck $foodtruck) {
-        /*
+    public function destroy(Request $request, foodtruck $foodtruck) {
+
         $api_token = $request -> header('api_token');
         $user_id = $request -> header('user_id');
         $role = $request -> header('role');
@@ -160,14 +160,6 @@ class FoodtruckController extends Controller {
         if ($comprobacion == null) {
             return Response() -> json(['message' => 'No tienes permisos para eliminar este foodtruck'], 401);
         }
-*/
-
-
-
-
-
-
-
 
         $foodtruck -> delete ();
         return Response() -> json(['message' => 'Foodtruck eliminado correctamente'], 200);
@@ -245,6 +237,34 @@ class FoodtruckController extends Controller {
         }
     }
 
+    /*OpcionGlobal solo para admin para cerrar todas las foodtrucks*/
+    public function abrirFoodtrucks(Request $request) {
+        $api_token = $request -> header('api_token');
+        $user_id = $request -> header('user_id');
+        $role = $request -> header('role');
+
+        $comprobacion = usuario:: where
+            (
+                [
+                    ['id', '=', $user_id],
+                    ['api_token', '=', $api_token],
+                    ['role', '=', $role]
+                ]
+            ) -> first();
+
+        if ($comprobacion == null || $comprobacion -> role != 'admin' || $comprobacion -> id != $user_id || $comprobacion -> api_token != $api_token) {
+            return Response() -> json(['message' => 'No tienes permisos para cerrar todas las foodtrucks'], 401);
+        } else {
+            $foodtrucks = foodtruck:: all();
+            foreach($foodtrucks as $foodtruck) {
+                $foodtruck -> status = 'Activo';
+                $foodtruck -> save();
+            }
+            return Response() -> json(['message' => 'Todas las foodtrucks han sido cerradas'], 200);
+        }
+    }
+
+
     public function obtenFoodtrucksPorCategoria(Request $request) {
         $categoria = $request['headers']['categoria'];
         $api_token = $request['headers']['api_token'];
@@ -269,11 +289,12 @@ class FoodtruckController extends Controller {
     }
 
     public function obtenFoodtrucksPorUbicacion(Request $request) {
-        
-        $ubicacion = $request->headers->ubicacion;
-        $api_token = $request['headers']['api_token'];
-        $user_id = $request['headers']['user_id'];
-        $role = $request['headers']['role'];
+
+        $ubicacion = $request -> header('zona');
+        $api_token = $request -> header('api_token');
+        $user_id = $request -> header('user_id');
+        $role = $request -> header('role');
+        $foodtrucksFiltradas = array();
 
         $comprobacion = usuario:: where
             (
@@ -303,5 +324,38 @@ class FoodtruckController extends Controller {
             return $foodtrucksFiltradas;
         }
     }
+
+    /*Cerrar todas las foodtrucks de un usuario*/
+    public function cerrartodastrucksdeusuario(Request $request, $id) {
+        $api_token = $request -> header('api_token');
+        $user_id = $request -> header('user_id');
+        $role = $request -> header('role');
+
+        $comprobacion = usuario:: where
+            (
+                [
+                    ['id', '=', $user_id],
+                    ['api_token', '=', $api_token],
+                    ['role', '=', $role]
+                ]
+            ) -> first();
+
+        if ($comprobacion == null || $comprobacion -> role != 'admin' || $comprobacion -> id != $user_id || $comprobacion -> api_token != $api_token) {
+            return Response() -> json(['message' => 'No tienes permisos para cerrar todas las foodtrucks'], 401);
+        } else {
+            $foodtrucks = foodtruck:: where('user_id', $id) -> get();
+            foreach($foodtrucks as $foodtruck) {
+                $foodtruck -> status = 'Inactivo';
+                $foodtruck -> save();
+            }
+            return Response() -> json(['message' => 'Todas las foodtrucks han sido cerradas'], 200);
+        }
+    }
+
+
+
+
+
+
 }
 

@@ -33,6 +33,9 @@ function HomeAdmin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password_confirmation, setPasswordConfirmation] = useState("");
+    const [mensajeerror, setMensajeError] = useState("");
+    const [mensajeexito, setMensajeExito] = useState("");
+
 
 
 
@@ -131,6 +134,7 @@ function HomeAdmin() {
                                                 .then((res) => {
                                                     console.log(res.data);
                                                     setShowModalExito(true);
+                                                    mensajeexito = "Se cerraron todas las foodtrucks";
                                                     /*cierra el modal a los 3 segundos*/
                                                     setTimeout(() => {
                                                         setShowModalExito(false);
@@ -141,6 +145,7 @@ function HomeAdmin() {
                                                     console.log(err);
                                                     setShowModalError(true);
                                                     /*cierra el modal a los 3 segundos*/
+                                                    mensajeerror = "No se pudieron cerrar todas las foodtrucks";
                                                     setTimeout(() => {
                                                         setShowModalError(false);
                                                     }
@@ -223,7 +228,7 @@ function HomeAdmin() {
                     <MKTypography variant="h6" component="h2" gutterBottom sx={
                         { color: "green" }
                     }>
-                        ¡El administrador se ha creado con éxito!
+                        {{ mensajeexito }}
                     </MKTypography>
                 </MKAlert>
             </Modal>
@@ -240,7 +245,7 @@ function HomeAdmin() {
             >
                 <MKAlert severity="error" >
                     <MKTypography variant="h6" component="h2" gutterBottom >
-                        ¡El administrador no se ha creado!
+                        {{ mensajeerror }}
                     </MKTypography>
                 </MKAlert>
             </Modal>
