@@ -93,43 +93,14 @@ function AjustesPropietario() {
 
                     }> Panel de administración de la aplicación
                 </MKTypography>
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <MKTypography variant="h5" sx={{ textAlign: "center", fontFamily: "Roboto", marginBottom: 10, color: "#FFFFFF", fontWeight: "bold", }}>¿Estás seguro de que quieres cerrar todas las foodtrucks?</MKTypography>
-                    </Modal.Header>
-                    <Modal.Body>Una vez cerradas, los usuarios no podrán acceder a ellas.</Modal.Body>
-                    <Modal.Footer>
-                        <MKButton variant="secondary" onClick={handleClose}>
-                            Cancelar
-                        </MKButton>
-                        <MKButton variant="primary" onClick={handleCerrarFoodtrucks}>
-                            Cerrar todas las foodtrucks
-                        </MKButton>
-                    </Modal.Footer>
-                </Modal>
-
-                <Modal show={show2} onHide={handleClose2}>
-                    <Modal.Header closeButton>
-                        <MKTypography variant="h5" sx={{ textAlign: "center", fontFamily: "Roboto", marginBottom: 10, color: "#FFFFFF", fontWeight: "bold", }}>¿A qué hora quieres cerrar las foodtrucks?</MKTypography>
-                    </Modal.Header>
-                    <Modal.Body>La hora elegida se aplicará a todas tus foodtrucks .</Modal.Body>
-                    <Modal.Footer>
-                        <MKButton variant="secondary" onClick={handleClose2}>
-                            Cancelar
-                        </MKButton>
-                        <MKButton variant="primary" onClick={handleProgramarCierres}>
-                            Programar cierres
-                        </MKButton>
-                    </Modal.Footer>
-                </Modal>
-
+              
 
                 <MKBox className="container"
                     align="center"
                     justify-content="center"
                     py={10}
                 >
-                    <div class="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
+                    <div className="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
                         <MKBox align="center" justify-content="center">
                             <div className="row">
                                 <div className="col-md-4">
