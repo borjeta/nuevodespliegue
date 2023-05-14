@@ -62,9 +62,7 @@ function AjustesPropietario() {
     }
 
     function handleContactarSoporte() {
-        alert("Contactar con soporte");
     }
-
 
 
     return (

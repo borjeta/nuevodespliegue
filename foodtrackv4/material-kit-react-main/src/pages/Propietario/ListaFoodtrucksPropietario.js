@@ -20,6 +20,7 @@ import MKBox from "components/MKBox";
 
 function ListaFoodtrucksPropietario() {
     const [foodtrucks, setFoodtrucks] = useState([]);
+    const [foodtruck, setFoodtruck] = useState([]);
     const [show, setShow] = useState(false);
 
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -193,18 +194,20 @@ function ListaFoodtrucksPropietario() {
                                                         startIcon={<Icon icon={deleteIcon} />}
                                                         onClick={() => {
                                                             setShow(true);
+                                                            setFoodtruck(foodtruck);
                                                         }}>Eliminar</MKButton>
                                                 </div>
                                             </td>
                                         </tr>
+                                        
+                                    
                                     ))}
                                 </tbody>
                             </table>
                         </div>
 
                     </Box>
-                </Container>
-                <Modal open={show} onClose={() => setShow(false)}>
+                </Container><Modal open={show} onClose={() => setShow(false)}>
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -240,6 +243,7 @@ function ListaFoodtrucksPropietario() {
                     </div>
                 </Modal>
 
+                
 
             </MKBox >
             <Footer />

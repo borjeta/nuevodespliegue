@@ -37,9 +37,6 @@ function OpcionesGlobales() {
     const [mensajeexito, setMensajeExito] = useState("");
 
 
-
-
-
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -47,43 +44,39 @@ function OpcionesGlobales() {
     const deleteCookie = (name) => {
         document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
-    deleteCookie("api_token");
-    deleteCookie("user_id");
-    deleteCookie("role");
-
-
-
-
+    
 
 
     return (
         <div>
             <NavbarAdmin />
-            <br />
 
             <Container className="container" align="center" justify-content="center" py={10}>
-                <br />
-                <br />
 
+                <MKTypography>
+                    <br />
+                    
+                </MKTypography>
                 <MKTypography variant="h2" component="h2" sx={
                     {
                         textAlign: "center",
                         fontFamily: "Roboto",
-                        marginBottom: 10,
                         color: "#FFFFFF",
-                        fontWeight: "bold"
+                        marginTop: 8,
+                        fontWeight: "bold",
+
                     }
                 }>
                     Opciones Globales
-                    <br />
                 </MKTypography>
-                <br />
+                <Modal open={showmodal} onClose={() => {
+                    setShowModal(false);
+                }}>
 
-                <MKAlert severity="success"
-                    style={{ display: showmodalexito ? "block" : "none" }}
-                >
-                    Se cerraron todas las foodtrucks
-                </MKAlert>
+                    <MKAlert severity="success">
+                        {mensajeexito}
+                    </MKAlert>
+                </Modal>
 
 
 
@@ -100,15 +93,15 @@ function OpcionesGlobales() {
                                     <MKButton
                                         color="primary"
                                         size="large"
+                                        className="btn"
                                         style={{
-                                            display: role == "admin" ? "block" : "none"
+                                            margin : "auto"
                                         }}
 
                                         onClick={() => {
                                             setShowModal(true);
                                         }}
 
-                                        className="btn"
                                     >
                                         Crear Administrador
                                     </MKButton>
@@ -119,6 +112,9 @@ function OpcionesGlobales() {
                                         color="primary"
                                         size="large"
                                         className="btn"
+                                        style={{
+                                            margin : "auto"
+                                        }}
                                         onClick={() => {
                                             axios.get(`http://localhost:8000/api/foodtrucks/admin/cierratodas`, {
                                                 headers: {
@@ -131,23 +127,11 @@ function OpcionesGlobales() {
                                             })
                                                 .then((res) => {
                                                     console.log(res.data);
-                                                    setShowModalExito(true);
-                                                    mensajeexito = "Se cerraron todas las foodtrucks";
-                                                    /*cierra el modal a los 3 segundos*/
-                                                    setTimeout(() => {
-                                                        setShowModalExito(false);
-                                                    }
-                                                        , 3000);
+
                                                 })
                                                 .catch((err) => {
                                                     console.log(err);
-                                                    setShowModalError(true);
-                                                    /*cierra el modal a los 3 segundos*/
-                                                    mensajeerror = "No se pudieron cerrar todas las foodtrucks";
-                                                    setTimeout(() => {
-                                                        setShowModalError(false);
-                                                    }
-                                                        , 3000);
+
 
                                                 });
                                         }}
@@ -175,22 +159,9 @@ function OpcionesGlobales() {
                                             })
                                                 .then((res) => {
                                                     console.log(res.data);
-                                                    setShowModalExito(true);
-                                                    /*cierra el modal a los 3 segundos*/
-                                                    setTimeout(() => {
-                                                        setShowModalExito(false);
-                                                    }
-                                                        , 3000);
                                                 })
                                                 .catch((err) => {
                                                     console.log(err);
-                                                    setShowModalError(true);
-                                                    /*cierra el modal a los 3 segundos*/
-                                                    setTimeout(() => {
-                                                        setShowModalError(false);
-                                                    }
-                                                        , 3000);
-
                                                 });
                                         }}
 

@@ -174,7 +174,7 @@ function CrearFoodtruckAdmin() {
                                         <div className="row">
 
                                             {/* <!--Columna 1--> */}
-                                            <div className="col-md-3">
+                                            <div className="col-md-6">
                                                 <MKTypography variant="h6" >
                                                     Nombre
                                                 </MKTypography>
@@ -189,7 +189,7 @@ function CrearFoodtruckAdmin() {
                                             </div>
 
                                             {/* <!--Columna 2--> */}
-                                            <div className="col-md-3">
+                                            <div className="col-md-6">
                                                 <MKTypography variant="h6" >
                                                     Descripción
                                                 </MKTypography>
@@ -207,7 +207,7 @@ function CrearFoodtruckAdmin() {
 
 
                                             {/* <!--Columna 1--> */}
-                                            <div className="col-md-3">
+                                            <div className="col-md-6">
                                                 <MKTypography variant="h6" >
                                                     Ubicacion
                                                 </MKTypography>
@@ -225,7 +225,7 @@ function CrearFoodtruckAdmin() {
 
 
                                             {/* <!--Columna 3--> */}
-                                            <div className="col-md-3">
+                                            <div className="col-md-6">
 
                                                 <MKTypography variant="h6" >
                                                     Teléfono
@@ -243,15 +243,14 @@ function CrearFoodtruckAdmin() {
                                         </div>
                                         <div className="row">
                                             <div className="col-md-3">
-
                                                 <MKTypography variant="h6" >
                                                     Propietario:
-                                                    <select className="form-select" aria-label="Default select example" id="usuario">
-                                                        {usuarios.map((usuario) => (
-                                                            <option value={usuario.id}>{usuario.name}</option>
-                                                        ))}
-                                                    </select>
                                                 </MKTypography>
+                                                <select className="form-select" aria-label="Default select example" id="usuario">
+                                                    {usuarios.map((usuario) => (
+                                                        <option value={usuario.id}> {usuario.name} </option>
+                                                    ))}
+                                                </select>
                                                 <MKTypography variant="h6" >
                                                     Categoria
                                                 </MKTypography>

@@ -15,15 +15,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import Icon from '@mui/material/Icon';
 import Footer from "pages/LandingPages/Author/sections/Footer";
 import Card from "@mui/material/Card";
-import { Block } from "@mui/icons-material";
-import { bool } from "prop-types";
+
 
 function HomeUsuario() {
     const [data, setData] = useState([]);
@@ -58,9 +54,7 @@ function HomeUsuario() {
             });
     }, []);
 
-    const handleDetalles = (id) => {
-        window.location.href = `/foodtrucks/${id}/info`;
-    }
+
 
     /*configuramos el addeventlistener onChange del deplegable de categorias*/
     const handleCategoria = () => {
@@ -116,6 +110,17 @@ function HomeUsuario() {
 
 
     }
+    const Activo = (status) => {
+        if (status == "Activo") {
+            return "Activo";
+        } else {
+            return "Inactivo";
+        }
+
+    }
+
+
+
 
 
 
@@ -130,15 +135,19 @@ function HomeUsuario() {
             <br />
             <br />
             <MKAlert severity="info"
+
                 sx={{
                     width: "70%",
                     alignItems: "center",
                     justifyContent: "center",
                     margin: "auto",
-                    marginTop: "10px",
+                    marginTop: "1rem",
                 }}>
                 Encuentra los mejores foodtrucks cerca de ti
             </MKAlert>
+            {/*Insertamos separaador*/}
+            <span style={{ display: "block", height: "20px" }}></span>
+
             <MKBox sx={{
                 width: "70%",
                 alignItems: "center",
@@ -165,6 +174,7 @@ function HomeUsuario() {
                         </MKTypography>
 
                         <select className="form-select" defaultValue={selectedCategory} onChange={handleCategoria} aria-label="Default select example" id="categoria">
+                            <option selected value="Activas">Activas</option>
                             <option value="Comida Mexicana">Comida Mexicana</option>
                             <option value="Comida Italiana">Comida Italiana</option>
                             <option value="Comida Japonesa">Comida Japonesa</option>
@@ -192,7 +202,7 @@ function HomeUsuario() {
                             Buscador por zona
                         </MKTypography>
                         <select className="form-select" defaultValue=" " onChange={handleZona} aria-label="Default select example" id="filterzona">
-                            <option value=" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    </option>
+                            <option selected value=" ">Todas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    </option>
                             <option value="Ontinyent">Ontinyent</option>
                             <option value="Alcoy">Alcoy</option>
                             <option value="xativa">Xativa</option>
@@ -204,7 +214,16 @@ function HomeUsuario() {
 
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+                <Container maxWidth="md" sx={{
+                    mt: 4, mb: 4,
+                    border: "1px solid #FFFFFF",
+                    borderRadius: "12px",
+                    padding: "10px",
+                    boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+                    background: "linear-gradient(90deg, #836b4f  0%, #FFDB58 50%, #836b4f  100%)",
+
+
+                }}>
 
 
 
@@ -215,44 +234,69 @@ function HomeUsuario() {
                         <Container sx={{ py: 2 }} maxWidth="md"
                         >
                             {/* End hero unit */}
-                            <Grid container spacing={6}>
+                            <Grid container spacing={6} sx={
+                                {
+
+                                }
+
+                            } >
 
 
                                 {foodtrucks.map((foodtruck) => (
                                     <Grid item key={foodtruck.id} xs={12} sm={6} md={4} >
-                                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} border={1} borderRadius={16}>
+                                        <Card sx={{
+                                            height: '100%', display: 'flex', flexDirection: 'column', border: "1px solid #FFFFFF",
+                                            borderRadius: "12px",
+                                            boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+                                        }} border={1} borderRadius={16}>
                                             <CardMedia
                                                 component="img"
                                                 sx={{
-                                                    // 16:9
+                                                    width: "25rem",
+                                                    height: "15rem",
+                                                    margin: "auto",
+                                                    position: "relative",
+
                                                 }}
-                                                image="https://source.unsplash.com/random"
+                                                image={foodtruck.avatar}
                                                 alt="random"
                                             />
                                             <CardContent sx={{ flexGrow: 1 }}>
-                                                <Typography gutterBottom variant="h5" component="h5">
+                                                <Typography gutterBottom variant="h4" component="h4" sx={
+                                                    {
+                                                        textAlign: "center",
+                                                        fontWeight: "bold",
+                                                        fontSize: "2rem",
+                                                    }
+
+                                                }>
                                                     {foodtruck.nombre}
                                                 </Typography>
                                                 <Typography>
                                                     {foodtruck.descripcion}
                                                 </Typography>
-                                                <Typography>
-                                                    {foodtruck.direccion}
+                                                &nbsp;
+
+                                                <Typography color="text.primary">
+                                                    {foodtruck.ubicacion}
                                                 </Typography>
                                                 &nbsp;
                                                 <Typography color="text.primary">
-                                                    {foodtruck.horario}
+                                                    Cerramos a las {foodtruck.horario} horas de hoy
                                                 </Typography>
-                                                &nbsp;
-                                                <Typography >
-                                                    Estado: {foodtruck.status}
+
+                                                <Typography color="text.primary">
+                                                    Categoria: {foodtruck.TipoComida}
                                                 </Typography>
+
                                             </CardContent>
-                                            <CardActions >
-                                                <Link to={`/foodtrucks/dondeesta/${foodtruck.id}/info`} className='btn btn-primary btn-lg'>
-                                                    Ver donde está ahora
-                                                </Link>
-                                            </CardActions>
+                                            <div className="row g-3 align-items-center justify-content-center">
+                                                <CardActions >
+                                                    <Link to={`/foodtrucks/dondeesta/${foodtruck.id}/info`} className='btn btn-primary btn-lg '>
+                                                        Ver donde está ahora
+                                                    </Link>
+                                                </CardActions>
+                                            </div>
                                         </Card>
                                     </Grid>
                                 ))}

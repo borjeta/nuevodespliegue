@@ -227,8 +227,11 @@ function HomeAdmin() {
 
                                                             <MKButton variant="gradient" className="btn"
                                                                 size="large"
+                                                                sx = {{hover: { backgroundColor: "#Ee170f"
+                                                                }}}
                                                                 startIcon={<Icon icon={deleteIcon} />} onClick={() => {
                                                                     setShow(true);
+                                                                    setFoodtruck(foodtruck);
                                                                 }}>Eliminar</MKButton>
                                                         </TableCell>
 

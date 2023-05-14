@@ -40,18 +40,15 @@ function HomeAdmin() {
             <Container className="container" align="center" justify-content="center" py={10}>
                 <MKTypography
                     variant="h3"
-
-
                     sx={
                         {
 
                             textAlign: "center",
                             fontFamily: "Roboto",
-                            marginBottom: 10,
-                            color: "#FFFFFF",
                             fontWeight: "bold",
+                            color: "#FFFFFF",
 
-                           
+
                         }
 
                     }> Panel de administración de la aplicación
@@ -63,39 +60,54 @@ function HomeAdmin() {
                     py={10}
                 >
                     <div className="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
-                        <MKBox align="center" justify-content="center">
+                        <MKBox align="center" justify-content="center" sx={
+                            {
+                                textAlign: "center",
+                                fontFamily: "Roboto",
+                                fontWeight: "bold",
+                                borderRadius: "10px",
+                                padding: "10px",
+                                margin: "10px",
+                                width: "100%",
+                            }
+                        }>
                             <div className="row">
                                 <div className="col-md-4">
-                                    <br />
-
                                     <MKButton
                                         color="primary"
                                         size="large"
-                                        href="/admin/foodtrucks"
                                         className="btn"
+                                        href="/admin/foodtrucks"
+                                        sx={
+                                            { hover: { backgroundColor: "#2c7b78" } }
+                                        }
                                     >
                                         Foodtrucks
                                     </MKButton>
                                 </div>
-                                <div className="col-md-4">
-                                    <br />
 
+                                <div className="col-md-4">
                                     <MKButton
                                         color="primary"
                                         size="large"
                                         href="/admin/usuarios"
                                         className="btn"
+                                        sx={
+                                            { hover: { backgroundColor: "#2c7b78" } }
+                                        }
                                     >
                                         usuarios
                                     </MKButton>
                                 </div>
                                 <div className="col-md-4">
-                                    <br />
                                     <MKButton
                                         color="primary"
                                         size="large"
                                         href="/admin/opcionesglobales"
                                         className="btn"
+                                        sx={
+                                            { hover: { backgroundColor: "#2c7b78" } }
+                                        }
                                     >
                                         Opciones
                                     </MKButton>

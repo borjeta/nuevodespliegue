@@ -142,7 +142,7 @@ class FoodtruckController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, foodtruck $foodtruck) {
+    public function destroy(Request $request, $id) {
 
         $api_token = $request -> header('api_token');
         $user_id = $request -> header('user_id');
@@ -160,8 +160,8 @@ class FoodtruckController extends Controller {
         if ($comprobacion == null) {
             return Response() -> json(['message' => 'No tienes permisos para eliminar este foodtruck'], 401);
         }
-
-        $foodtruck -> delete ();
+        $foodtruck = foodtruck:: where('id', $id) ;
+        $foodtruck -> delete();
         return Response() -> json(['message' => 'Foodtruck eliminado correctamente'], 200);
     }
 
@@ -283,9 +283,15 @@ class FoodtruckController extends Controller {
         if ($comprobacion == null) {
             return Response() -> json(['message' => 'No tienes permisos para ver las foodtrucks'], 401);
         } else {
-            $foodtrucks = foodtruck:: where('tipocomida', $categoria) -> get();
+            if ($categoria == 'Activas'){
+                $foodtrucks = foodtruck:: where('status', 'Activo') -> get();
+                return $foodtrucks;
+            }   else {
+            $foodtrucks = foodtruck:: where('TipoComida', $categoria) -> get();
             return $foodtrucks;
+            }
         }
+        
     }
 
     public function obtenFoodtrucksPorUbicacion(Request $request) {

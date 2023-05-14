@@ -37,15 +37,11 @@ Software.
 
 <body>
   <style>
-    .btn-group .btn {
-      border-radius: 0;
-      border: 2px solid #1A73E8;
-    }
+    
 
     #btnsGlobales {
       background-color: aliceblue;
-      margin-top: 10px;
-      border: 1rem solid #1A73E8;
+      border: 1rem solid #2c7b78;
       border-radius: 2rem;
       padding: 2rem;
       align-items: center;
@@ -55,9 +51,6 @@ Software.
       width: 100%;
     }
 
-    .btn-group .btn:not(:first-child) {
-      margin-left: -2px;
-    }
     .titulopaneladmin {
       color: #1A73E8;
       font-size: 2rem;
@@ -66,8 +59,20 @@ Software.
     }
 
     .btn {
-      background-color: #1A73E8;
+      background-color: #2c7b78;
       color: black;
+      border: none;
+      margin-bottom: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+    }
+
+  
+    /*Si los botones estan en pantalla de movil cuando están en vertical se les da un poco de espacio entre ellos*/
+    @media screen and (max-width: 600px) {
+      .btn {
+        margin-bottom: 1rem;
+      }
     }
 
     body {
@@ -103,7 +108,7 @@ Software.
     }
 
     #btnOpcionesGlobales {
-      margin-top: 10px;
+      
       border: 0.5rem solid #1A73E8;
       border-radius: 1rem;
       padding: 1rem;

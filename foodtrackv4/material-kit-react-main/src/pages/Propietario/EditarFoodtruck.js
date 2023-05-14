@@ -185,7 +185,14 @@ function EditarFoodtruck() {
     }
 
 
-    /*Editar foodtruck*/
+/*Si se pulsa Enter en el campo de avatar refresca la pagina*/
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            window.location.href = `/foodtrucks/propietario/listafoodtrucks/${foodtruck.id}/editar`;
+        }
+    }
+
+
 
     return (
         <div>
@@ -372,8 +379,7 @@ function EditarFoodtruck() {
                                             id="avatar"
                                             variant="outlined"
                                             size="small"
-                                            onChange={handleAvatar}
-                                        />
+                                                                                    />
 
                                         <MKTypography variant="h6" >
                                             Previsualización
@@ -381,7 +387,7 @@ function EditarFoodtruck() {
                                         <CardMedia
                                             component="img"
                                             height="140"
-                                            alt="green iguana"
+                                            alt="avatar"
                                             image={foodtruck.avatar}
                                         />
                                         <br />

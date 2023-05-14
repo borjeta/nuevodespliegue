@@ -46,8 +46,27 @@ const HomePropietario = () => {
     }, []);
 
 
-    /*Cuenta las foodtrucks que tiene el propietario*/
+    function handleBorrarFoodtruck (id) {
+        axios
+            .delete(`http://localhost:8000/api/foodtrucks/${id}`, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                    "user_id": `${user_id}`,
+                    "api_token": `${api_token}`,
+                    "role": `${role}`
+                }
 
+            })
+            .then((res) => {
+                console.log(res.data);
+                window.location.href = "/foodtrucks/propietario/listafoodtrucks";
+
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 
 
     return (
@@ -97,28 +116,8 @@ const HomePropietario = () => {
                                                                             Editar
                                                                         </MKButton>
                                                                         &nbsp;
-                                                                        <MKButton variant="gradient" color="info" size="large" onClick={() => {
-                                                                            axios
-                                                                                .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
-                                                                                    headers: {
-                                                                                        "Access-Control-Allow-Origin": "*",
-                                                                                        "Content-Type": "application/json",
-                                                                                        "user_id": `${user_id}`,
-                                                                                        "api_token": `${api_token}`,
-                                                                                        "role": `${role}`
-                                                                                    }
-
-                                                                                })
-                                                                                .then((res) => {
-                                                                                    console.log(res.data);
-                                                                                    window.location.reload();
-                                                                                }
-                                                                                )
-                                                                                .catch((err) => {
-                                                                                    console.log(err);
-                                                                                }
-                                                                                );
-                                                                        }}>Eliminar</MKButton>
+                                                                        <MKButton variant="gradient" color="info" size="large" 
+                                                                        >Eliminar</MKButton>
                                                                     </div>
                                                                 </td>
                                                             </tr>
