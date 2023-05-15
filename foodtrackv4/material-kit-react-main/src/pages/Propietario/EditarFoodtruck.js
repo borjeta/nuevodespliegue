@@ -225,9 +225,7 @@ function EditarFoodtruck() {
 
                             >
                                 <MKBox display="flex" alignItems="center" p={2}>
-                                    <br />
-                                    <br />
-                                    <br />
+                                   
                                     <MKTypography variant="h5" alignItems="center">Ventana de edición de foodtruck</MKTypography>
                                     <br />
                                     <MKButton

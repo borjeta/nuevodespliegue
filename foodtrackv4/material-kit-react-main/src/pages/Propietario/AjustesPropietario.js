@@ -11,6 +11,7 @@ import Footer from "pages/LandingPages/Author/sections/Footer";
 import Modal from '@mui/material/Modal'
 import axios from "axios";
 import { Button } from "components/MKButton";
+import MKInput from "components/MKInput";
 
 
 
@@ -18,25 +19,28 @@ import { Button } from "components/MKButton";
 
 function AjustesPropietario() {
 
-    const [show, setShow] = React.useState(false);
-    const [show2, setShow2] = React.useState(false);
-    const handleClose = () => setShow(false);
-    const handleClose2 = () => setShow2(false);
-    const handleShow = () => setShow(true);
-    const handleShow2 = () => setShow2(true);
+    const [show, setShow] = useState(false);
+    const [showconfirmcerrar, setShowconfirmcerrar] = useState(false);
+    const handleCloseConfirmCerrar = () => setShowconfirmcerrar(false);
+    const handleOpenConfirmCerrar = () => setShowconfirmcerrar(true);
+    const [showmensajeerror, setShowmensajeerror] = useState(false);
+    const [showModalProgramaCierre, setShowModalProgramaCierre] = useState(false);
+    const handleCloseProgramarCierre = () => setShowModalProgramaCierre(false);
+    const handleOpenProgramaCierre = () => setShowModalProgramaCierre(true);
+    const [showModalAsignarMismoCierre, setShowModalAsignarMismoCierre] = useState(false);
+    const handleCloseAsignarMismoCierre = () => setShowModalAsignarMismoCierre(false);
+    const handleOpenAsignarMismoCierre = () => setShowModalAsignarMismoCierre(true);
+
+
 
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
 
-
-
-
-
     function handleCerrarFoodtrucks() {
 
-        axios.post('http://localhost:8080/foodtruck/propietario/cerrartodas', {
+        axios.post('http://localhost:8000/api/foodtrucks/propietario/cerrartodaspropietario', {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
@@ -47,7 +51,7 @@ function AjustesPropietario() {
         })
             .then(function (response) {
                 console.log(response);
-                alert("Se han cerrado todas las foodtrucks");
+                handleClose();
             }
             )
             .catch(function (error) {
@@ -57,11 +61,33 @@ function AjustesPropietario() {
 
     }
 
-    function handleProgramarCierres() {
+    function handleProgramarCierre() {
+        /*recogemos la hora seleccionada en el modal y la guardamos en una variable*/
+        var hora = document.getElementById("hora").value;
 
+        axios.post('http://localhost:8000/api/foodtrucks/propietario/programarcierrepropietario', {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                "user_id": `${user_id}`,
+                "api_token": `${api_token}`,
+                "role": `${role}`
+            },
+            hora: `${hora}`
+        })
+            .then(function (response) {
+                console.log(response);
+                handleCloseProgramarCierre();
+            }
+            )
+            .catch(function (error) {
+                console.log(error);
+            }
+            );
     }
 
-    function handleContactarSoporte() {
+    function handleAsignarMismoCierre() {
+
     }
 
 
@@ -75,14 +101,11 @@ function AjustesPropietario() {
             <Container className="container" align="center" justify-content="center" py={10}>
                 <MKTypography
                     variant="h3"
-
-
                     sx={
                         {
 
                             textAlign: "center",
                             fontFamily: "Roboto",
-                            marginBottom: 10,
                             color: "#FFFFFF",
                             fontWeight: "bold",
 
@@ -91,7 +114,7 @@ function AjustesPropietario() {
 
                     }> Panel de administración de la aplicación
                 </MKTypography>
-              
+
 
                 <MKBox className="container"
                     align="center"
@@ -99,48 +122,136 @@ function AjustesPropietario() {
                     py={10}
                 >
                     <div className="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
-                        <MKBox align="center" justify-content="center">
+                        <MKBox align="center" justify-content="center" sx={
+                            {
+                                textAlign: "center",
+                                fontFamily: "Roboto",
+                                fontWeight: "bold",
+                                borderRadius: "10px",
+                                width: "100%",
+
+                            }
+                        }>
+                            <Modal open={showconfirmcerrar} onClose={handleCloseConfirmCerrar} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title" id="exampleModalLongTitle">¿Estás seguro de que quieres cerrar todas tus foodtrucks?</h5>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseConfirmCerrar}>X</button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <p>Si cierras todas tus foodtrucks, no serán visibles tus foodtrucks <strong>hasta que las vuelvas a abrir.</strong></p>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCloseConfirmCerrar}>Cancelar</button>
+                                            <button type="button" className="btn btn-primary" onClick={handleCerrarFoodtrucks}>Cerrar todas</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Modal>
+
+                            <Modal open={showModalProgramaCierre} onClose={handleCloseProgramarCierre} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title" id="exampleModalLongTitle">¿A qué hora quieres cerrar todas tus foodtrucks?</h5>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseProgramarCierre}>X</button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <p>A la hora seleccionada se cerrarán todas tus foodtrucks <strong> Recuerda que hasta que no las abras no serán visibles al público </strong></p>
+                                            <br />
+
+                                            <MKInput sx={
+                                                {
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    textAlign: "center",
+                                                    display: "flex",
+                                                }
+                                            }
+                                                id="hora" type="time" />
+                                        </div>
+
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCloseProgramarCierre}>Cancelar</button>
+                                            <button type="button" className="btn btn-primary" onClick={handleProgramarCierre}>Aplicar cierre automático</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Modal>
+
+                            <Modal open={showModalAsignarMismoCierre} onClose={handleCloseAsignarMismoCierre} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title" id="exampleModalLongTitle">¿A qué hora quieres cerrar todas tus foodtrucks?</h5>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseAsignarMismoCierre}>X</button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <p>A la hora seleccionada se cerrarán todas tus foodtrucks <strong> Recuerda que hasta que no las abras no serán visibles al público </strong></p>
+                                            <br />
+
+                                            <MKInput sx={
+                                                {
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    textAlign: "center",
+                                                    display: "flex",
+                                                }
+                                            }
+                                                id="hora" type="time" />
+
+
+
+                                        </div>
+                                        <br />
+
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCloseAsignarMismoCierre}>Cancelar</button>
+                                            <button type="button" className="btn btn-primary" onClick={handleAsignarMismoCierre}>Aplicar cierre automático</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Modal>
+
                             <div className="row">
                                 <div className="col-md-4">
-                                    <br />
 
                                     <MKButton
                                         color="primary"
                                         size="large"
-                                        href="/admin/foodtrucks"
                                         className="btn"
+                                        onClick={handleOpenConfirmCerrar}
                                     >
                                         Cerrar mis foodtrucks
                                     </MKButton>
                                 </div>
                                 <div className="col-md-4">
-                                    <br />
 
                                     <MKButton
                                         color="primary"
                                         size="large"
-                                        href="/admin/usuarios"
                                         className="btn"
+                                        onClick={handleOpenProgramaCierre}
                                     >
-                                        Programar cierres de las Foodtrucks
+                                        Programar cierres de las Foodtrucks 
                                     </MKButton>
                                 </div>
                                 <div className="col-md-4">
-                                    <br />
+
                                     <MKButton
                                         color="primary"
                                         size="large"
-                                        href="/admin/opcionesglobales"
                                         className="btn"
+                                        onClick={handleOpenAsignarMismoCierre}
                                     >
-                                        Contactar con soporte
+
+                                        Asignar mismo cierre a  tus foodtrucks
                                     </MKButton>
                                 </div>
                             </div>
-
                         </MKBox>
                     </div>
-
                 </MKBox>
             </Container>
             <Footer />

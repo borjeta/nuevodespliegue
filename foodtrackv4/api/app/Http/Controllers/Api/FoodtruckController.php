@@ -332,10 +332,10 @@ class FoodtruckController extends Controller {
     }
 
     /*Cerrar todas las foodtrucks de un usuario*/
-    public function cerrartodastrucksdeusuario(Request $request, $id) {
-        $api_token = $request -> header('api_token');
-        $user_id = $request -> header('user_id');
-        $role = $request -> header('role');
+    public function cerrartodastrucksdeusuario(Request $request) {
+        $api_token = $request['headers']['api_token'];
+        $user_id = $request['headers']['user_id'];
+        $role = $request['headers']['role'];
 
         $comprobacion = usuario:: where
             (
@@ -346,10 +346,10 @@ class FoodtruckController extends Controller {
                 ]
             ) -> first();
 
-        if ($comprobacion == null || $comprobacion -> role != 'admin' || $comprobacion -> id != $user_id || $comprobacion -> api_token != $api_token) {
+        if ($comprobacion == null || $comprobacion -> role != 'propietario' || $comprobacion -> id != $user_id || $comprobacion -> api_token != $api_token) {
             return Response() -> json(['message' => 'No tienes permisos para cerrar todas las foodtrucks'], 401);
         } else {
-            $foodtrucks = foodtruck:: where('user_id', $id) -> get();
+            $foodtrucks = foodtruck:: where('user_id', $comprobacion->id) -> get();
             foreach($foodtrucks as $foodtruck) {
                 $foodtruck -> status = 'Inactivo';
                 $foodtruck -> save();

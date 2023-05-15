@@ -113,10 +113,8 @@ function HomeAdmin() {
                                     </MKButton>
                                 </div>
                             </div>
-
                         </MKBox>
                     </div>
-
                 </MKBox>
             </Container>
             <Footer />
