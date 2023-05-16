@@ -31,7 +31,9 @@ function HomeUsuario() {
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const [zona, setZona] = useState("");
+
     useEffect(() => {
+        /*activa el scroll hasta abajo de la página*/
 
         axios
             .post(`http://localhost:8000/api/foodtrucks/estado/foodtrucksabiertas`, {
@@ -110,30 +112,12 @@ function HomeUsuario() {
 
 
     }
-    const Activo = (status) => {
-        if (status == "Activo") {
-            return "Activo";
-        } else {
-            return "Inactivo";
-        }
-
-    }
-
-
-
-
-
-
-
 
     return (
         <div >
             <NavbarUsuario />
 
-            <br />
-            <br />
-            <br />
-            <br />
+            <span style={{ display: "block", height: "4rem" }}></span>
             <MKAlert severity="info"
 
                 sx={{
@@ -142,10 +126,10 @@ function HomeUsuario() {
                     justifyContent: "center",
                     margin: "auto",
                     marginTop: "1rem",
+
                 }}>
                 Encuentra los mejores foodtrucks cerca de ti
             </MKAlert>
-            {/*Insertamos separaador*/}
             <span style={{ display: "block", height: "20px" }}></span>
 
             <MKBox sx={{
@@ -154,16 +138,13 @@ function HomeUsuario() {
                 justifyContent: "center",
                 margin: "auto",
                 marginTop: "10px",
-                marginBottom: "10px",
                 borderRadius: "12px",
                 padding: "10px",
                 color: "#FFFFFF",
                 border: "1px solid #FFFFFF",
-
-
-
             }} >
-                <div className="row g-3 align-items-center justify-content-center">
+                <div className="row g-3 align-items-center justify-content-center" >
+
 
                     <div className="col-md-4">
 
@@ -174,7 +155,7 @@ function HomeUsuario() {
                         </MKTypography>
 
                         <select className="form-select" defaultValue={selectedCategory} onChange={handleCategoria} aria-label="Default select example" id="categoria">
-                            <option selected value="Activas">Activas</option>
+                            <option value="Activas">Activas</option>
                             <option value="Comida Mexicana">Comida Mexicana</option>
                             <option value="Comida Italiana">Comida Italiana</option>
                             <option value="Comida Japonesa">Comida Japonesa</option>
@@ -197,15 +178,14 @@ function HomeUsuario() {
                             width: "70%",
                             color: "#FFFFFF",
                             margin: "auto",
-                            position: "relative",
                         }} >
                             Buscador por zona
                         </MKTypography>
-                        <select className="form-select" defaultValue=" " onChange={handleZona} aria-label="Default select example" id="filterzona">
-                            <option selected value=" ">Todas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    </option>
+                        <select className="form-select align-center" defaultValue=" " onChange={handleZona} aria-label="Default select example" id="filterzona">
+                            <option value=" ">Todas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    </option>
                             <option value="Ontinyent">Ontinyent</option>
                             <option value="Alcoy">Alcoy</option>
-                            <option value="xativa">Xativa</option>
+                            <option value="xativa">Xátiva</option>
                             <option value="Gandia">Gandia</option>
                         </select>
                     </div>
@@ -222,24 +202,25 @@ function HomeUsuario() {
                     boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
                     background: "linear-gradient(90deg, #836b4f  0%, #FFDB58 50%, #836b4f  100%)",
 
-
                 }}>
 
 
 
-                    <Box sx={{ my: 4 }}>
+                    <Box sx={{
+                        my: 4,
+                    }}>
 
 
 
-                        <Container sx={{ py: 2 }} maxWidth="md"
-                        >
+                        <Container sx={{
+                            py: 2,
+                            height: "100%",
+                            width: "100%",
+                            display: "flex",
+
+                        }} maxWidth="md" >
                             {/* End hero unit */}
-                            <Grid container spacing={6} sx={
-                                {
-
-                                }
-
-                            } >
+                            <Grid container spacing={6}>
 
 
                                 {foodtrucks.map((foodtruck) => (
@@ -255,7 +236,6 @@ function HomeUsuario() {
                                                     width: "25rem",
                                                     height: "15rem",
                                                     margin: "auto",
-                                                    position: "relative",
 
                                                 }}
                                                 image={foodtruck.avatar}
@@ -266,7 +246,7 @@ function HomeUsuario() {
                                                     {
                                                         textAlign: "center",
                                                         fontWeight: "bold",
-                                                        fontSize: "2rem",
+                                                        fontSize: "1.7rem",
                                                     }
 
                                                 }>

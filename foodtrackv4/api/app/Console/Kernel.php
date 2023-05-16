@@ -13,6 +13,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        /*Cada 5 minutos se revisan todas las foodtrucks de la base de datos para ver si hay que cerrarlas o no*/
+        $schedule->command('foodtruck:cerrar')->everyFiveMinutes();
+        
     }
 
     /**

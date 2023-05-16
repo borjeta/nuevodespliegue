@@ -316,20 +316,34 @@ class FoodtruckController extends Controller {
         } else {
             /* recogemos todas las foodtrucks de bdd*/
             $foodtrucks = foodtruck:: all();
+            function quitarAcentos($cadena) {
+                $no_permitidas = array ("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","À","Ã","Ì","Ò","Ù","Ã™","Ã ","Ã¨","Ã¬","Ã²","Ã¹","ç","Ç","Ã¢","ê","Ã®","Ã´","Ã»","Ã‚","ÃŠ","ÃŽ","Ã”","Ã›","ü","Ã¶","Ã–","Ã¯","Ã¤","«","Ò","Ã","Ã„","Ã‹");
+                $permitidas = array ("a","e","i","o","u","A","E","I","O","U","n","N","A","E","I","O","U","a","e","i","o","u","c","C","a","e","i","o","u","A","E","I","O","U","u","o","O","i","a","e","U","I","A","E");
+                $texto = str_replace($no_permitidas, $permitidas ,$cadena);
+                return $texto;
+            }
 
             foreach($foodtrucks as $foodtruck) {
                 /*recogemos la ubicacion de cada foodtruck*/
                 $ubicacionFoodtruck = $foodtruck -> ubicacion;
-                /*comprobamos si la ubicacion contiene la ubicacion que nos pasan por parametro*/
-                if (strpos($ubicacionFoodtruck, $ubicacion) !== false) {
-                    /*si la contiene la guardamos en un array*/
-                    $foodtrucksFiltradas[] = $foodtruck;
+                /*comprobamos si la ubicacion contiene la ubicacion que nos pasan por parametro pasando todo a minusc y quitando los acentos*/
+                if (strpos(strtolower(quitarAcentos($ubicacionFoodtruck)), strtolower(quitarAcentos($ubicacion))) !== false) {
+                    /*si la contiene la añadimos al array de foodtrucks filtradas*/
+                    array_push($foodtrucksFiltradas, $foodtruck);
                 }
             }
             /*devolvemos el array con las foodtrucks filtradas*/
             return $foodtrucksFiltradas;
         }
     }
+
+    function quitarAcentos($cadena) {
+        $no_permitidas = array ("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","À","Ã","Ì","Ò","Ù","Ã™","Ã ","Ã¨","Ã¬","Ã²","Ã¹","ç","Ç","Ã¢","ê","Ã®","Ã´","Ã»","Ã‚","ÃŠ","ÃŽ","Ã”","Ã›","ü","Ã¶","Ã–","Ã¯","Ã¤","«","Ò","Ã","Ã„","Ã‹");
+        $permitidas = array ("a","e","i","o","u","A","E","I","O","U","n","N","A","E","I","O","U","a","e","i","o","u","c","C","a","e","i","o","u","A","E","I","O","U","u","o","O","i","a","e","U","I","A","E");
+        $texto = str_replace($no_permitidas, $permitidas ,$cadena);
+        return $texto;
+    }
+
 
     /*Cerrar todas las foodtrucks de un usuario*/
     public function cerrartodastrucksdeusuario(Request $request) {
@@ -395,6 +409,56 @@ class FoodtruckController extends Controller {
             return $foodtrucksFiltradas;
         }
     }
+
+    /*Funcion para asingar la misma hora de cierre a todas las foodtrucks de un usuario*/
+
+    public function asignarHoraCierre(Request $request) {
+        $horaCierre = $request -> header('horaCierre');
+        $api_token = $request -> header('api_token');
+        $user_id = $request -> header('user_id');
+        $role = $request -> header('role');
+
+        $comprobacion = usuario:: where
+            (
+                [
+                    ['id', '=', $user_id],
+                    ['api_token', '=', $api_token],
+                    ['role', '=', $role]
+                ]
+            ) -> first();
+
+        if ($comprobacion == null || $comprobacion -> role != 'propietario' || $comprobacion -> id != $user_id || $comprobacion -> api_token != $api_token) {
+            return Response() -> json(['message' => 'No tienes permisos para asignar la hora de cierre'], 401);
+        } else {
+            $foodtrucks = foodtruck:: where('user_id', $comprobacion->id) -> get();
+            foreach($foodtrucks as $foodtruck) {
+                $foodtruck -> horaCierre = $horaCierre;
+                $foodtruck -> save();
+            }
+            return Response() -> json(['message' => 'Todas las foodtrucks han sido cerradas'], 200);
+        }
+    }
+
+    /*Funcion para que de manera automatica el servidor compruebe cada minuto si la 
+    hora de cierre ha llegado y si es asi, 
+    cambie el estado de la foodtruck a inactivo*/
+
+    function comprobarHoraCierre() {
+        $foodtrucks = foodtruck:: all();
+        $horaActual = date('H:i');
+        foreach($foodtrucks as $foodtruck) {
+            if ($foodtruck -> horaCierre == $horaActual) {
+                $foodtruck -> status = 'Inactivo';
+                $foodtruck -> save();
+            }
+        }
+    }
+
+
+
+
+
+
 
 
 

@@ -67,9 +67,8 @@ function Footer() {
               opacity={0.8}
               textAlign={{ xs: "center", lg: "left" }}
               color="white"
-            >
-
-              Copyright ©  2023 Creado por Borja Alventosa
+              justifyContent={{ xs: "center", lg: "left" }}>
+              Copyright © 2023 Creado por Borja Alventosa
             </MKTypography>
           </Grid>
         </Grid>

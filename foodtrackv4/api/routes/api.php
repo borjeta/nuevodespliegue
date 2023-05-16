@@ -48,3 +48,4 @@ Route::post('/foodtrucks/categoria/categoria', 'App\Http\Controllers\Api\Foodtru
 Route::get('/foodtrucks/zonas/ciudades/zona', 'App\Http\Controllers\Api\FoodtruckController@obtenFoodtrucksPorUbicacion');
 Route::get('/foodtrucks/buscar/{nombre}', 'App\Http\Controllers\Api\FoodtruckController@buscaFoodtruckPorNombre');
 Route::post('/foodtrucks/propietario/cerrartodaspropietario', 'App\Http\Controllers\Api\FoodtruckController@cerrartodastrucksdeusuario');
+Route::post('/foodtrucks/propietario/asignaratodarmismocierre', 'App\Http\Controllers\Api\FoodtruckController@asignarHoraCierre');

@@ -14,7 +14,6 @@ import Signin from "pages/LandingPages/SignIn";
 import InfoCuenta from "pages/Usuario/InfoCuenta";
 import Registro from "pages/Usuario/Registro";
 import InfoFoodtruck from "pages/Foodtruck/InfoFoodtruck";
-import HomePropietario from "pages/Propietario/HomePropietario";
 import routes from "routes";
 import ListaFoodtrucksPropietario from "pages/Propietario/ListaFoodtrucksPropietario";
 import InfoFoodtruckPropietario from "pages/Propietario/InfoFoodtruckPropietario";
@@ -55,7 +54,9 @@ export default function App() {
 
   return (
     <div style={{
-      backgroundImage: "/img2(Recortada).jpeg"
+      backgroundImage: "/img2(Recortada).jpeg",
+      
+
     }} >
       <ThemeProvider theme={
         pathname.indexOf("/presentation") !== -1
@@ -74,7 +75,6 @@ export default function App() {
           backgroundRepeat: "no-repeat",
           width: "100%",
           height: "100%",
-          position: "fixed",
 
         }}>
           <Routes>
@@ -89,7 +89,6 @@ export default function App() {
             <Route path="/foodtrucks/dondeesta/:id/info" element={<InfoFoodtruck />} />
             <Route path="*" element={<Navigate to="/login" />} />
             <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/homepropietario" element={<HomePropietario />} />
             <Route path="/foodtrucks/propietario/listafoodtrucks" element={<ListaFoodtrucksPropietario />} />
             <Route path="/foodtrucks/propietario/listafoodtrucks/:id/info" element={<InfoFoodtruckPropietario />} />
             <Route path="/foodtrucks/propietario/listafoodtrucks/:id/editar" element={<EditarFoodtruck />} />

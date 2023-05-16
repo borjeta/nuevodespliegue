@@ -1,6 +1,5 @@
 
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import HomePropietario from "./HomePropietario";
 
 
 
