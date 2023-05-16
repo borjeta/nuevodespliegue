@@ -317,8 +317,10 @@ class FoodtruckController extends Controller {
             /* recogemos todas las foodtrucks de bdd*/
             $foodtrucks = foodtruck:: all();
             function quitarAcentos($cadena) {
-                $no_permitidas = array ("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","À","Ã","Ì","Ò","Ù","Ã™","Ã ","Ã¨","Ã¬","Ã²","Ã¹","ç","Ç","Ã¢","ê","Ã®","Ã´","Ã»","Ã‚","ÃŠ","ÃŽ","Ã”","Ã›","ü","Ã¶","Ã–","Ã¯","Ã¤","«","Ò","Ã","Ã„","Ã‹");
-                $permitidas = array ("a","e","i","o","u","A","E","I","O","U","n","N","A","E","I","O","U","a","e","i","o","u","c","C","a","e","i","o","u","A","E","I","O","U","u","o","O","i","a","e","U","I","A","E");
+                $no_permitidas = array ("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","À","Ã","Ì","Ò","Ù","Ã™","Ã ","Ã¨","Ã¬","Ã²","Ã¹",
+                "ç","Ç","Ã¢","ê","Ã®","Ã´","Ã»","Ã‚","ÃŠ","ÃŽ","Ã”","Ã›","ü","Ã¶","Ã–","Ã¯","Ã¤","«","Ò","Ã","Ã„","Ã‹");
+                $permitidas = array ("a","e","i","o","u","A","E","I","O","U","n","N","A","E","I","O","U","a","e","i","o","u","c","C"
+                ,"a","e","i","o","u","A","E","I","O","U","u","o","O","i","a","e","U","I","A","E");
                 $texto = str_replace($no_permitidas, $permitidas ,$cadena);
                 return $texto;
             }
@@ -413,10 +415,11 @@ class FoodtruckController extends Controller {
     /*Funcion para asingar la misma hora de cierre a todas las foodtrucks de un usuario*/
 
     public function asignarHoraCierre(Request $request) {
-        $horaCierre = $request -> header('horaCierre');
-        $api_token = $request -> header('api_token');
-        $user_id = $request -> header('user_id');
-        $role = $request -> header('role');
+        
+        $api_token = $request['headers']['api_token'];
+        $user_id = $request['headers']['user_id'];
+        $role = $request['headers']['role'];
+        $horaCierre = $request['headers']['hora'];
 
         $comprobacion = usuario:: where
             (
@@ -432,7 +435,7 @@ class FoodtruckController extends Controller {
         } else {
             $foodtrucks = foodtruck:: where('user_id', $comprobacion->id) -> get();
             foreach($foodtrucks as $foodtruck) {
-                $foodtruck -> horaCierre = $horaCierre;
+                $foodtruck -> horario = $horaCierre;
                 $foodtruck -> save();
             }
             return Response() -> json(['message' => 'Todas las foodtrucks han sido cerradas'], 200);
@@ -447,7 +450,7 @@ class FoodtruckController extends Controller {
         $foodtrucks = foodtruck:: all();
         $horaActual = date('H:i');
         foreach($foodtrucks as $foodtruck) {
-            if ($foodtruck -> horaCierre == $horaActual) {
+            if ($foodtruck -> horaCierre >= $horaActual) {
                 $foodtruck -> status = 'Inactivo';
                 $foodtruck -> save();
             }

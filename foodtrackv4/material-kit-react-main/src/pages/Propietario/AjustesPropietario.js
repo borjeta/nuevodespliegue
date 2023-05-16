@@ -240,11 +240,11 @@ return (
                             <div className="modal-dialog modal-dialog-centered">
                                 <div className="modal-content">
                                     <div className="modal-header">
-                                        <h5 className="modal-title" id="exampleModalLongTitle">¿A qué hora quieres cerrar todas tus foodtrucks?</h5>
+                                        <h5 className="modal-title" id="exampleModalLongTitle">¿A qué hora cerrarás todas tus foodtrucks?</h5>
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseAsignarMismoCierre}>X</button>
                                     </div>
                                     <div className="modal-body">
-                                        <p>A la hora seleccionada se cerrarán todas tus foodtrucks <strong> Recuerda que hasta que no las abras no serán visibles al público </strong></p>
+                                        <p>A la hora seleccionada se asignará a todas tus foodtrucks <strong> Recuerda que hasta que no las abras no serán visibles al público </strong></p>
                                         <br />
 
                                         <MKInput sx={
@@ -302,7 +302,7 @@ return (
                                     onClick={handleOpenAsignarMismoCierre}
                                 >
 
-                                    Asignar mismo hora a las foodtrucks
+                                    Asignar misma hora a las foodtrucks
                                 </MKButton>
                             </div>
                         </div>
