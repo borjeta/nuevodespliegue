@@ -37,7 +37,13 @@ function HomeAdmin() {
             <br />
             <br />
 
-            <Container className="container" align="center" justify-content="center" py={10}>
+            <Container className="container" align="center" justify-content="center" py={10}
+                sx={
+                    {
+                        width: "100%",
+                        height: "100%",
+                    }
+                }>
                 <MKTypography
                     variant="h3"
                     sx={
@@ -118,7 +124,7 @@ function HomeAdmin() {
                 </MKBox>
             </Container>
             <Footer />
-        </div>
+        </div >
 
     );
 }

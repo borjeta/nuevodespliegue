@@ -1,37 +1,35 @@
-#Dockerfile para Heroku que descargará la imagen con docker, descargara el proyecto y ejecutará el docker-compose de la aplicación
+# Imagen base
+FROM docker
 
-FROM heroku/heroku:18
+# Instala Docker dentro del contenedor
+RUN apk add --update docker openrc
 
-RUN apt-get update && apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    software-properties-common \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# Inicia el servicio de Docker
+RUN rc-update add docker boot
 
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+# Instala Docker Compose dentro del contenedor
+RUN apk add --update py-pip
+RUN pip install docker-compose
 
-RUN add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   bionic \
-   stable"
+#instala git 
+RUN apk add git
+#clona el repositorio
+RUN git clone https://github.com/borjeta/nuevodespliegue.git
 
-RUN apt-get update && apt-get install -y docker-ce
+# Copia el archivo docker-compose.yml a la ubicación correcta dentro del contenedor
+COPY docker-compose.yml /docker-compose.yml
 
-RUN curl -L
+# Configura el punto de entrada del contenedor para ejecutar el docker-compose
+CMD ["docker-compose", "-f", "/docker-compose.yml", "up", "-d"]
 
-RUN docker --version
-
-RUN git clone "https://github.com/borjeta/nuevodespliegue.git"
+# Expone el puerto 80 del contenedor
+EXPOSE 3000
 
 RUN cd nuevodespliegue
 
-RUN docker-compose up -d
-
-RUN docker ps -a
-
-RUN docker-compose logs -f
+# Configuramos ip del servidor
+RUN sed -i 's/localhost/'172.16.238.1'/g' /nuevodespliegue/docker-compose.yml
 
 
+
+CMD ["docker-compose", "-f", "/nuevodespliegue/docker-compose.yml", "up", "-d"]

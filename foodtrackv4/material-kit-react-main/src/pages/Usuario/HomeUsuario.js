@@ -86,7 +86,6 @@ function HomeUsuario() {
     /*configuramos el addeventlistener onChange del buscador por zona*/
     const handleZona = () => {
         var zona1 = document.getElementById("filterzona").value;
-        alert(zona1);
 
 
         axios

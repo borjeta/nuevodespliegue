@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
 import MKTypography from "components/MKTypography";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
@@ -10,7 +9,6 @@ import NavbarPropietario from "./NavbarPropietario";
 import Footer from "pages/LandingPages/Author/sections/Footer";
 import Modal from '@mui/material/Modal'
 import axios from "axios";
-import { Button } from "components/MKButton";
 import MKInput from "components/MKInput";
 
 

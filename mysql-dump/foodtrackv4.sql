@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-04-2023 a las 09:41:38
+-- Tiempo de generación: 17-05-2023 a las 08:09:10
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -63,14 +63,19 @@ CREATE TABLE `foodtrucks` (
 --
 
 INSERT INTO `foodtrucks` (`id`, `nombre`, `descripcion`, `telefono`, `ubicacion`, `avatar`, `status`, `TipoComida`, `horario`, `user_id`, `created_at`, `updated_at`) VALUES
-(2, 'Thelma Murray', 'Vero exercitationem cum velit est omnis voluptas dicta. Quia impedit ad velit est et aut vel ut. Aspernatur aut molestias reiciendis cum nam iste.', '863.416.7330', '416 Demetris Viaduct Apt. 306\nJakubowskitown, CO 82444-1018', 'https://via.placeholder.com/640x480.png/0022ee?text=quas', 'Inactivo', 'Comida Japonesa', '14:00', '3', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
-(3, 'Lamont Haag', 'Ut repudiandae delectus libero aliquid. Nulla molestiae sapiente quis sint dolores blanditiis minima.', '726-526-9850', '1839 Therese Rest\nEwaldtown, MT 03289-2784', 'https://via.placeholder.com/640x480.png/0066aa?text=veritatis', 'Inactivo', 'Comida Mexicana', '14:00', '2', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
-(4, 'HotDogs', 'Odio reprehenderit sit aut facilis. Est et doloremque quisquam dolores dolore totam dicta. Repellendus repellat dolore est voluptas rerum.', '+1-361-594-3081', 'IES l\'estacio', 'https://via.placeholder.com/640x480.png/0066cc?text=aut', 'Inactivo', 'Comida Italiana', '14:00', '1', '2023-03-12 16:13:34', '2023-04-08 14:56:37'),
-(5, 'Prof. Madison Windler', 'Facilis quod deserunt ut non sed. Sit laboriosam inventore ducimus unde. Voluptatem rem velit unde reprehenderit eaque corrupti. Qui et non eius.', '+1.931.966.5849', '648 Senger Forks\nOwenshire, IA 41024-0648', 'https://via.placeholder.com/640x480.png/00ccaa?text=molestiae', 'Inactivo', 'Comida Americana', '14:00', '3', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
-(6, 'Churrerias canuto', 'Mil churros al minuto', '962223735', '4549 Demetrius ClubEast Vitoberg, RI 91894-2542', 'https://via.placeholder.com/640x480.png/008899?text=qui', 'Activo', 'Comida Italiana', '19:48', '1', '2023-03-12 16:13:34', '2023-04-04 17:59:08'),
-(7, 'Coleman Kautzer', 'Maiores itaque voluptates ut consequuntur magnam distinctio sapiente. Eligendi est unde et accusantium dolorum vel. Ut qui numquam magni nihil sint voluptas. Quam quo aut vero nihil quo optio nulla.', '352-861-4314', '9189 Macejkovic Camp\nWest Elnora, MS 52353-5828', 'https://via.placeholder.com/640x480.png/008855?text=omnis', 'Activo', 'Comida Italiana', '14:00', '2', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
-(8, 'Dora Koch', 'Ab voluptatem rerum et qui atque alias qui. Omnis consequatur ipsa et deleniti illo optio. Iusto aliquid tempora harum quos. Voluptatum nisi autem quia aperiam.', '+15807708629', '8932 Schuster Fort Apt. 898Port Kallie, MO 96785-6593', 'https://via.placeholder.com/640x480.png/007799?text=quis', 'Inactivo', 'Comida Japonesa', '19:03', '1', '2023-03-12 16:13:34', '2023-04-04 18:00:05'),
-(9, 'Bonnie Heidenreich I', 'Tempore aut ipsa in excepturi et expedita fugit quis. Vel ut dignissimos recusandae. Ducimus est facere vero dolorem.', '260-262-5524', '237 Joy Valley Apt. 963\nJakubowskiton, IN 78309', 'https://via.placeholder.com/640x480.png/00ffff?text=voluptatum', 'Activo', 'Comida Mexicana', '14:00', '2', '2023-03-12 16:13:34', '2023-03-12 16:13:34');
+(2, 'JapandFood', 'La mejor streetfood Japonesa de tu zona', '652555149', 'bbva xativa', 'https://cdn.pixabay.com/photo/2021/01/01/15/31/sushi-balls-5878892_1280.jpg', 'Activo', 'Comida Japonesa', '14:00', '3', '2023-03-12 16:13:34', '2023-05-14 18:51:43'),
+(3, 'VeryRapidosWey', 'Los tacos más picantes y sabrosos de Méjico cerca de ti ', '654147854', 'plaza la concepción , Ontinyent', 'https://cdn.pixabay.com/photo/2017/05/11/11/37/van-2303881_1280.jpg', 'Activo', 'Comida Mexicana', '14:00', '2', '2023-03-12 16:13:34', '2023-05-14 18:51:43'),
+(4, 'AsadosStreet', 'La carne más sabrosa al más puro estilo argentino', '635487598', 'ajuntament de Xativa', 'https://cdn.pixabay.com/photo/2014/08/12/20/28/beef-416966_1280.jpg', 'Inactivo', 'Comida Argentina', '12:50', '1', '2023-03-12 16:13:34', '2023-05-16 05:47:25'),
+(5, 'HotDogs4you', 'Que mejor cena que unos perritos con patatas !', '698575533', 'Avinguda almaig, ontinyent', 'https://cdn.pixabay.com/photo/2021/02/15/11/43/hot-dog-6017568_1280.jpg', 'Activo', 'Hamburguesas y Hot Dogs', '14:00', '3', '2023-03-12 16:13:34', '2023-05-14 18:51:43'),
+(6, 'Churrotruck', 'Churros y porras con chocolate recién hechos.', '962223735', 'ajuntament de xativa', 'https://cdn.pixabay.com/photo/2016/10/24/17/24/churreria-1766714_1280.jpg', 'Inactivo', 'Churrerias', '12:50', '1', '2023-03-12 16:13:34', '2023-05-16 05:47:25'),
+(7, 'PizzaExpress', 'No tenemos horno de leña pero si el más puro estilo italiano', '678254123', 'plaza la bassa XAtiva', 'https://cdn.pixabay.com/photo/2017/08/06/06/43/pizza-2589575_1280.jpg', 'Activo', 'Comida Italiana', '14:00', '2', '2023-03-12 16:13:34', '2023-05-14 18:51:43'),
+(8, 'GelatsL\'Estació', 'A qui no li fa un gelat després de clase , t\'esperem !', '962282365', 'IES l\'estacio', 'https://cdn.pixabay.com/photo/2017/09/08/19/42/ice-cream-van-2729884_1280.jpg', 'Inactivo', 'Helados', '12:50', '1', '2023-03-12 16:13:34', '2023-05-16 05:47:25'),
+(9, 'Taco\'sTruckExpress', 'Los mejores tacos al mejor precio los tienes aquí.', '968822332', 'Family cash xativa', 'https://cdn.pixabay.com/photo/2017/11/13/03/56/mango-catfish-taco-2944558_1280.jpg', 'Activo', 'Comida Mexicana', '14:00', '2', '2023-03-12 16:13:34', '2023-05-14 18:51:43'),
+(13, 'Mi negocio', 'Ut impedit fugit omnis molestiae omnis. Culpa mollitia aut aut totam id quis deleniti.', '72222', '32046 Irma MewsSouth Edmond, HI 45920-9174', NULL, 'Activo', 'Comida Peruana', '16:00', '26', '2023-04-21 13:55:24', '2023-05-14 18:51:43'),
+(14, 'Mi negocio 2', 'mi negocio2', '687654332', 'xativa', NULL, 'Activo', 'Comida Francesa', '00:00', '26', '2023-04-21 14:34:38', '2023-05-14 18:51:43'),
+(15, 'Nacho&Tacos', ' ¿Unos nachos con queso y unos tacos para picar ? ', '666666666', 'bbva xativa', 'https://cdn.pixabay.com/photo/2020/11/11/17/39/nachos-5733142_1280.jpg', 'Activo', 'Comida Mexicana', '00:00', '26', '2023-04-21 14:35:23', '2023-05-14 18:51:43'),
+(16, 'Smile&Burgers', 'Las mejores hamburguesas en tu ciudad .', '962226666', 'gran teatre xàtiva', 'https://cdn.pixabay.com/photo/2019/01/29/18/05/burger-3962996_1280.jpg', 'Inactivo', 'Hamburguesas y Hot Dogs', '12:50', '1', '2023-04-23 11:27:46', '2023-05-16 05:47:25'),
+(17, 'Mi nuevo negocio ADmin', 'mi nuevo negocioadmin', '962221234', 'xativa', 'https://cdn.pixabay.com/photo/2019/01/29/18/05/burger-3962996_1280.jpg', 'Activo', 'Comida Peruana', '00:00', '25', '2023-05-06 20:32:53', '2023-05-14 18:51:43');
 
 -- --------------------------------------------------------
 
@@ -95,12 +100,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2023_03_05_230148_creacion_usuarios', 1),
 (6, '2023_03_11_202039_foodtrucks', 1);
-
--- --------------------------------------------------------
-
-CREATE USER 'borja'@'172.16.238.30' IDENTIFIED BY 'contraseña';
-GRANT ALL PRIVILEGES ON *.* TO 'borja'@'172.16.238.30';
-FLUSH PRIVILEGES;
 
 -- --------------------------------------------------------
 
@@ -162,9 +161,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `api_token`, `date_createtoken`, `expires_at`, `role`, `avatar`, `telefono`, `ubicacion`, `created_at`, `updated_at`) VALUES
-(1, 'raquel', 'raquel@raquel.com', '2023-03-12 16:13:33', '$2y$10$kBCBEFc8q65kkELz2OXMv.T9MT6l/sB7nxj.okDESq3Z.OZ8S4dAe', 'y0EQJiwPjm', 'eDnSsvxU6PXN04wFOJMMApCDGXSqJjf4FVWvL4XO6zcZ4pZiJkx48eV4nFB9', '2023-04-09 06:32:38', '2023-04-10 06:32:38', 'propietario', 'https://picsum.photos/200/300?random=5', '+1-520-214-2520', 'xativa', '2023-03-12 16:13:34', '2023-04-09 06:32:38'),
+(1, 'raquel', 'raquel@raquel.com', '2023-03-12 16:13:33', '$2y$10$kBCBEFc8q65kkELz2OXMv.T9MT6l/sB7nxj.okDESq3Z.OZ8S4dAe', 'y0EQJiwPjm', 'jXWqnO1EmzbPnqZtKNIihsRTs9zTOsHXADhSAcvBOQS80Uut62nVEPhsQBJR', '2023-05-16 05:21:31', '2023-05-17 05:21:31', 'propietario', 'https://picsum.photos/200/300?random=5', '+1-520-214-2520', 'xativa', '2023-03-12 16:13:34', '2023-05-16 05:21:31'),
 (2, 'pepe', 'qvon@example.net', '2023-03-12 16:13:34', '$2y$10$uef/aLIPO07c/ljf2AkleuboYIRRYrmAslKl6JRztO4hYU5rcp3/K', 'fLIBH1ihR4', 'jMnbPGK031jJ4h4hBPU6O5GZaJ5O27Kn4TMd3T4IdO4Mwyk0DDUGSdOyJTNF', '2023-03-26 08:00:30', '2023-03-27 08:00:30', 'user', 'https://picsum.photos/200/300?random=3', '+1-989-980-4082', '926 Margie Cape Apt. 889\nPort Tessville, KS 24771-4911', '2023-03-12 16:13:34', '2023-04-08 16:36:46'),
-(3, 'Janis Daniel', 'user@user.com', '2023-03-12 16:13:34', '$2y$10$4A9sAJPEmQAmo6Je9/rkOeVFbOFvX.JrOZu9toB44NVhRFdDWI/Ca', '9KwT5cbJPO', 'SBjF77ClUa6foYGzQlejopVKGaglTVTp9vcoDslnfHDDGlQA4So51M62lGFn', '2023-04-09 07:17:19', '2023-04-10 07:17:19', 'user', 'https://picsum.photos/200/300?random=9', '1-272-767-7343', '346 Sonya Ridge\nMohrtown, TX 64751-1013', '2023-03-12 16:13:34', '2023-04-09 07:17:19'),
+(3, 'Borja', 'user@user.com', '2023-03-12 16:13:34', '$2y$10$LNT2huswni/I39V1xO7qdOSZGtOeOjt0BSQLwh1Sw0ufvkI9Z8Vui', '9KwT5cbJPO', 'JouHhUuio4wPCvjvqc8ALlbvcCSjoFkJVORHNkne4yMbGqaIcWrlsbD9UU6c', '2023-05-17 04:07:37', '2023-05-18 04:07:37', 'user', 'https://picsum.photos/200/300?random=9', '722271252', 'Xativa', '2023-03-12 16:13:34', '2023-05-17 04:07:37'),
 (4, 'Coty Kling II', 'vbogisich@example.com', '2023-03-12 16:13:34', '$2y$10$/7m92SB.zAc71utP9OXtje3zCWRRfO7E6YZFJzAoc2NPhkC5CtAwq', 'ShaAhYam34', 'aN98KuLMxwrlU7b6Xq7olEFjM9xhDCtcE5qnCx4BIGTMX4RkSQe7Nu7lYsbJTwiqfT6RPioUue6tLVyZ', '2023-03-12 16:13:34', '2023-03-13 16:13:34', 'user', 'https://picsum.photos/200/300?random=3', '+17263931186', '1420 Jack Rue\nNorth Vallie, IN 46190-1192', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
 (5, 'Mr. Kieran Schuppe', 'hackett.jovan@example.net', '2023-03-12 16:13:34', '$2y$10$lRuPcREg6RwuLJhec83wY.Kgn8coiZcTaeQN53Wp9ggjteFbr6NHG', 'jjpBa74duN', '1a3i6LLENc7zRSvjCGIWkAmXz7baIN3EXu4NMLq0gQ4X8bfCoMjGbdHN6N6ZnY5XMYvAg5oQtisHJdoS', '2023-03-12 16:13:34', '2023-03-13 16:13:34', 'user', 'https://picsum.photos/200/300?random=7', '(754) 429-1385', '576 Greenholt Meadows Apt. 107\nFeilton, AL 49475-5007', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
 (6, 'Aron Herzog', 'laila12@example.org', '2023-03-12 16:13:34', '$2y$10$IEuPsXDF2MNpbOE3OsIrQu4uyGsXorkvatx.32bENtXOiaAsw5LTa', 'LHNfUHwZD8', 'kthBM8rsprK7lJEiMvA2Kv9R2Dh6sBwLhfadIQiMkot0Uad1wTNvxhzroVqk86pqr8A1PYZMQa9EiNXr', '2023-03-12 16:13:34', '2023-03-13 16:13:34', 'user', 'https://picsum.photos/200/300?random=8', '1-814-426-9311', '8347 Carroll Parks\nNicolastown, CT 51617-6922', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
@@ -172,7 +171,10 @@ INSERT INTO `usuarios` (`id`, `name`, `email`, `email_verified_at`, `password`, 
 (8, 'Leilani Rath DVM', 'lance74@example.net', '2023-03-12 16:13:34', '$2y$10$qFOQeUfWHVeZg8YvfN3kxOB.uyTA4xOgwkB.es0lmNUIVAm05PqBy', 'S8GmHGOhnd', 'KVnG5amNcaHkbtcBL587WPLoy7FAaFi4tqtTYzLTTb1arLPOfVFUvBsZncuS2uWmGVOoik1raHxJpRav', '2023-03-12 16:13:34', '2023-03-13 16:13:34', 'user', 'https://picsum.photos/200/300?random=4', '1-985-298-8157', '7155 Kilback Dale\nFaheystad, GA 55843', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
 (9, 'Eve Baumbach', 'keely57@example.com', '2023-03-12 16:13:34', '$2y$10$eOcuR7OuGYZee9Ij.15QZeoYtCpl8xEqPxgkF8fossS7iH1fkqTJO', 'Z9X8uSJmoD', 'RGgxpX6SxsbvVPt3wRdaws7RMvo0lAog2e8e9Fc6PsgTqCEHqj6NNbhMZ1jWidSZdJVv2CjTVZ65biWX', '2023-03-12 16:13:34', '2023-03-13 16:13:34', 'user', 'https://picsum.photos/200/300?random=7', '(858) 412-7502', '2693 Bins Turnpike\nSanfordfurt, FL 20272', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
 (10, 'Isabella Williamson Sr.', 'amaya37@example.com', '2023-03-12 16:13:34', '$2y$10$rIiPsn0uOr8om.PD0rcgMOger4CqidPy8dRTEuwZLJMYidR7vBgwW', 'YD2wzaa0Xk', 'qri1nBOrfn6xaCeIo1opsNX3LUrcDhbw5X32cLyJSdDVyKxStPBj7Z070VbiSsP4uQZLv5MMnl4Nlh2T', '2023-03-12 16:13:34', '2023-03-13 16:13:34', 'user', 'https://picsum.photos/200/300?random=4', '(281) 747-9484', '4210 Karelle Prairie Suite 559\nWest Felipemouth, AZ 55410', '2023-03-12 16:13:34', '2023-03-12 16:13:34'),
-(25, 'Administrador', 'admin@admin.com', '2023-03-12 16:13:34', '$2y$10$rIiPsn0uOr8om.PD0rcgMOger4CqidPy8dRTEuwZLJMYidR7vBgwW', 'YD2wzaa0Xk', 'rAamO1nQOb1DXfFCkP7Vznc8JzWWr39Ovhe5KWMRq55KqgBaxZQlqRDn2aKj', '2023-04-09 07:17:01', '2023-04-10 07:17:01', 'admin', 'https://picsum.photos/200/300?random=4', '123456789', 'Xativa , valencia', '2023-03-12 16:13:34', '2023-04-09 07:17:01');
+(25, 'Administrador', 'admin@admin.com', '2023-03-12 16:13:34', '$2y$10$DGj4RdJRsvpKRtUpU0BRa.2/nxfmK0reCGoi/pNBD0JsrvLF9Frt6', 'YD2wzaa0Xk', 'FbdvuhzmccpQX6DPWd9758QVMzVz1GWJk1HLMdEDDpD62NlHvJdCrNO8FhKd', '2023-05-17 04:05:40', '2023-05-18 04:05:40', 'admin', 'https://picsum.photos/200/300?random=4', '722271252', 'Xativa , valencia', '2023-03-12 16:13:34', '2023-05-17 04:05:40'),
+(26, 'pepe', 'p@p.com', '2023-04-19 18:08:44', '$2y$10$.RjGoB6XDbk7JwiOeOfI6ei8Jmzr/pfLXmfmDexuKkRAIX2KwwFCS', NULL, 'NksRd3IfLVaRd8FOmlFfDrZSZtWsRGGaeDLr6TWoj21yztF5la4ghCyGsbxL', '2023-04-22 12:30:16', '2023-04-23 12:30:16', 'propietario', NULL, '123456789', 'xativa', '2023-04-19 18:08:44', '2023-04-22 12:30:16'),
+(27, 'pruebaadmin', 'padmin@padmin.com', NULL, '$2y$10$0ExSAt0oxaO8ZyKu2liEmegpak10D25HkXmhvA1bdzskrGCI61uAi', NULL, NULL, NULL, NULL, 'admin', NULL, NULL, NULL, '2023-04-23 15:54:22', '2023-04-23 15:54:22'),
+(28, 'Emilio', 'Emilio@emilio.com', '2023-05-14 11:56:46', '$2y$10$1kUjJo0lmPdNDwQJIwXnk.mxLi03flwadIC6j/umDOJrcvcdq8f/e', NULL, '7cQ5fkhTBxqo6Si2O7ZkmDRSFad6hnLBSN3y9Q98JbS9buz9t2z0WEHJZo1p', '2023-05-14 13:53:32', '2023-05-15 13:53:32', 'user', NULL, '92222222', 'chapinería', '2023-05-14 11:56:46', '2023-05-14 13:53:32');
 
 --
 -- Índices para tablas volcadas
@@ -233,7 +235,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `foodtrucks`
 --
 ALTER TABLE `foodtrucks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -251,7 +253,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

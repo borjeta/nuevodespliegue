@@ -15,7 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MKTypography from "components/MKTypography";
 import MKBox from "components/MKBox";
 import Footer from "pages/LandingPages/Author/sections/Footer";
-import Card from "@mui/material/Card";
+import NavbarAdmin from "pages/Admin/NavbarAdmin";
+import Card from '@mui/material/Card';
 
 
 function HomeUsuario() {
@@ -125,7 +126,7 @@ function HomeUsuario() {
 
     return (
         <div >
-            <NavbarUsuario />
+            <NavbarAdmin />
 
             <br />
             <br />
