@@ -67,6 +67,9 @@ function OpcionesGlobales() {
 
                     }
                 }>
+                    <br />
+                        <br />
+                        <br />
                     Opciones Globales
                 </MKTypography>
                 <Modal open={showmodal} onClose={() => {
@@ -348,6 +351,17 @@ function OpcionesGlobales() {
                     </MKBox>
                 </div>
             </Modal>
+             {/*Si la resolución es mayor a 1920 px añadimos 4 etiquetas br */
+                window.screen.width >= 1920 ? (
+                    <div>
+                        <br />
+                        <br />
+                        <br />
+                        
+                        <br />
+                        <br />
+                    </div>
+                ) : null}
             <Footer />
         </div >
     );

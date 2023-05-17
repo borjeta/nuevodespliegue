@@ -307,12 +307,12 @@ function ListaFoodtrucksPropietario() {
                                                     &nbsp;
                                                     <MKButton variant="gradient"
                                                         size="large"
-                                                        sx = {{
+                                                        sx={{
                                                             backgroundColor: "#FF6347",
                                                             color: "#FFFFFF",
                                                             /*hover*/
                                                             "&:hover": {
-                                                                
+
                                                                 backgroundColor: "#FF6347",
                                                                 color: "black"
                                                             },
@@ -378,6 +378,18 @@ function ListaFoodtrucksPropietario() {
 
 
             </MKBox >
+            {/*Si la resolución es mayor a 1920 px añadimos 4 etiquetas br */
+                window.screen.width >= 1920 ? (
+                    <div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                ) : null}
             <Footer />
 
         </div >

@@ -46,6 +46,14 @@ function ListaUsuariosAdmin() {
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
 
+    const deleteCookie = (name) => {
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    };
+
+    deleteCookie("api_token");
+    deleteCookie("user_id");
+    deleteCookie("role");
+
 
     useEffect(() => {
 
@@ -124,48 +132,48 @@ function ListaUsuariosAdmin() {
                                 } placeholder="Buscar usuarios por email"
                                     onChange={() => {
                                         var email = document.getElementById("email").value;
-                                        
-                                        if(email != "" && email != null && email != undefined){
 
-                                        axios
-                                            .get(`http://localhost:8000/api/usuarios/admin/buscar`, {
-                                                headers: {
-                                                    "Access-Control-Allow-Origin": "*",
-                                                    "Content-Type": "application/json",
-                                                    "user_id": `${user_id}`,
-                                                    "api_token": `${api_token}`,
-                                                    "role": `${role}`,
-                                                    "email": `${email}`
-                                                }
-                                            })
-                                            .then((res) => {
-                                                setUsuarios(res.data);
-                                                setTotalUsuarios(res.data.length + 1);
-                                            })
-                                            .catch((err) => {
-                                                console.log(err);
-                                            });
-                                        }
-                                        else{
+                                        if (email != "" && email != null && email != undefined) {
+
                                             axios
-                                            .get(`http://localhost:8000/api/foodtrucks`, {
-                                                headers: {
-                                                    "Access-Control-Allow-Origin": "*",
-                                                    "Content-Type": "application/json",
-                                                    "user_id": `${user_id}`,
-                                                    "api_token": `${api_token}`,
-                                                    "role": `${role}`
-                                                }
-
-                                            })
-                                            .then((res) => {
-                                                setFoodtrucks(res.data);
-                                                setTotalfoodtrucks(res.data.length + 1);
-                                            })
-                                            .catch((err) => {
-                                            });
+                                                .get(`http://localhost:8000/api/usuarios/admin/buscar`, {
+                                                    headers: {
+                                                        "Access-Control-Allow-Origin": "*",
+                                                        "Content-Type": "application/json",
+                                                        "user_id": `${user_id}`,
+                                                        "api_token": `${api_token}`,
+                                                        "role": `${role}`,
+                                                        "email": `${email}`
+                                                    }
+                                                })
+                                                .then((res) => {
+                                                    setUsuarios(res.data);
+                                                    setTotalUsuarios(res.data.length + 1);
+                                                })
+                                                .catch((err) => {
+                                                    console.log(err);
+                                                });
                                         }
-                                        
+                                        else {
+                                            axios
+                                                .get(`http://localhost:8000/api/foodtrucks`, {
+                                                    headers: {
+                                                        "Access-Control-Allow-Origin": "*",
+                                                        "Content-Type": "application/json",
+                                                        "user_id": `${user_id}`,
+                                                        "api_token": `${api_token}`,
+                                                        "role": `${role}`
+                                                    }
+
+                                                })
+                                                .then((res) => {
+                                                    setFoodtrucks(res.data);
+                                                    setTotalfoodtrucks(res.data.length + 1);
+                                                })
+                                                .catch((err) => {
+                                                });
+                                        }
+
                                     }}
 
                                     id="email"

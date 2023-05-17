@@ -123,6 +123,24 @@ function HomeAdmin() {
                     </div>
                 </MKBox>
             </Container>
+            {/*Si la resolucion es de 1920px o mas, insertamos 5 etiquetas <br> para que se ajuste a la pantall */
+                window.screen.width >= 1920 ?
+                    <div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    
+                    </div>
+                    : null
+            }
             <Footer />
         </div >
 

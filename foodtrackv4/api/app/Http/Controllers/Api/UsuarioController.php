@@ -273,16 +273,14 @@ class UsuarioController extends Controller
         /* Buscamos el usuario por el nombre */
         $api_token = $request->header('api_token');
         $user_id = $request->header('user_id');
-        $role = $request->header('role');
 
-
+    
 
         $comprobacion = usuario:: where
             (
                 [
                     ['id', '=', $user_id],
-                    ['api_token', '=', $api_token],
-                    ['role', '=', $role]
+                    ['api_token', '=', $api_token]
                 ]
             ) -> first();
 
@@ -292,7 +290,7 @@ class UsuarioController extends Controller
             $usuario = new usuario();
             $usuario->name = $body['name'];
             $usuario->email = $body['email'];
-            $usuario->role = $body['role'];
+            $usuario->role = $body['role_user'];
             $usuario->telefono = $body['telefono'];
             $usuario->ubicacion = $body['ubicacion'];
             $usuario->password = password_hash($body['password'], PASSWORD_DEFAULT);

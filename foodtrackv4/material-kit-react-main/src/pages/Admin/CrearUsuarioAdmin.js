@@ -34,7 +34,7 @@ function SimpleModal() {
         const phone = document.getElementById("phone_nuevousuario").value;
         const ubicacion = document.getElementById("ubicacion_nuevousuario").value;
         const password = document.getElementById("password_nuevousuario").value;
-        const role = document.getElementById("role_nuevousuario").value;
+        const role_user = document.getElementById("role_nuevousuario").value;
 
 
         if (name === "" || email === "" || phone === "" || ubicacion === "" || password === "") {
@@ -57,30 +57,37 @@ function SimpleModal() {
             alert("Las contraseñas no coinciden");
             return;
         }
+        if (role !== "user" && role !== "admin" && role !== "propietario") {
+            alert("El rol debe ser válido");
+            return;
+        }
 
         e.preventDefault();
-        axios.post("http://localhost:8000/api/usuarios/registro/newuser", {
+        axios.post("http://localhost:8000/api/usuarios/admin/crearusuarioporadmin", {
             name: name,
             email: email,
             telefono: phone,
             ubicacion: ubicacion,
             password: password,
-            role: role
+            role_user: role_user
         }, {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
+                "api_token": api_token,
+                "user_id": user_id,
+                "role": role
+
             }
         })
             .then((response) => {
                 console.log(response);
                 if (response.status === 200) {
-                    window.location.href = "/login";
+                    window.location.href = "/homeadmin";
                 }
             })
             .catch((error) => {
                 console.log(error);
-                alert("Error al crear el usuario");
             });
     };
 
