@@ -260,7 +260,7 @@ class FoodtruckController extends Controller {
                 $foodtruck -> status = 'Activo';
                 $foodtruck -> save();
             }
-            return Response() -> json(['message' => 'Todas las foodtrucks han sido cerradas'], 200);
+            return Response() -> json(['message' => 'Todas las foodtrucks han sido abiertas'], 200);
         }
     }
 
@@ -456,6 +456,8 @@ class FoodtruckController extends Controller {
             }
         }
     }
+
+
 
 
 

@@ -39,9 +39,7 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  onClick={() => {
-                    window.history.back();
-                  }}
+                  href="http://localhost:3000/homeusuario"
                   rel="noreferrer"
                 >
                   Home

@@ -27,6 +27,7 @@ Route::post('/usuarios/{id}/buscausuario', 'App\Http\Controllers\Api\UsuarioCont
 Route::post('/usuarios/{id}/editarusuarioadmin', 'App\Http\Controllers\Api\UsuarioController@editarusuarioadmin');
 Route::post('/usuarios/admin/crearadmin', 'App\Http\Controllers\Api\UsuarioController@crearadmin');
 Route::get('/usuarios/admin/buscar', 'App\Http\Controllers\Api\UsuarioController@obtenUsuariosPorEmail');
+Route::post('/usuarios/admin/crearusuarioporadmin', 'App\Http\Controllers\Api\UsuarioController@crearUsuarioDesdeRolAdmin');
 
 
 

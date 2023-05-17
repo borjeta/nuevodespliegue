@@ -30,6 +30,7 @@ import MKBox from "components/MKBox";
 import AjustesPropietario from "pages/Propietario/AjustesPropietario";
 import CrearFoodtruckAdmin from "pages/Admin/CrearFoodtruckAdmin";
 import CrearAdmin from "pages/Admin/CrearAdmin";
+import CrearUsuarioAdmin from "pages/Admin/CrearUsuarioAdmin";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -55,7 +56,7 @@ export default function App() {
   return (
     <div style={{
       backgroundImage: "/img2(Recortada).jpeg",
-      
+
 
     }} >
       <ThemeProvider theme={
@@ -102,6 +103,7 @@ export default function App() {
             <Route path="/admin/opcionesglobales" element={<OpcionesGlobales />} />
             <Route path="/foodtrucks/propietario/ajustes" element={<AjustesPropietario />} />
             <Route path="/admin/crear/crearadmin" element={<CrearAdmin />} />
+            <Route path="/admin/usuarios/crear" element={<CrearUsuarioAdmin />} />
           </Routes>
         </MKBox>
       </ThemeProvider>

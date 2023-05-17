@@ -1,312 +1,357 @@
-import react from "react";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import MKAlert from "components/MKAlert";
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { Link } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import MKTypography from "components/MKTypography";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import MKBox from "components/MKBox";
-import Footer from "pages/LandingPages/Author/sections/Footer";
+import MKButton from "components/MKButton";
+import { Container } from "@material-ui/core";
+import { useState, useEffect } from "react";
 import NavbarAdmin from "pages/Admin/NavbarAdmin";
-import Card from '@mui/material/Card';
+import MKTypography from "components/MKTypography";
+import axios from "axios";
+import Modal from "@mui/material/Modal";
+import MKAlert from "components/MKAlert";
+import MKInput from "components/MKInput";
+import Footer from "pages/LandingPages/Author/sections/Footer";
 
 
-function HomeUsuario() {
+
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
+    },
+});
+
+
+function OpcionesGlobales() {
+
+    const classes = useStyles();
     const [data, setData] = useState([]);
     const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const [foodtrucks, setFoodtrucks] = useState([]);
-    const theme = createTheme();
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [showmodalexito, setShowModalExito] = useState(false);
+    const [showmodalerror, setShowModalError] = useState(false);
+    const [showmodal, setShowModal] = useState(false);
+    const [nombre, setNombre] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [password_confirmation, setPasswordConfirmation] = useState("");
+    const [mensajeerror, setMensajeError] = useState("");
+    const [mensajeexito, setMensajeExito] = useState("");
+
+
     const api_token = document.cookie.replace(/(?:(?:^|.*;\s*)api_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user_id = document.cookie.replace(/(?:(?:^|.*;\s*)user_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const role = document.cookie.replace(/(?:(?:^|.*;\s*)role\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    const [zona, setZona] = useState("");
-    useEffect(() => {
 
-        axios
-            .post(`http://localhost:8000/api/foodtrucks/estado/foodtrucksabiertas`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`
-                }
-
-            })
-            .then((res) => {
-                setFoodtrucks(res.data);
-                console.log(res.data);
-
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
-
-
-
-    /*configuramos el addeventlistener onChange del deplegable de categorias*/
-    const handleCategoria = () => {
-        var categoria = document.getElementById("categoria").value;
-
-        axios
-            .post(`http://localhost:8000/api/foodtrucks/categoria/categoria`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`,
-                    "categoria": `${categoria}`
-                }
-
-            })
-            .then((res) => {
-                setFoodtrucks(res.data);
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+    const deleteCookie = (name) => {
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
-
-    /*configuramos el addeventlistener onChange del buscador por zona*/
-    const handleZona = () => {
-        var zona1 = document.getElementById("filterzona").value;
-        alert(zona1);
-
-
-        axios
-            .get(`http://localhost:8000/api/foodtrucks/zonas/ciudades/zona`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
-                    "user_id": `${user_id}`,
-                    "api_token": `${api_token}`,
-                    "role": `${role}`,
-                    "zona": `${zona1}`
-                }
-
-
-            })
-            .then((res) => {
-                setFoodtrucks(res.data);
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-
-    }
-    const Activo = (status) => {
-        if (status == "Activo") {
-            return "Activo";
-        } else {
-            return "Inactivo";
-        }
-
-    }
-
-
-
-
-
-
+    
 
 
     return (
-        <div >
+        <div>
             <NavbarAdmin />
 
-            <br />
-            <br />
-            <br />
-            <br />
-            <MKAlert severity="info"
+            <Container className="container" align="center" justify-content="center" py={10}>
 
+                <MKTypography>
+                    <br />
+                    
+                </MKTypography>
+                <MKTypography variant="h2" component="h2" sx={
+                    {
+                        textAlign: "center",
+                        fontFamily: "Roboto",
+                        color: "#FFFFFF",
+                        marginTop: 8,
+                        fontWeight: "bold",
+
+                    }
+                }>
+                    Opciones Globales
+                </MKTypography>
+                <Modal open={showmodal} onClose={() => {
+                    setShowModal(false);
+                }}>
+
+                    <MKAlert severity="success">
+                        {mensajeexito}
+                    </MKAlert>
+                </Modal>
+
+
+
+                <MKBox className="container"
+                    align="center"
+                    justify-content="center"
+                    py={10}
+                >
+                    <div className="btn-group btn-group-justified" id="btnsGlobales" role="group" aria-label="Basic example">
+
+                        <MKBox align="center" justify-content="center">
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        className="btn"
+                                        style={{
+                                            margin : "auto"
+                                        }}
+
+                                        onClick={() => {
+                                            setShowModal(true);
+                                        }}
+
+                                    >
+                                        Crear Administrador
+                                    </MKButton>
+                                </div>
+
+                                <div className="col-md-3">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        className="btn"
+                                        style={{
+                                            margin : "auto"
+                                        }}
+                                        onClick={() => {
+                                            axios.get(`http://localhost:8000/api/foodtrucks/admin/cierratodas`, {
+                                                headers: {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json",
+                                                    "user_id": `${user_id}`,
+                                                    "api_token": `${api_token}`,
+                                                    "role": `${role}`
+                                                }
+                                            })
+                                                .then((res) => {
+                                                    console.log(res.data);
+
+                                                })
+                                                .catch((err) => {
+                                                    console.log(err);
+
+
+                                                });
+                                        }}
+
+                                    >
+                                        Cerrar foodtrucks
+                                    </MKButton>
+
+                                </div>
+
+                                <div className="col-md-3">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        className="btn"
+                                        onClick={() => {
+                                            axios.get(`http://localhost:8000/api/foodtrucks/admin/abretodas`, {
+                                                headers: {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json",
+                                                    "user_id": `${user_id}`,
+                                                    "api_token": `${api_token}`,
+                                                    "role": `${role}`
+                                                }
+                                            })
+                                                .then((res) => {
+                                                    console.log(res.data);
+                                                })
+                                                .catch((err) => {
+                                                    console.log(err);
+                                                });
+                                        }}
+
+                                    >
+                                        Abrir foodtrucks
+                                    </MKButton>
+
+                                </div>
+
+                                <div className="col-md-3">
+                                    <MKButton
+                                        color="primary"
+                                        size="large"
+                                        className="btn"
+                                        onClick={() => {
+                                            window.location.href = "/homeadmin";
+                                        }}
+
+                                    >
+                                        Volver al panel
+                                    </MKButton>
+                                </div>
+
+                            </div>
+                        </MKBox>
+                    </div>
+
+                </MKBox>
+            </Container>
+
+            <Modal open={showmodalexito} onClose={() => setShowModalExito(false)}>
+                <MKAlert severity="success">
+                    <MKTypography variant="h6" component="h2" gutterBottom sx={
+                        { color: "green" }
+                    }>
+                        {{ mensajeexito }}
+                    </MKTypography>
+                </MKAlert>
+            </Modal>
+            <Modal open={showmodalerror} onClose={() => setShowModalError(false)}
                 sx={{
-                    width: "70%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    margin: "auto",
-                    marginTop: "1rem",
-                }}>
-                Encuentra los mejores foodtrucks cerca de ti
-            </MKAlert>
-            {/*Insertamos separaador*/}
-            <span style={{ display: "block", height: "20px" }}></span>
+                    display: "grid",
+                    placeItems: "center",
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
 
-            <MKBox sx={{
-                width: "70%",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "auto",
-                marginTop: "10px",
-                marginBottom: "10px",
-                borderRadius: "12px",
-                padding: "10px",
-                color: "#FFFFFF",
-                border: "1px solid #FFFFFF",
+                }}
 
-
-
-            }} >
-                <div className="row g-3 align-items-center justify-content-center">
-
-                    <div className="col-md-4">
-
-                        <MKTypography variant="h6" sx={{
-                            color: "#FFFFFF",
-                        }} >
-                            Buscar por categoria
-                        </MKTypography>
-
-                        <select className="form-select" defaultValue={selectedCategory} onChange={handleCategoria} aria-label="Default select example" id="categoria">
-                            <option selected value="Activas">Activas</option>
-                            <option value="Comida Mexicana">Comida Mexicana</option>
-                            <option value="Comida Italiana">Comida Italiana</option>
-                            <option value="Comida Japonesa">Comida Japonesa</option>
-                            <option value="Comida China">Comida China</option>
-                            <option value="Comida Española">Comida Española</option>
-                            <option value="Comida Americana">Comida Americana</option>
-                            <option value="Comida Peruana">Comida Peruana</option>
-                            <option value="Comida Colombiana">Comida Colombiana</option>
-                            <option value="Comida Argentina">Comida Argentina</option>
-                            <option value="Hamburguesas y Hot Dogs">Hamburguesas y Hot Dogs</option>
-                            <option value="Helados">Helados</option>
-                            <option value="Churrerias">Churrerias</option>
-                            <option value="Golosinas">Golosinas</option>
-                        </select>
-
-                    </div>
-                    <div className="col-md-4">
-
-                        <MKTypography variant="h6" sx={{
-                            width: "70%",
-                            color: "#FFFFFF",
-                            margin: "auto",
-                            position: "relative",
-                        }} >
-                            Buscador por zona
-                        </MKTypography>
-                        <select className="form-select" defaultValue=" " onChange={handleZona} aria-label="Default select example" id="filterzona">
-                            <option selected value=" ">Todas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    </option>
-                            <option value="Ontinyent">Ontinyent</option>
-                            <option value="Alcoy">Alcoy</option>
-                            <option value="xativa">Xativa</option>
-                            <option value="Gandia">Gandia</option>
-                        </select>
-                    </div>
-                </div>
-            </MKBox>
-
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Container maxWidth="md" sx={{
-                    mt: 4, mb: 4,
-                    border: "1px solid #FFFFFF",
-                    borderRadius: "12px",
-                    padding: "10px",
-                    boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
-                    background: "linear-gradient(90deg, #836b4f  0%, #FFDB58 50%, #836b4f  100%)",
+            >
+                <MKAlert severity="error" >
+                    <MKTypography variant="h6" component="h2" gutterBottom >
+                        {{ mensajeerror }}
+                    </MKTypography>
+                </MKAlert>
+            </Modal>
+            <Modal open={showmodal} onClose={() => setShowModal(false)} sx={{ display: "grid", placeItems: "center" }}>
+                <div className="container" align="center" justify-content="center" py={10}>
+                    <MKBox sx={{
+                        width: 400,
+                        height: 400,
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24, p: 4,
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
 
 
-                }}>
-
-
-
-                    <Box sx={{ my: 4 }}>
-
-
-
-                        <Container sx={{ py: 2 }} maxWidth="md"
-                        >
-                            {/* End hero unit */}
-                            <Grid container spacing={6} sx={
+                    }}>
+                        <MKButton
+                            color="primary"
+                            size="large"
+                            onClick={() => {
+                                setShowModal(false);
+                            }}
+                            className="btn"
+                            sx={
                                 {
+                                    position: 'absolute',
+                                    top: '10%',
+                                    right: '0%',
+                                    transform: 'translate(-50%, -50%)',
 
                                 }
+                            }
+                        > X
+                        </MKButton>
 
-                            } >
 
 
-                                {foodtrucks.map((foodtruck) => (
-                                    <Grid item key={foodtruck.id} xs={12} sm={6} md={4} >
-                                        <Card sx={{
-                                            height: '100%', display: 'flex', flexDirection: 'column', border: "1px solid #FFFFFF",
-                                            borderRadius: "12px",
-                                            boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
-                                        }} border={1} borderRadius={16}>
-                                            <CardMedia
-                                                component="img"
-                                                sx={{
-                                                    width: "25rem",
-                                                    height: "15rem",
-                                                    margin: "auto",
-                                                    position: "relative",
+                        <MKTypography variant="h6" component="h2" gutterBottom>
+                            Crear administrador
+                        </MKTypography>
+                        <div className="form-group">
 
-                                                }}
-                                                image={foodtruck.avatar}
-                                                alt="random"
-                                            />
-                                            <CardContent sx={{ flexGrow: 1 }}>
-                                                <Typography gutterBottom variant="h4" component="h4" sx={
-                                                    {
-                                                        textAlign: "center",
-                                                        fontWeight: "bold",
-                                                        fontSize: "2rem",
-                                                    }
+                            <MKInput
+                                id="outlined-basic"
+                                label="Nombre"
+                                variant="outlined"
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
+                            />
+                            <br />
+                            <br />
+                            <MKInput
+                                id="outlined-basic"
+                                label="Email"
+                                variant="outlined"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <br />
+                            <br />
+                            <MKInput
 
-                                                }>
-                                                    {foodtruck.nombre}
-                                                </Typography>
-                                                <Typography>
-                                                    {foodtruck.descripcion}
-                                                </Typography>
-                                                &nbsp;
+                                id="outlined-basic"
+                                label="Contraseña"
+                                variant="outlined"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <br />
+                            <br />
+                            <MKInput
+                                id="outlined-basic"
+                                label="Confirmar contraseña"
+                                variant="outlined"
+                                value={password_confirmation}
+                                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                            />
+                            <br />
+                            <br />
+                            <MKButton
+                                variant="contained"
+                                color="primary"
+                                sx={{
+                                    position: 'absolute',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
 
-                                                <Typography color="text.primary">
-                                                    {foodtruck.ubicacion}
-                                                </Typography>
-                                                &nbsp;
-                                                <Typography color="text.primary">
-                                                    Cerramos a las {foodtruck.horario} horas de hoy
-                                                </Typography>
 
-                                                <Typography color="text.primary">
-                                                    Categoria: {foodtruck.TipoComida}
-                                                </Typography>
+                                }}
+                                onClick={() => {
+                                    if (nombre === "" || email === "" || password === "" || password_confirmation === "") {
+                                        alert("Rellena todos los campos");
+                                        return;
+                                    } else if (password !== password_confirmation) {
+                                        alert("Las contraseñas no coinciden");
+                                        return;
+                                    } else {
 
-                                            </CardContent>
-                                            <div className="row g-3 align-items-center justify-content-center">
-                                                <CardActions >
-                                                    <Link to={`/foodtrucks/dondeesta/${foodtruck.id}/info`} className='btn btn-primary btn-lg '>
-                                                        Ver donde está ahora
-                                                    </Link>
-                                                </CardActions>
-                                            </div>
-                                        </Card>
-                                    </Grid>
-                                ))}
-
-                            </Grid>
-                        </Container>
-                    </Box>
-                </Container>
-            </ThemeProvider >
+                                        axios.post("http://localhost:8000/api/usuarios/admin/crearadmin", {
+                                            name: nombre,
+                                            email: email,
+                                            password: password,
+                                            password_confirmation: password_confirmation
+                                        }, {
+                                            headers: {
+                                                "Access-Control-Allow-Origin": "*",
+                                                "Content-Type": "application/json",
+                                                "user_id": `${user_id}`,
+                                                "api_token": `${api_token}`,
+                                                "role": `${role}`
+                                            }
+                                        }
+                                        ).then((response) => {
+                                            console.log(response);
+                                            setShowModalExito(true);
+                                            setShowModal(false);
+                                        }).catch((error) => {
+                                            console.log(error);
+                                            setShowModalError(true);
+                                            setShowModal(false);
+                                        })
+                                    }
+                                }
+                                }
+                            >
+                                Crear
+                            </MKButton>
+                        </div>
+                    </MKBox>
+                </div>
+            </Modal>
             <Footer />
         </div >
     );
 }
 
-export default HomeUsuario;
+
+export default OpcionesGlobales;

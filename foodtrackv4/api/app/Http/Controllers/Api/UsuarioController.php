@@ -267,6 +267,40 @@ class UsuarioController extends Controller
         }
     }
 
+    public function crearUsuarioDesdeRolAdmin(Request $request)
+    {
+        $body = $request->all();
+        /* Buscamos el usuario por el nombre */
+        $api_token = $request->header('api_token');
+        $user_id = $request->header('user_id');
+        $role = $request->header('role');
+
+
+
+        $comprobacion = usuario:: where
+            (
+                [
+                    ['id', '=', $user_id],
+                    ['api_token', '=', $api_token],
+                    ['role', '=', $role]
+                ]
+            ) -> first();
+
+        if ($comprobacion == null || $comprobacion -> role != 'admin' || $comprobacion -> id != $user_id || $comprobacion -> api_token != $api_token) {
+            return Response() -> json(['message' => 'No tienes permisos para crear usuarios'], 401);
+        } else {
+            $usuario = new usuario();
+            $usuario->name = $body['name'];
+            $usuario->email = $body['email'];
+            $usuario->role = $body['role'];
+            $usuario->telefono = $body['telefono'];
+            $usuario->ubicacion = $body['ubicacion'];
+            $usuario->password = password_hash($body['password'], PASSWORD_DEFAULT);
+            $usuario->save();
+            return Response($usuario, 200);
+        }
+    }
+
     
 
 
