@@ -193,13 +193,16 @@ class FoodtruckControllerTest extends TestCase
         // Define the request payload
         $payload = [
             'nombre' => 'Food Truck Test',
-            'descripcion' => 'This is a test food truck',
-            'ubicacion' => 'Test Location',
-            'telefono' => '123456780',
-            'tipocomida' => 'Test Cuisine',
+            'descripcion' => 'This is an updated food truck',
+            'status' => 'Active',
+            'ubicacion' => 'Updated Location',
+            'telefono' => '9876543210',
+            'avatar' => 'updated.jpg',
+            'tipocomida' => 'Updated Cuisine',
+            'horario' => '12:00',
         ];
 
-        // Send a PUT request to the update endpoint with the payload and food truck ID
+        // Send a PUT request to the update endpoint with the payload
         $response = $this->withHeaders($headers)->put('/foodtrucks/' . $foodtruck->id, $payload);
 
         // Assert the response status code is 200 (OK) or any other assertions you need
@@ -208,5 +211,34 @@ class FoodtruckControllerTest extends TestCase
         // Assert the response JSON structure or any other assertions you need
     }
 
+    /**
+     * Test destroy method.
+     *
+     * @return void
+     */
+    public function testDestroy()
+    {
+        // Create a test user
+        $user = factory(\App\Models\User::class)->create([
+            'role' => 'admin',
+        ]);
 
+        // Create a test food truck
+        $foodtruck = factory(\App\Models\FoodTruck::class)->create();
+
+        // Set the required headers
+        $headers = [
+            'api_token' => $user->api_token,
+            'user_id' => $user->id,
+            'role' => $user->role,
+        ];
+
+        // Send a DELETE request to the destroy endpoint with the food truck ID
+        $response = $this->withHeaders($headers)->delete('/foodtrucks/' . $foodtruck->id);
+
+        // Assert the response status code is 200 (OK) or any other assertions you need
+        $response->assertStatus(200);
+
+        // Assert the response JSON structure or any other assertions you need
+    }
 }
