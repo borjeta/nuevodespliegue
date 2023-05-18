@@ -5,10 +5,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
-class FoodtruckControllerTest extends TestCase
+class testFoodtrucks extends TestCase
 {
     use RefreshDatabase;
-
     public function testObtenFoodtrucksPorCategoria()
     {
         // Crea un usuario de ejemplo

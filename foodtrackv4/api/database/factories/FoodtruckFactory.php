@@ -26,6 +26,7 @@ class FoodtruckFactory extends Factory
             'TipoComida' => $this->faker->randomElement(['Comida Mexicana', 'Comida Italiana', 'Comida Japonesa', 'Comida Americana', 'Churreria']),
             'horario' => $this->faker->randomElement(['Hasta las 14:00', 'Hasta las 20:00', 'Hasta las 22:00']),
             'user_id' => $this->faker->numberBetween(1, 3),
+            
         ];
     }
 }

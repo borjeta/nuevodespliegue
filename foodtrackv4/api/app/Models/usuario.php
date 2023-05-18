@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class usuario extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     protected $fillable =[
         'api_token',
