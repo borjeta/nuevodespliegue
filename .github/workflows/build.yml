@@ -33,24 +33,31 @@ jobs:
           docker-compose --version
           docker --version
 
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-          extensions: mbstring, intl, gd, pdo_mysql, zip, dom, curl, xml, json, bcmath, exif, fileinfo, iconv, mysqli, pcntl, pdo, pdo_sqlite, phar, posix, readline, sqlite3, tokenizer, xmlreader, xmlwriter, xsl, zip, opcache, imagick, gmp, ldap, redis, memcached, xdebug, soap, sockets, calendar, ctype, ftp, gettext, iconv, imap, mbstring, mysqli, pcntl, pdo, pdo_mysql, pdo_sqlite, phar, posix, readline, shmop, simplexml, soap, sockets, sysvmsg, sysvsem, sysvshm, tokenizer, wddx, xml, xmlreader, xmlwriter, xsl, zip, zlib, bcmath, bz2, calendar, exif, fileinfo, ftp, gettext, gmp, iconv, imap, intl, json, ldap, mbstring, mysqli, opcache, pcntl, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, readline, shmop, simplexml, soap, sockets, sysvmsg, sysvsem, sysvshm, tokenizer, wddx, xml, xmlreader, xmlwriter, xsl, zip, zlib, xdebug, redis, memcached, imagick, gmagick, igbinary, msgpack, mongodb, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick, msgpack, mongodb, pthreads, raphf, redis, swoole, yaml, xdebug, sodium, libsodium, sodium_compat, ldap, memcached, mongodb, redis, xdebug, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick, msgpack, mongodb, pthreads, raphf, redis, swoole, yaml, xdebug, sodium, libsodium, sodium_compat, ldap, memcached, mongodb, redis, xdebug, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick
-      #instalamos node
-      - name: Install Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: "14"
-      #Descargamos e instalamos composer
-      - name: Install Composer
+      # - name: Install PHP
+      #   uses: shivammathur/setup-php@v2
+      #   with:
+      #     php-version: '8.1'
+      #     extensions: mbstring, intl, gd, pdo_mysql, zip, dom, curl, xml, json, bcmath, exif, fileinfo, iconv, mysqli, pcntl, pdo, pdo_sqlite, phar, posix, readline, sqlite3, tokenizer, xmlreader, xmlwriter, xsl, zip, opcache, imagick, gmp, ldap, redis, memcached, xdebug, soap, sockets, calendar, ctype, ftp, gettext, iconv, imap, mbstring, mysqli, pcntl, pdo, pdo_mysql, pdo_sqlite, phar, posix, readline, shmop, simplexml, soap, sockets, sysvmsg, sysvsem, sysvshm, tokenizer, wddx, xml, xmlreader, xmlwriter, xsl, zip, zlib, bcmath, bz2, calendar, exif, fileinfo, ftp, gettext, gmp, iconv, imap, intl, json, ldap, mbstring, mysqli, opcache, pcntl, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, readline, shmop, simplexml, soap, sockets, sysvmsg, sysvsem, sysvshm, tokenizer, wddx, xml, xmlreader, xmlwriter, xsl, zip, zlib, xdebug, redis, memcached, imagick, gmagick, igbinary, msgpack, mongodb, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick, msgpack, mongodb, pthreads, raphf, redis, swoole, yaml, xdebug, sodium, libsodium, sodium_compat, ldap, memcached, mongodb, redis, xdebug, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick, msgpack, mongodb, pthreads, raphf, redis, swoole, yaml, xdebug, sodium, libsodium, sodium_compat, ldap, memcached, mongodb, redis, xdebug, amqp, apcu, apcu_bc, ast, ds, event, ffi, http, igbinary, imagick
+      # #instalamos node
+      # - name: Install Node
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: "14"
+      # #Descargamos e instalamos composer
+      # - name: Install Composer
+      #   run: |
+      #     curl -sS https://getcomposer.org/installer -o composer-setup.php
+      #     php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+      #     composer --version
+
+      - name: vamos a la carpeta del proyecto
         run: |
-          curl -sS https://getcomposer.org/installer -o composer-setup.php
-          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-          composer --version
+          cd nuevodespliegue
+          ls -l
+          ls -a
 
-      #ejecutamos los dos docker-compose.yml
-      
-
-  
+      #ejecutamos el docker-compose para levantar los contenedores
+      - name: Run docker-compose
+        run: |
+          docker-compose up -d
+          docker ps -a
