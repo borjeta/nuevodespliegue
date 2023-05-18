@@ -57,7 +57,7 @@ jobs:
 
       - name: desplegamos la app
         run: | 
-        composer install
+        php composer install
         php artisan serve
 
       - name: Build and push
