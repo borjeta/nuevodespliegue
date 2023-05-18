@@ -53,9 +53,7 @@ jobs:
       - name: vamos a la carpeta del proyecto
         run: |
           ls -l
-          cd nuevodespliegue
-          ls -l
-          ls -a
+          
 
       #ejecutamos el docker-compose para levantar los contenedores
       - name: Run docker-compose
