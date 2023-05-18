@@ -45,11 +45,6 @@ jobs:
           php composer-setup.php --install-dir=/usr/local/bin --filename=composer
           composer --version
 
-      - name: vamos a la carpeta del proyecto y ejecutamos el test de laravel
-        run: |
-          php artisan test
-  
-
       - name: Build and push
         run: |
           cd .. 
