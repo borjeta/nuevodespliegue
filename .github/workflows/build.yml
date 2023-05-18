@@ -52,6 +52,7 @@ jobs:
 
       - name: vamos a la carpeta del proyecto
         run: |
+          ls -l
           cd nuevodespliegue
           ls -l
           ls -a
