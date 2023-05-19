@@ -25,7 +25,7 @@ import EditarUsuarioAdmin from "pages/Admin/EditarUsuarioAdmin";
 import DatosCompletosUsuario from "pages/Admin/DatosCompletosUsuario";
 import CrearFoodtruck from "pages/Propietario/CrearFoodtruck";
 import OpcionesGlobales from "pages/Admin/OpcionesGlobales";
-import bgImage from "assets/images/img1.jpeg";
+import bgImage from 'assets/images/img1recortada.jpeg';
 import MKBox from "components/MKBox";
 import AjustesPropietario from "pages/Propietario/AjustesPropietario";
 import CrearFoodtruckAdmin from "pages/Admin/CrearFoodtruckAdmin";
@@ -55,7 +55,6 @@ export default function App() {
 
   return (
     <div style={{
-      backgroundImage: "/img2(Recortada).jpeg",
 
 
     }} >

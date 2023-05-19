@@ -31,5 +31,4 @@ RUN cd nuevodespliegue
 RUN sed -i 's/localhost/'172.16.238.1'/g' /nuevodespliegue/docker-compose.yml
 
 
-
 CMD ["docker-compose", "-f", "/nuevodespliegue/docker-compose.yml", "up", "-d"]

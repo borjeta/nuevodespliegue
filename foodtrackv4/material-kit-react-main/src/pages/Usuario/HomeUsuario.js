@@ -142,18 +142,22 @@ function HomeUsuario() {
                 color: "#FFFFFF",
                 border: "1px solid #FFFFFF",
             }} >
-                <div className="row g-3 align-items-center justify-content-center" >
+                <div className="row align-items-center justify-content-center d-flex">
 
 
-                    <div className="col-md-4">
-
+                    <div className="col-md-4 offset-md-2">
                         <MKTypography variant="h6" sx={{
+                            width: "70%",
                             color: "#FFFFFF",
+                           
                         }} >
                             Buscar por categoria
                         </MKTypography>
 
-                        <select className="form-select" defaultValue={selectedCategory} onChange={handleCategoria} aria-label="Default select example" id="categoria">
+                        <select className="form-select" style ={{
+                            width: "50%",
+                            margin: "auto",
+                        }} defaultValue={selectedCategory} onChange={handleCategoria} aria-label="Default select example" id="categoria">
                             <option value="Activas">Activas</option>
                             <option value="Comida Mexicana">Comida Mexicana</option>
                             <option value="Comida Italiana">Comida Italiana</option>
@@ -171,17 +175,22 @@ function HomeUsuario() {
                         </select>
 
                     </div>
-                    <div className="col-md-4">
+
+                    <div className="col-md-4 ">
 
                         <MKTypography variant="h6" sx={{
-                            width: "70%",
-                            color: "#FFFFFF",
-                            margin: "auto",
+                             width: "70%",
+                             color: "#FFFFFF",
+                             
                         }} >
                             Buscador por zona
                         </MKTypography>
-                        <select className="form-select align-center" defaultValue=" " onChange={handleZona} aria-label="Default select example" id="filterzona">
-                            <option value=" ">Todas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    </option>
+
+                        <select className="form-select " style ={{
+                            margin: "auto",
+                            width: "50%",
+                        }} defaultValue=" " onChange={handleZona} aria-label="Default select example" id="filterzona">
+                            <option value=" ">Todas</option>
                             <option value="Ontinyent">Ontinyent</option>
                             <option value="Alcoy">Alcoy</option>
                             <option value="xativa">Xátiva</option>
