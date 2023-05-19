@@ -2,33 +2,4 @@
 runtime: custom
 env: flex
 service: foodtrackv4
-# This sample incurs costs to run on the App Engine flexible environment.
-# The settings below are to reduce costs during testing and are not appropriate
-# for production use. For more information, see:
-# https://cloud.google.com/appengine/docs/flexible/python/configuring-your-app-with-app-yaml
-manual_scaling:
-  instances: 1
-resources:
-  cpu: 1
-  memory_gb: 0.5
-  disk_size_gb: 10
-network:
-  session_affinity: true
-# [END gae_flex_env]
-# [START gae_flex_env_vpc_access]
-vpc_access_connector:
-  name: projects/foodtrackv4/locations/us-central1/connectors/europe-west1
-# [END gae_flex_env_vpc_access]
-# [START gae_flex_mysql]
-beta_settings:
-  cloud_sql_instances: foodtrackv4:us-central1:foodtrackv4
-# [END gae_flex_mysql]
-# [START gae_flex_redis]
-# Uncomment below to enable Redis.
-# beta_settings:
-#   cloud_redis_instances: YOUR_INSTANCE_NAME
-# [END gae_flex_redis]
-# [START gae_flex_memcache]
-# Uncomment below to enable memcache.
-# beta_settings:
-#   cloud_memcache_instances: YOUR_INSTANCE_NAME
+
