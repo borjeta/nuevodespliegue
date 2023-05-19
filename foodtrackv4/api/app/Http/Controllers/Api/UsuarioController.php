@@ -110,12 +110,10 @@ class UsuarioController extends Controller
     }
     public function login(Request $request)
     {
-        // Permitir solicitudes CORS
 
 
         $usuario = usuario::where('email', $request->email)->first();
         if ($usuario) {
-            /* Si el usuario existe y la contraseña es correcta , generamos el token con 60 caracteres aleatorios */
             $token = Str::class::random(60);
             $role = $usuario->role;
             $user_id = $usuario->id;
@@ -168,7 +166,6 @@ class UsuarioController extends Controller
 
     public function buscaUsuariosPorToken(Request $request)
     {
-        $body = $request->all();
         /* Buscamos el usuario por el nombre */
         $api_token = $request->header('api_token');
         $user_id = $request->header('user_id');
@@ -300,15 +297,11 @@ class UsuarioController extends Controller
         }
     }
 
-    
 
-
-
-
-
-
-
-
-
+    /*Test de carga de usuarios */
+    public function cargaUsuarios(Request $request)
+    {
+        return response("Ok", 200);
+    }
 
 }

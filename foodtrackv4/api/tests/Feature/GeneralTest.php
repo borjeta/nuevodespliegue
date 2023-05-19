@@ -11,22 +11,13 @@ class GeneralTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function raiz(): void
+    public function testGeneral(): void
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
     }
 
-    /**
-     * A basic feature test example.
-     */
-    public function api(): void
-    {
-        $response = $this->get('/api/usuarios');
-
-        $response->assertStatus(200);
-    }
 
 
 }

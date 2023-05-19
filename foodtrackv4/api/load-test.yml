@@ -1,0 +1,27 @@
+#Yml para el test de carga en artillery sobre la api de usuarios 
+config:
+  target: "http://localhost:8000"
+  phases:
+    - duration: 5
+      arrivalRate: 2000000
+    - duration: 10
+      arrivalRate: 2000000
+    - duration: 15
+      arrivalRate: 2000000
+    - duration: 20
+      arrivalRate: 2000000
+    - duration: 25
+      arrivalRate: 2000000
+  defaults:
+    headers:
+      content-type: "application/json"
+      accept: "application/json"
+scenarios:
+- name: "Test de carga"
+  flow:
+    - get:
+        url: "/api/testcarga"
+    
+        
+
+

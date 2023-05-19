@@ -23,7 +23,15 @@ class UserTest extends TestCase
      */
     public function test_get_all_users()
     {
-        $user = usuario::factory()->create();
+        $user = usuario::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'John@doe.com',
+            'password' => 'password123',
+            'telefono' => '123456789',
+            'ubicacion' => 'Location',
+            'role' => 'admin',
+        ]);
+
         $user->save();
 
         /*seteamos el header con el user_id y el api_token y el role*/
@@ -42,7 +50,23 @@ class UserTest extends TestCase
         if($response->status() != 200){
             $response->assertStatus(200);
         }
-        $response->assertJsonStructure(['data']);
+        $response->assertJsonStructure([
+            
+                '*' => [
+                    'id',
+                    'name',
+                    'email',
+                    'telefono',
+                    'ubicacion',
+                    'role',
+                    'api_token',
+                    'created_at',
+                    'updated_at',
+                ]
+            
+        ]);
+
+        
     }
 
     /**
@@ -72,34 +96,40 @@ class UserTest extends TestCase
         $response->assertJson($user->toArray());
     }
 
-
-       
-
-    /**
-     * Test PUT request to update a user.
-     *
-     * @return void
-     */
-  
-    public function testBuscaUsuariosPorToken()
+/*Test Login*/
+    public function test_login_user()
     {
-        $usuario = usuario::factory()->create();
-        $usuario->save();
+        $user = usuario::factory()->create([
+            'name' => 'user@user.com',
+            'email' => 'user@user.com',
+            'password' => 'user',]);
 
-        $headers = [
-            'api_token' => $usuario->api_token,
-            'user_id' => $usuario->id,
-            'role' => $usuario->role,
-        ];
+        $user->save();
 
-        $response = $this->post('/api/usuarios/' . $usuario->id . '/buscaportoken', $headers);
+        /*
+        $usuario = usuario::where('email', $request->email)->first();
+        if ($usuario) {
+            $token = Str::class::random(60);
+            $role = $usuario->role;
+            $user_id = $usuario->id;
+            $usuario->api_token = $token;
+            $usuario->date_createtoken = now();
+            $usuario->expires_at = now()->addDays(1);
+            $usuario->save();
+        }
+
+        return response()->json(['token' => $token, 'user_id' => $user_id, 'role' => $role], 200);*/
+
+        $response = $this->post('/api/usuarios/login', [
+            'email' => 'user@user.com',
+            'password' => 'user',
+        ]);
+
+        $response->assertStatus(200);
 
         if($response->status() != 200){
             $response->assertStatus(200);
         }
-        $response->assertJson($usuario->toArray());
-
     }
- 
-
 }
+        

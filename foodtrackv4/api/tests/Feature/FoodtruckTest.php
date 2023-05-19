@@ -1,245 +1,107 @@
-<?php/*
-use App\Models\Foodtruck;
-use App\Models\Usuario;
+<?php
+
+namespace Tests\Feature\Api;
+
+use App\Models\foodtruck;
+use App\Models\usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Response;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class FoodtruckTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testObtenFoodtrucksPorCategoria()
-    {
-        // Crea un usuario de ejemplo
-        $usuario = Usuario::factory()->create();
-
-        // Crea foodtrucks de ejemplo
-        Foodtruck::factory()->count(3)->create();
-
-        // Envía una solicitud con la categoría y las cabeceras requeridas
-        $response = $this->postJson('/foodtrucks/categoria/categoria', [], [
-            'categoria' => 'Activas',
-            'api_token' => $usuario->api_token,
-            'user_id' => $usuario->id,
-            'role' => 'user',
-        ]);
-
-        // Verifica que la respuesta sea exitosa
-        $response->assertOk();
-
-        // Verifica que la respuesta sea en formato JSON
-        $response->assertJson();
-
-        // Verifica que la respuesta contenga los datos esperados
-        $this->assertCount(3, $response->json());
-    }
-
-    public function testObtenFoodtrucksPorUbicacion()
-    {
-        // Crea un usuario de ejemplo
-        $usuario = Usuario::factory()->create();
-
-        // Crea foodtrucks de ejemplo
-        $foodtruck1 = Foodtruck::factory()->create(['ubicacion' => 'xativa']);
-        $foodtruck2 = Foodtruck::factory()->create(['ubicacion' => 'ontinyent']);
-
-        // Envía una solicitud con la ubicación y las cabeceras requeridas
-        $response = $this->postJson('/foodtrucks/zonas/ciudades/zona', [], [
-            'zona' => 'ubicación',
-            'api_token' => $usuario->api_token,
-            'user_id' => $usuario->id,
-            'role' => 'user',
-        ]);
-
-        // Verifica que la respuesta sea exitosa
-        $response->assertOk();
-
-        // Verifica que la respuesta sea en formato JSON
-        $response->assertJson();
-
-        // Verifica que la respuesta contenga los datos esperados
-        $response->assertJsonCount(2);
-
-        // Verifica que los foodtrucks esperados estén presentes en la respuesta
-        $response->assertJsonFragment(['ubicacion' => 'Ubicación A']);
-        $response->assertJsonFragment(['ubicacion' => 'Ubicación B']);
-    }
-
-    // Agrega más pruebas para los otros métodos del controlador
-
-    // ...
-
-    // También puedes agregar pruebas para verificar los casos de error
-
-    public function testNoTienePermisosParaVerFoodtrucks()
-    {
-        // Envía una solicitud sin las cabeceras requeridas
-        $response = $this->postJson('/foodtrucks/por-categoria');
-
-        // Verifica que la respuesta sea un error de permisos
-        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
-
-        // Verifica que la respuesta contenga el mensaje esperado
-        $response->assertJson(['message' => 'No tienes permisos para ver las foodtrucks']);
-    }
     /**
-     * Test index method.
-     *
-     * @return void
-     *//*
-    public function testIndex()
+     * Test for getting a list of foodtrucks.
+     */
+    public function testGetFoodtrucks()
     {
-        // Create a test user
-        $user = factory(\App\Models\User::class)->create([
-            'role' => 'admin',
-        ]);
+        // Creating a test user with admin role
+        $user = usuario::factory()->create(['role' => 'admin']);
+        
+        // Creating foodtrucks for testing
+        $foodtrucks = foodtruck::factory()->count(5)->create();
 
-        // Set the required headers
-        $headers = [
+        // Making a GET request to the index endpoint
+        $response = $this->getJson('/api/foodtrucks', [
             'api_token' => $user->api_token,
             'user_id' => $user->id,
             'role' => $user->role,
+        ]);
+
+        // Asserting the response status code and the number of foodtrucks returned
+        $response->assertStatus(200)
+            ->assertJsonCount(5);
+    }
+
+    /**
+     * Test for creating a foodtruck.
+     */
+    public function testCreateFoodtruck()
+    {
+        // Creating a test user with admin role
+        $user = usuario::factory()->create(['role' => 'propietario']);
+
+        // Creating a new foodtruck data
+        $foodtruckData = [
+            'nombre' => 'Foodtruck Test',
+            'descripcion' => 'This is a test foodtruck',
+            'ubicacion' => 'Test Location',
+            'telefono' => '123456789',
+            'avatar' => 'foodtruck.jpg',
+            'tipocomida' => 'Test Cuisine',
         ];
 
-        // Send a GET request to the index endpoint
-        $response = $this->withHeaders($headers)->get('/foodtrucks');
+        // Making a POST request to the store endpoint
+        $response = $this->postJson('/api/foodtrucks', $foodtruckData, [
+            'api_token' => $user->api_token,
+            'user_id' => $user->id,
+            'role' => $user->role,
+        ]);
 
-        // Assert the response status code is 200 (OK)
-        $response->assertStatus(200);
+        // Asserting the response status code and the success message
+        $response->assertStatus(200)
+            ->assertJson(['message' => 'Foodtruck creado correctamente']);
 
-        // Assert the response JSON structure or any other assertions you need
+        // Asserting that the foodtruck was stored in the database
+        $this->assertDatabaseHas('foodtrucks', [
+            'nombre' => 'Foodtruck Test',
+            'descripcion' => 'This is a test foodtruck',
+            'ubicacion' => 'Test Location',
+            'telefono' => '123456789',
+            'avatar' => 'foodtruck.jpg',
+            'tipocomida' => 'Test Cuisine',
+        ]);
     }
-// */
-//     /**
-//      * Test store method.
-//      *
-//      * @return void
-//      */
-//     public function testStore()
-//     {
-//         // Create a test user
-//         $user = factory(\App\Models\User::class)->create([
-//             'role' => 'admin',
-//         ]);
 
-//         // Set the required headers
-//         $headers = [
-//             'api_token' => $user->api_token,
-//             'user_id' => $user->id,
-//             'role' => $user->role,
-//         ];
 
-//         // Define the request payload
-//         $payload = [
-//             'nombre' => 'Food Truck Test',
-//             'descripcion' => 'This is a test food truck',
-//             'ubicacion' => 'Test Location',
-//             'telefono' => '1234567890',
-//             'avatar' => 'test.jpg',
-//             'tipocomida' => 'Test Cuisine',
-//         ];
 
-//         // Send a POST request to the store endpoint with the payload
-//         $response = $this->withHeaders($headers)->post('/foodtrucks', $payload);
+    /**
+     * Test for deleting a foodtruck.
+     */
+    public function testDeleteFoodtruck()
+    {
+        // Creating a test user with admin role
+        $user = usuario::factory()->create(['role' => 'admin']);
 
-//         // Assert the response status code is 200 (OK) or any other assertions you need
-//         $response->assertStatus(200);
+        // Creating a foodtruck for testing
+        $foodtruck = foodtruck::factory()->create();
 
-//         // Assert the response JSON structure or any other assertions you need
-//     }
+        // Making a DELETE request to the destroy endpoint
+        $response = $this->deleteJson('/api/foodtrucks/' . $foodtruck->id, [], [
+            'api_token' => $user->api_token,
+            'user_id' => $user->id,
+            'role' => $user->role,
+        ]);
 
-//     /**
-//      * Test show method.
-//      *
-//      * @return void
-//      */
-//     public function testShow()
-//     {
-//         // Create a test food truck
-//         $foodtruck = factory(\App\Models\FoodTruck::class)->create();
+        // Asserting the response status code and the success message
+        $response->assertStatus(200)
+            ->assertJson(['message' => 'Foodtruck eliminado correctamente']);
 
-//         // Send a GET request to the show endpoint with the food truck ID
-//         $response = $this->get('/foodtrucks/' . $foodtruck->id);
+        // Asserting that the foodtruck was deleted from the database
+        $this->assertDatabaseMissing('foodtrucks', ['id' => $foodtruck->id]);
+    }
 
-//         // Assert the response status code is 200 (OK) or any other assertions you need
-//         $response->assertStatus(200);
-
-//         // Assert the response JSON structure or any other assertions you need
-//     }
-    
-//     /**
-//      * Test update method.
-//      *
-//      * @return void
-//      */
-//     public function testUpdate()
-//     {
-//         // Create a test user
-//         $user = factory(\App\Models\User::class)->create([
-//             'role' => 'admin',
-//         ]);
-
-//         // Create a test food truck
-//         $foodtruck = factory(\App\Models\FoodTruck::class)->create();
-
-//         // Set the required headers
-//         $headers = [
-//             'api_token' => $user->api_token,
-//             'user_id' => $user->id,
-//             'role' => $user->role,
-//         ];
-
-//         // Define the request payload
-//         $payload = [
-//             'nombre' => 'Food Truck Test',
-//             'descripcion' => 'This is an updated food truck',
-//             'status' => 'Active',
-//             'ubicacion' => 'Updated Location',
-//             'telefono' => '9876543210',
-//             'avatar' => 'updated.jpg',
-//             'tipocomida' => 'Updated Cuisine',
-//             'horario' => '12:00',
-//         ];
-
-//         // Send a PUT request to the update endpoint with the payload
-//         $response = $this->withHeaders($headers)->put('/foodtrucks/' . $foodtruck->id, $payload);
-
-//         // Assert the response status code is 200 (OK) or any other assertions you need
-//         $response->assertStatus(200);
-
-//         // Assert the response JSON structure or any other assertions you need
-//     }
-
-//     /**
-//      * Test destroy method.
-//      *
-//      * @return void
-//      */
-//     public function testDestroy()
-//     {
-//         // Create a test user
-//         $user = factory(\App\Models\User::class)->create([
-//             'role' => 'admin',
-//         ]);
-
-//         // Create a test food truck
-//         $foodtruck = factory(\App\Models\FoodTruck::class)->create();
-
-//         // Set the required headers
-//         $headers = [
-//             'api_token' => $user->api_token,
-//             'user_id' => $user->id,
-//             'role' => $user->role,
-//         ];
-
-//         // Send a DELETE request to the destroy endpoint with the food truck ID
-//         $response = $this->withHeaders($headers)->delete('/foodtrucks/' . $foodtruck->id);
-
-//         // Assert the response status code is 200 (OK) or any other assertions you need
-//         $response->assertStatus(200);
-
-//         // Assert the response JSON structure or any other assertions you need
-//     }
-// }
-?>
+   
+}
