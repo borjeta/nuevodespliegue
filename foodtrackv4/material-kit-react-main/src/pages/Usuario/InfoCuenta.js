@@ -66,7 +66,7 @@ function SimpleModal() {
         }
 
         axios
-            .put(`http://localhost:8000/api/usuarios/editar/usuario`, {
+            .put(`http://172.16.238.10:8000/api/usuarios/editar/usuario`, {
                 name: name,
                 email: email,
                 telefono: phone,
@@ -100,7 +100,7 @@ function SimpleModal() {
     /*Cuando haya acabado de cargar la vista se ejecuta el useEffect*/
     useEffect(() => {
         axios
-            .post(`http://localhost:8000/api/usuarios/${user_id}/buscausuario`, {
+            .post(`http://172.16.238.10:8000/api/usuarios/${user_id}/buscausuario`, {
                 headers: {
                     "Content-Type": "application/json",
                     "user_id": `${user_id}`,
@@ -132,7 +132,7 @@ function SimpleModal() {
 
         if (confirmacionBorrado === true) {
             axios
-                .delete(`http://localhost:8000/api/usuarios/borrar/usuario`, {
+                .delete(`http://172.16.238.10:8000/api/usuarios/borrar/usuario`, {
                     headers: {
                         "Access-Control-Allow-Origin": "*",
                         "Content-Type": "application/json",

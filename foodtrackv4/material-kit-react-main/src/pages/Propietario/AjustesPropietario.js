@@ -38,7 +38,7 @@ function AjustesPropietario() {
 
     function handleCerrarFoodtrucks() {
 
-        axios.post('http://localhost:8000/api/foodtrucks/propietario/cerrartodaspropietario', {
+        axios.post('http://172.16.238.10:8000/api/foodtrucks/propietario/cerrartodaspropietario', {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
@@ -64,7 +64,7 @@ function AjustesPropietario() {
         /*recogemos la hora seleccionada en el modal y la guardamos en una variable*/
         var hora = document.getElementById("hora").value;
 
-        axios.post('http://localhost:8000/api/foodtrucks/propietario/asignaratodarmismocierre', {
+        axios.post('http://172.16.238.10:8000/api/foodtrucks/propietario/asignaratodarmismocierre', {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
@@ -88,7 +88,7 @@ function AjustesPropietario() {
     function handleAsignarMismoCierre() {
         var hora = document.getElementById("hora").value;
 
-        axios.post('http://localhost:8000/api/foodtrucks/propietario/asignaratodarmismocierre', {
+        axios.post('http://172.16.238.10:8000/api/foodtrucks/propietario/asignaratodarmismocierre', {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",

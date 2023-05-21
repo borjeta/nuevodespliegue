@@ -57,7 +57,7 @@ function SimpleModal() {
         }
 
         e.preventDefault();
-        axios.post("http://localhost:8000/api/usuarios/registro/newuser", {
+        axios.post("http://172.16.238.10:8000/api/usuarios/registro/newuser", {
             name: name,
             email: email,
             telefono: phone,

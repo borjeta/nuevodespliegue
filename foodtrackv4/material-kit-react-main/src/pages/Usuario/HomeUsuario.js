@@ -36,7 +36,7 @@ function HomeUsuario() {
         /*activa el scroll hasta abajo de la página*/
 
         axios
-            .post(`http://localhost:8000/api/foodtrucks/estado/foodtrucksabiertas`, {
+            .post(`http://172.16.238.10:8000/api/foodtrucks/estado/foodtrucksabiertas`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -63,7 +63,7 @@ function HomeUsuario() {
         var categoria = document.getElementById("categoria").value;
 
         axios
-            .post(`http://localhost:8000/api/foodtrucks/categoria/categoria`, {
+            .post(`http://172.16.238.10:8000/api/foodtrucks/categoria/categoria`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -89,7 +89,7 @@ function HomeUsuario() {
 
 
         axios
-            .get(`http://localhost:8000/api/foodtrucks/zonas/ciudades/zona`, {
+            .get(`http://172.16.238.10:8000/api/foodtrucks/zonas/ciudades/zona`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

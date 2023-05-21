@@ -44,7 +44,7 @@ function EditarFoodtruck() {
     const handleSubmit = () => {
 
 
-        axios.put(`http://localhost:8000/api/foodtrucks/${foodtruck.id}/editar`, {
+        axios.put(`http://172.16.238.10:8000/api/foodtrucks/${foodtruck.id}/editar`, {
             "id": foodtruck.id,
             "nombre": document.getElementById("nombre").value,
             "descripcion": document.getElementById("descripcion").value,
@@ -103,7 +103,7 @@ function EditarFoodtruck() {
 
         /*OBtener datos del foodtruck*/
         axios
-            .get(`http://localhost:8000/api/foodtrucks/${id.id}`, {
+            .get(`http://172.16.238.10:8000/api/foodtrucks/${id.id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -141,7 +141,7 @@ function EditarFoodtruck() {
     const handleOpen = () => {
 
         axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/abrirfoodtruck`, {
+            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/abrirfoodtruck`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -165,7 +165,7 @@ function EditarFoodtruck() {
 
     const handleClose = () => {
         axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/cerrarfoodtruck`, {
+            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/cerrarfoodtruck`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

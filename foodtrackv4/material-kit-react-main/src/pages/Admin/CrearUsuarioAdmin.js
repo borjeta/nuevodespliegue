@@ -63,7 +63,7 @@ function SimpleModal() {
         }
 
         e.preventDefault();
-        axios.post("http://localhost:8000/api/usuarios/admin/crearusuarioporadmin", {
+        axios.post("http://172.16.238.10:8000/api/usuarios/admin/crearusuarioporadmin", {
             name: name,
             email: email,
             telefono: phone,

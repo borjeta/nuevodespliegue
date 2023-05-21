@@ -45,7 +45,7 @@ function CrearFoodtruck() {
     const handleSubmit = () => {
 
 
-        axios.post(`http://localhost:8000/api/foodtrucks`, {
+        axios.post(`http://172.16.238.10:8000/api/foodtrucks`, {
             "nombre": document.getElementById("nombre").value,
             "descripcion": document.getElementById("descripcion").value,
             "ubicacion": document.getElementById("ubicacion").value,

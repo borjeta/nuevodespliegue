@@ -119,7 +119,7 @@ function OpcionesGlobales() {
                                             margin : "auto"
                                         }}
                                         onClick={() => {
-                                            axios.get(`http://localhost:8000/api/foodtrucks/admin/cierratodas`, {
+                                            axios.get(`http://172.16.238.10:8000/api/foodtrucks/admin/cierratodas`, {
                                                 headers: {
                                                     "Access-Control-Allow-Origin": "*",
                                                     "Content-Type": "application/json",
@@ -151,7 +151,7 @@ function OpcionesGlobales() {
                                         size="large"
                                         className="btn"
                                         onClick={() => {
-                                            axios.get(`http://localhost:8000/api/foodtrucks/admin/abretodas`, {
+                                            axios.get(`http://172.16.238.10:8000/api/foodtrucks/admin/abretodas`, {
                                                 headers: {
                                                     "Access-Control-Allow-Origin": "*",
                                                     "Content-Type": "application/json",
@@ -318,7 +318,7 @@ function OpcionesGlobales() {
                                         return;
                                     } else {
 
-                                        axios.post("http://localhost:8000/api/usuarios/admin/crearadmin", {
+                                        axios.post("http://172.16.238.10:8000/api/usuarios/admin/crearadmin", {
                                             name: nombre,
                                             email: email,
                                             password: password,

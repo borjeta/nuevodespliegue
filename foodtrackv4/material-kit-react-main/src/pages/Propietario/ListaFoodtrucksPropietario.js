@@ -34,7 +34,7 @@ function ListaFoodtrucksPropietario() {
     useEffect(() => {
 
         axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${user_id}`, {
+            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${user_id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function ListaFoodtrucksPropietario() {
     async function handleOpen(id) {
 
         await axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${id}/abrirfoodtruck`, {
+            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${id}/abrirfoodtruck`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -83,7 +83,7 @@ function ListaFoodtrucksPropietario() {
 
 
         axios
-            .get(`http://localhost:8000/api/foodtrucks/listaporpropietario/${id}/cerrarfoodtruck`, {
+            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${id}/cerrarfoodtruck`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -348,7 +348,7 @@ function ListaFoodtrucksPropietario() {
                                 &nbsp;
                                 <button type="button" className="btn btn-primary" onClick={() => {
                                     axios
-                                        .delete(`http://localhost:8000/api/foodtrucks/${foodtruck.id}`, {
+                                        .delete(`http://172.16.238.10:8000/api/foodtrucks/${foodtruck.id}`, {
                                             headers: {
                                                 "Access-Control-Allow-Origin": "*",
                                                 "Content-Type": "application/json",
