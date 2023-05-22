@@ -50,7 +50,7 @@ function HomeAdmin() {
     useEffect(() => {
 
         axios
-            .get(`http://172.16.238.10:8000/api/foodtrucks`, {
+            .get(`http://20.199.41.101:8000/api/foodtrucks`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -132,7 +132,7 @@ function HomeAdmin() {
                                         if(nombre != ""){
 
                                         axios
-                                            .get(`http://172.16.238.10:8000/api/foodtrucks/buscar/${nombre}`, {
+                                            .get(`http://20.199.41.101:8000/api/foodtrucks/buscar/${nombre}`, {
                                                 headers: {
                                                     "Access-Control-Allow-Origin": "*",
                                                     "Content-Type": "application/json",
@@ -153,7 +153,7 @@ function HomeAdmin() {
                                         }
                                         else{
                                             axios
-                                            .get(`http://172.16.238.10:8000/api/foodtrucks`, {
+                                            .get(`http://20.199.41.101:8000/api/foodtrucks`, {
                                                 headers: {
                                                     "Access-Control-Allow-Origin": "*",
                                                     "Content-Type": "application/json",
@@ -249,7 +249,7 @@ function HomeAdmin() {
                                                     &nbsp;
                                                     <button type="button" className="btn btn-primary" onClick={() => {
                                                         axios
-                                                            .delete(`http://172.16.238.10:8000/api/foodtrucks/${foodtruck.id}`, {
+                                                            .delete(`http://20.199.41.101:8000/api/foodtrucks/${foodtruck.id}`, {
                                                                 headers: {
                                                                     "Access-Control-Allow-Origin": "*",
                                                                     "Content-Type": "application/json",

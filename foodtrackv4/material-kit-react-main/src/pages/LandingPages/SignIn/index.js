@@ -57,7 +57,7 @@ function SignInBasic() {
       password: password,
     };
     axios
-      .post('http://172.16.238.10:8000/api/usuarios/login', data,
+      .post('http://20.199.41.101:8000/api/usuarios/login', data,
         {
           headers: {
             "Content-Type": "application/json",
@@ -75,13 +75,13 @@ function SignInBasic() {
         document.cookie = `role=${res.data.role}`;
 
         if (res.data.role == "admin") {
-          window.location.href = "http://localhost:3000/homeadmin";
+          window.location.href = "http://20.199.41.101:3000/homeadmin";
           //alert("Usuario logueado como admin");
         } else if (res.data.role == "user") {
-          window.location.href = "http://localhost:3000/homeusuario";
+          window.location.href = "http://20.199.41.101:3000/homeusuario";
           //alert("Usuario logueado como usuario");
         } else if (res.data.role == "propietario") {
-          window.location.href = "http://localhost:3000/foodtrucks/propietario/listafoodtrucks";
+          window.location.href = "http://20.199.41.101:3000/foodtrucks/propietario/listafoodtrucks";
           //alert("Usuario logueado como propietario");
         } else {
           alert("No se ha podido loguear correctamente ");

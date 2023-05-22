@@ -58,7 +58,7 @@ function ListaUsuariosAdmin() {
     useEffect(() => {
 
         axios
-            .get(`http://172.16.238.10:8000/api/usuarios`, {
+            .get(`http://20.199.41.101:8000/api/usuarios`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -136,7 +136,7 @@ function ListaUsuariosAdmin() {
                                         if (email != "" && email != null && email != undefined) {
 
                                             axios
-                                                .get(`http://172.16.238.10:8000/api/usuarios/admin/buscar`, {
+                                                .get(`http://20.199.41.101:8000/api/usuarios/admin/buscar`, {
                                                     headers: {
                                                         "Access-Control-Allow-Origin": "*",
                                                         "Content-Type": "application/json",
@@ -156,7 +156,7 @@ function ListaUsuariosAdmin() {
                                         }
                                         else {
                                             axios
-                                                .get(`http://172.16.238.10:8000/api/foodtrucks`, {
+                                                .get(`http://20.199.41.101:8000/api/foodtrucks`, {
                                                     headers: {
                                                         "Access-Control-Allow-Origin": "*",
                                                         "Content-Type": "application/json",

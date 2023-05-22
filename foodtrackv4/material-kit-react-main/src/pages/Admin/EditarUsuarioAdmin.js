@@ -51,7 +51,7 @@ function EditarFoodtruck() {
 
         /*Obtener usuario logueado*/
         axios
-            .post(`http://172.16.238.10:8000/api/usuarios/${user_id}/buscausuario`, {
+            .post(`http://20.199.41.101:8000/api/usuarios/${user_id}/buscausuario`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -74,7 +74,7 @@ function EditarFoodtruck() {
 
         /*Obtener usuario a modificar*/
         axios
-            .post(`http://172.16.238.10:8000/api/usuarios/${id.id}/buscausuario`, {
+            .post(`http://20.199.41.101:8000/api/usuarios/${id.id}/buscausuario`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -107,7 +107,7 @@ function EditarFoodtruck() {
     const handleSubmit = () => {
 
         /*Editar por usuario*/
-        axios.post(`http://172.16.238.10:8000/api/usuarios/${id.id}/editarusuarioadmin`, {
+        axios.post(`http://20.199.41.101:8000/api/usuarios/${id.id}/editarusuarioadmin`, {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",

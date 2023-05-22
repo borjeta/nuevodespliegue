@@ -44,7 +44,7 @@ function CrearFoodtruckAdmin() {
     const handleSubmit = () => {
 
 
-        axios.post(`http://172.16.238.10:8000/api/foodtrucks`, {
+        axios.post(`http://20.199.41.101:8000/api/foodtrucks`, {
             "nombre": document.getElementById("nombre").value,
             "descripcion": document.getElementById("descripcion").value,
             "ubicacion": document.getElementById("ubicacion").value,
@@ -77,7 +77,7 @@ function CrearFoodtruckAdmin() {
     };
     useEffect(() => {
         axios
-            .get(`http://172.16.238.10:8000/api/usuarios`, {
+            .get(`http://20.199.41.101:8000/api/usuarios`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

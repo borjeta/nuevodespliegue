@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
-const endpoint = "http://172.16.238.10:8000/api/foodtrucks/ubicacion";
+const endpoint = "http://20.199.41.101:8000/api/foodtrucks/ubicacion";
 
 
 const MapsView = (id) => {

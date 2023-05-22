@@ -39,7 +39,7 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  href="http://localhost:3000/homeusuario"
+                  href="http://20.199.41.101:3000/homeusuario"
                   rel="noreferrer"
                 >
                   Home
@@ -52,7 +52,7 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  href="http://localhost:3000/micuenta"
+                  href="http://20.199.41.101:3000/micuenta"
                   rel="noreferrer"
                 >
                   Mi cuenta

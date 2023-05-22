@@ -37,7 +37,7 @@ function Presentation() {
       setApi_token(cookies[1].split(";")[0]);
       setUser_id(cookies2[1].split(";")[0]);
       axios
-        .get(`http://172.16.238.10:8000/api/usuarios/${user_id}`, {
+        .get(`http://20.199.41.101:8000/api/usuarios/${user_id}`, {
           headers: {
             Authorization: `${api_token}`,
           },

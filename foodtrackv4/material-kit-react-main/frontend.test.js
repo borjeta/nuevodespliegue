@@ -51,7 +51,7 @@ describe('SignInBasic', () => {
       expect(document.cookie).toEqual('api_token=token');
       expect(document.cookie).toEqual('user_id=user_id');
       expect(document.cookie).toEqual('role=admin');
-      expect(window.location.href).toEqual('http://localhost:3000/homeadmin');
+      expect(window.location.href).toEqual('http://20.199.41.101:3000/homeadmin');
     });
   });
 

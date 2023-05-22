@@ -44,7 +44,7 @@ function EditarFoodtruck() {
     const handleSubmit = () => {
 
 
-        axios.put(`http://172.16.238.10:8000/api/foodtrucks/${foodtruck.id}/editar`, {
+        axios.put(`http://20.199.41.101:8000/api/foodtrucks/${foodtruck.id}/editar`, {
             "id": foodtruck.id,
             "nombre": document.getElementById("nombre").value,
             "descripcion": document.getElementById("descripcion").value,
@@ -57,7 +57,7 @@ function EditarFoodtruck() {
 
         }, {
             headers: {
-                "Access-Control-Allow-Origin": "localhost:3000/*/*/*",
+                "Access-Control-Allow-Origin": "20.199.41.101:3000/*/*/*",
                 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                 'Accept': 'application/json',
                 "Content-Type": "application/json",
@@ -103,7 +103,7 @@ function EditarFoodtruck() {
 
         /*OBtener datos del foodtruck*/
         axios
-            .get(`http://172.16.238.10:8000/api/foodtrucks/${id.id}`, {
+            .get(`http://20.199.41.101:8000/api/foodtrucks/${id.id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -141,7 +141,7 @@ function EditarFoodtruck() {
     const handleOpen = () => {
 
         axios
-            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/abrirfoodtruck`, {
+            .get(`http://20.199.41.101:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/abrirfoodtruck`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -165,7 +165,7 @@ function EditarFoodtruck() {
 
     const handleClose = () => {
         axios
-            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/cerrarfoodtruck`, {
+            .get(`http://20.199.41.101:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/cerrarfoodtruck`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

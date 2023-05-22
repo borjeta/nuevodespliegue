@@ -270,7 +270,7 @@ const routes = [
   {
     name: "Logout",
     icon: <Icon>exit_to_app</Icon>,
-    href: "http://localhost:3000/logout",
+    href: "http://20.199.41.101:3000/logout",
   },
 ];
 

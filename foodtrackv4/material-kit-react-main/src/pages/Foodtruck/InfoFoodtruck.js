@@ -45,7 +45,7 @@ function InfoFoodtruck() {
     useEffect(() => {
 
         axios
-            .get(`http://172.16.238.10:8000/api/foodtrucks/${id.id}`, {
+            .get(`http://20.199.41.101:8000/api/foodtrucks/${id.id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",

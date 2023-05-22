@@ -1,6 +1,6 @@
 Para realizar el despliegue en local debes tener docker instalado en tu máquina y ejecutar el siguiente comando en la raíz del proyecto: docker-compose up -d 
 Esto desplegará 3 contenedores , uno con la base de datos , otro con la aplicación y otro con el servidor web.
-Para acceder a la aplicación debes ir a la dirección http://localhost:3000
+Para acceder a la aplicación debes ir a la dirección http://20.199.41.101:3000
 Si usas el método en docker-compose recuerda descomentar la linea de DB_HOST en el archivo .env
 
 Otra manera es en VSC , clonar el repositorio y en la ruta foodtrackv4/api ejecutar el comando

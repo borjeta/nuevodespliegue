@@ -86,7 +86,7 @@ const CrearAdmin = () => {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            axios.post("http://172.16.238.10:8000/api/admins", {
+                            axios.post("http://20.199.41.101:8000/api/admins", {
                                 name: nombre,
                                 email: email,
                                 password: password,

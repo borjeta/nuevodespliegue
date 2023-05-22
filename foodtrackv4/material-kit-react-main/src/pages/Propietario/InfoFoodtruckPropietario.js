@@ -49,7 +49,7 @@ function InfoFoodtruckPropietario() {
 
         /*OBtener datos del foodtruck*/
         axios
-            .get(`http://172.16.238.10:8000/api/foodtrucks/${id.id}`, {
+            .get(`http://20.199.41.101:8000/api/foodtrucks/${id.id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -78,7 +78,7 @@ function InfoFoodtruckPropietario() {
 
 
         axios
-            .get(`http://172.16.238.10:8000/api/usuarios/${user_id}`, {
+            .get(`http://20.199.41.101:8000/api/usuarios/${user_id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -103,7 +103,7 @@ function InfoFoodtruckPropietario() {
 
     const handleOpen = () => {
         axios
-            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/abrirfoodtruck`, {
+            .get(`http://20.199.41.101:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/abrirfoodtruck`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json",
@@ -127,7 +127,7 @@ function InfoFoodtruckPropietario() {
 
     const handleClose = () => {
         axios
-            .get(`http://172.16.238.10:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/cerrarfoodtruck`, {
+            .get(`http://20.199.41.101:8000/api/foodtrucks/listaporpropietario/${foodtruck.id}/cerrarfoodtruck`, {
                 "estado": "Inactivo"
             }, {
                 headers: {
@@ -156,7 +156,7 @@ function InfoFoodtruckPropietario() {
     const handleSubmit = () => {
 
 
-        axios.put(`http://172.16.238.10:8000/api/foodtrucks/${foodtruck.id}/editar`, {
+        axios.put(`http://20.199.41.101:8000/api/foodtrucks/${foodtruck.id}/editar`, {
 
             "nombre": document.getElementById("nombre").value,
             "descripcion": document.getElementById("descripcion").value,
@@ -184,7 +184,7 @@ function InfoFoodtruckPropietario() {
             )
             .catch((err) => {
                 console.log(err);
-                window.location.href = `http://localhost:3000/foodtrucks/propietario/listafoodtrucks`;
+                window.location.href = `http://20.199.41.101:3000/foodtrucks/propietario/listafoodtrucks`;
 
             }
             );
